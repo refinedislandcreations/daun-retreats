@@ -1,0 +1,247 @@
+<!-- _includes/footer.html -->
+<footer class="bg-[#005509] text-[#FBF8EF] pt-16 pb-8 relative overflow-hidden">
+  <!-- Subtle decorative pattern overlay -->
+  <div class="absolute inset-0 opacity-5">
+    <div
+      class="absolute top-0 left-0 w-64 h-64 bg-[#FBF8EF] rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"
+    ></div>
+    <div
+      class="absolute bottom-0 right-0 w-96 h-96 bg-[#FBF8EF] rounded-full blur-3xl translate-x-1/3 translate-y-1/3"
+    ></div>
+  </div>
+
+  <div class="max-w-[96rem] mx-auto px-6 relative z-10">
+    <!-- Brand and Navigation -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 mb-12">
+      <!-- Brand Logo - Centered on mobile, left on desktop -->
+      <div class="lg:col-span-4 flex justify-center lg:justify-start">
+        <a
+          href="{{ '/' | relative_url }}"
+          class="block transform hover:scale-105 transition-transform duration-300"
+        >
+          <img
+            src="{{ '/assets/images/icons/daun-retreats-logo.png' | relative_url }}"
+            alt="Daun Retreats Logo"
+            class="h-24 md:h-28 w-auto"
+          />
+        </a>
+      </div>
+
+      <!-- Villas Menu -->
+      <div class="lg:col-span-4">
+        <h3
+          class="inline-block text-[#FBF8EF]/90 hover:text-[#FBF8EF] hover:translate-x-2 transition-all duration-300 proza-libre proza-500 text-base md:text-lg mb-4"
+        >
+          Villas
+        </h3>
+        <ul class="space-y-3 text-base md:text-lg ml-4 proza-libre proza-400">
+          <li>
+            <a
+              href="/gerimis-senja-villa/"
+              class="inline-block text-[#FBF8EF]/90 hover:text-[#FBF8EF] hover:translate-x-2 transition-all duration-300"
+            >
+              Gerimis Senja Villa
+            </a>
+          </li>
+          <li>
+            <a
+              href="/kozu-villa/"
+              class="inline-block text-[#FBF8EF]/90 hover:text-[#FBF8EF] hover:translate-x-2 transition-all duration-300"
+            >
+              Kozu Villa
+            </a>
+          </li>
+          <li>
+            <a
+              href="/kasturi-cabin/"
+              class="inline-block text-[#FBF8EF]/90 hover:text-[#FBF8EF] hover:translate-x-2 transition-all duration-300"
+            >
+              Kasturi Cabin
+            </a>
+          </li>
+          <li>
+            <a
+              href="/heritage-kampung-home/"
+              class="inline-block text-[#FBF8EF]/90 hover:text-[#FBF8EF] hover:translate-x-2 transition-all duration-300"
+            >
+              Heritage Kampung Home
+            </a>
+          </li>
+          <li>
+            <a
+              href="/norehans-place/"
+              class="inline-block text-[#FBF8EF]/90 hover:text-[#FBF8EF] hover:translate-x-2 transition-all duration-300"
+            >
+              Norehan’s Place
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Explore + Contact + Social + Button -->
+      <div class="lg:col-span-4">
+        <!-- Explore Section -->
+        <div class="mb-8">
+          <ul class="space-y-3 text-base md:text-lg proza-libre proza-500">
+            <li>
+              <a
+                href="/"
+                class="inline-block text-[#FBF8EF]/90 hover:text-[#FBF8EF] hover:translate-x-2 transition-all duration-300"
+              >
+                Explore the Area
+              </a>
+            </li>
+            <li>
+              <a
+                href="/"
+                class="inline-block text-[#FBF8EF]/90 hover:text-[#FBF8EF] hover:translate-x-2 transition-all duration-300"
+              >
+                Contact
+              </a>
+            </li>
+            <li>
+              <div class="flex space-x-4 items-center">
+                <!--  -->
+                <span
+                  class="inline-block proza-libre proza-500 text-base md:text-lg text-[#FBF8EF]/90 hover:text-[#FBF8EF] hover:translate-x-2 transition-all duration-300"
+                >
+                  Follow Us
+                </span>
+
+                <a
+                  href="#"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="group"
+                >
+                  <div class="p-2.5">
+                    <img
+                      src="/assets/images/icons/instagram-icon-green.png"
+                      alt="Instagram"
+                      class="h-6 w-auto group-hover:scale-110 transition-transform duration-300 brightness-0 invert opacity-90 group-hover:opacity-100"
+                    />
+                  </div>
+                </a>
+                <a
+                  href="#"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="group"
+                >
+                  <div class="p-2.5">
+                    <img
+                      src="/assets/images/icons/facebook-icon-green.png"
+                      alt="Facebook"
+                      class="h-6 w-auto group-hover:scale-110 transition-transform duration-300 brightness-0 invert opacity-90 group-hover:opacity-100"
+                    />
+                  </div>
+                </a>
+                <a
+                  href="#"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="group"
+                >
+                  <div class="p-2.5">
+                    <img
+                      src="/assets/images/icons/tiktok-icon-green.png"
+                      alt="TikTok"
+                      class="h-6 w-auto group-hover:scale-110 transition-transform duration-300 brightness-0 invert opacity-90 group-hover:opacity-100"
+                    />
+                  </div>
+                </a>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Book Now Button -->
+        <a
+          href="/book-now/"
+          class="inline-block bg-[#FBF8EF] text-[#005509] px-4 py-2 rounded-md text-base md:text-lg font-medium shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 hover:bg-white border-2 border-transparent hover:border-[#FBF8EF]/20"
+        >
+          Book Now
+        </a>
+      </div>
+    </div>
+
+    <!-- Privacy and Terms - Enhanced with decorative elements -->
+    <div class="relative pt-8 mb-8">
+      <div
+        class="flex flex-col md:flex-row md:justify-center md:items-center md:space-x-10 text-sm md:text-base text-center space-y-4 md:space-y-0"
+      >
+        <a
+          href="/privacy-policy/"
+          class="inline-block text-[#FBF8EF]/90 hover:text-[#FBF8EF] proza-libre"
+        >
+          Privacy Policy
+        </a>
+        <a
+          href="/return-and-refund-policy/"
+          class="inline-block text-[#FBF8EF]/90 hover:text-[#FBF8EF] proza-libre"
+        >
+          Return and Refund Policy
+        </a>
+        <a
+          href="/terms-and-conditions/"
+          class="inline-block text-[#FBF8EF]/90 hover:text-[#FBF8EF] proza-libre"
+        >
+          Terms & Conditions
+        </a>
+      </div>
+    </div>
+
+    <!-- Copyright and Credits - Enhanced with better typography -->
+    <div class="text-center pt-8">
+      <p class="text-[#FBF8EF]/90 proza-libre">
+        © {{ "now" | date: "%Y" }} All rights reserved.
+      </p>
+      <p class="text-[#FBF8EF]/90 proza-libre">
+        Designed and built by
+        <a
+          href="https://refinedislandcreations.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-[#FBF8EF] hover:text-white relative inline-block group"
+        >
+          Refined Island Creations.
+          <span
+            class="absolute -bottom-1 left-0 w-full h-0.5 bg-[#FBF8EF]/50 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"
+          ></span>
+        </a>
+      </p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  /* Custom animations and enhancements */
+  @keyframes gentlePulse {
+    0%,
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.9;
+      transform: scale(1.15);
+    }
+  }
+
+  .animate-pulse {
+    animation: gentlePulse 2s ease-in-out infinite;
+  }
+
+  /* Smooth backdrop blur support */
+  .backdrop-blur-sm {
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+  }
+
+  /* Better focus states for accessibility */
+  a:focus-visible {
+    outline: 2px solid #fbf8ef;
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+</style>
