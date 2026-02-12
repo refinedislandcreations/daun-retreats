@@ -1,6 +1,5 @@
 <!-- _includes/footer.html -->
 <footer class="bg-[#005509] text-[#FBF8EF] pt-16 pb-8 relative overflow-hidden">
-  <!-- Subtle decorative pattern overlay -->
   <div class="absolute inset-0 opacity-5">
     <div
       class="absolute top-0 left-0 w-64 h-64 bg-[#FBF8EF] rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"
@@ -13,200 +12,210 @@
   <div class="max-w-[96rem] mx-auto px-6 relative z-10">
     <!-- Brand and Navigation -->
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 mb-12">
-      <!-- Brand Logo - Centered on mobile, left on desktop -->
-      <div class="lg:col-span-4 flex justify-center lg:justify-start">
+      <!-- Brand Logo -->
+      <div class="lg:col-span-4 flex justify-center">
         <a
           href="{{ '/' | relative_url }}"
-          class="block transform hover:scale-105 transition-transform duration-300"
+          class="block transform hover:scale-105 transition-all duration-500 ease-out"
         >
           <img
             src="{{ '/assets/images/icons/daun-retreats-logo.png' | relative_url }}"
             alt="Daun Retreats Logo"
-            class="h-24 md:h-28 w-auto"
+            class="h-32 md:h-40 w-auto"
           />
         </a>
       </div>
 
       <!-- Villas Menu -->
-      <div class="lg:col-span-4">
-        <h3
-          class="inline-block text-[#FBF8EF]/90 hover:text-[#FBF8EF] hover:translate-x-2 transition-all duration-300 proza-libre proza-500 text-base md:text-lg mb-4"
-        >
-          Villas
-        </h3>
-        <ul class="space-y-3 text-base md:text-lg ml-4 proza-libre proza-400">
-          <li>
-            <a
-              href="/gerimis-senja-villa/"
-              class="inline-block text-[#FBF8EF]/90 hover:text-[#FBF8EF] hover:translate-x-2 transition-all duration-300"
-            >
-              Gerimis Senja Villa
-            </a>
-          </li>
-          <li>
-            <a
-              href="/kozu-villa/"
-              class="inline-block text-[#FBF8EF]/90 hover:text-[#FBF8EF] hover:translate-x-2 transition-all duration-300"
-            >
-              Kozu Villa
-            </a>
-          </li>
-          <li>
-            <a
-              href="/kasturi-cabin/"
-              class="inline-block text-[#FBF8EF]/90 hover:text-[#FBF8EF] hover:translate-x-2 transition-all duration-300"
-            >
-              Kasturi Cabin
-            </a>
-          </li>
-          <li>
-            <a
-              href="/heritage-kampung-home/"
-              class="inline-block text-[#FBF8EF]/90 hover:text-[#FBF8EF] hover:translate-x-2 transition-all duration-300"
-            >
-              Heritage Kampung Home
-            </a>
-          </li>
-          <li>
-            <a
-              href="/norehans-place/"
-              class="inline-block text-[#FBF8EF]/90 hover:text-[#FBF8EF] hover:translate-x-2 transition-all duration-300"
-            >
-              Norehan’s Place
-            </a>
-          </li>
-        </ul>
-      </div>
-
-      <!-- Explore + Contact + Social + Button -->
-      <div class="lg:col-span-4">
-        <!-- Explore Section -->
-        <div class="mb-8">
-          <ul class="space-y-3 text-base md:text-lg proza-libre proza-500">
+      <div class="lg:col-span-4 flex justify-center">
+        <div class="w-full max-w-[280px] lg:max-w-none lg:w-auto">
+          <h3
+            class="inline-block text-[#FBF8EF]/80 hover:text-[#FBF8EF] proza-libre proza-600 text-base md:text-lg mb-4 tracking-wide"
+          >
+            Villas
+          </h3>
+          <ul
+            class="space-y-2.5 text-base md:text-lg proza-libre proza-400 ml-4"
+          >
             <li>
               <a
-                href="/"
-                class="inline-block text-[#FBF8EF]/90 hover:text-[#FBF8EF] hover:translate-x-2 transition-all duration-300"
+                href="/gerimis-senja-villa/"
+                class="inline-block text-[#FBF8EF]/80 hover:text-[#FBF8EF] hover:translate-x-2 transition-all duration-300 border-b border-transparent hover:border-[#FBF8EF]/30 pb-0.5"
               >
-                Explore the Area
+                Gerimis Senja Villa
               </a>
             </li>
             <li>
               <a
-                href="/"
-                class="inline-block text-[#FBF8EF]/90 hover:text-[#FBF8EF] hover:translate-x-2 transition-all duration-300"
+                href="/kozu-villa/"
+                class="inline-block text-[#FBF8EF]/80 hover:text-[#FBF8EF] hover:translate-x-2 transition-all duration-300 border-b border-transparent hover:border-[#FBF8EF]/30 pb-0.5"
               >
-                Contact
+                Kozu Villa
               </a>
             </li>
             <li>
-              <div class="flex space-x-4 items-center">
-                <!--  -->
-                <span
-                  class="inline-block proza-libre proza-500 text-base md:text-lg text-[#FBF8EF]/90 hover:text-[#FBF8EF] hover:translate-x-2 transition-all duration-300"
-                >
-                  Follow Us
-                </span>
-
-                <a
-                  href="#"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="group"
-                >
-                  <div class="p-2.5">
-                    <img
-                      src="/assets/images/icons/instagram-icon-green.png"
-                      alt="Instagram"
-                      class="h-6 w-auto group-hover:scale-110 transition-transform duration-300 brightness-0 invert opacity-90 group-hover:opacity-100"
-                    />
-                  </div>
-                </a>
-                <a
-                  href="#"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="group"
-                >
-                  <div class="p-2.5">
-                    <img
-                      src="/assets/images/icons/facebook-icon-green.png"
-                      alt="Facebook"
-                      class="h-6 w-auto group-hover:scale-110 transition-transform duration-300 brightness-0 invert opacity-90 group-hover:opacity-100"
-                    />
-                  </div>
-                </a>
-                <a
-                  href="#"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="group"
-                >
-                  <div class="p-2.5">
-                    <img
-                      src="/assets/images/icons/tiktok-icon-green.png"
-                      alt="TikTok"
-                      class="h-6 w-auto group-hover:scale-110 transition-transform duration-300 brightness-0 invert opacity-90 group-hover:opacity-100"
-                    />
-                  </div>
-                </a>
-              </div>
+              <a
+                href="/kasturi-cabin/"
+                class="inline-block text-[#FBF8EF]/80 hover:text-[#FBF8EF] hover:translate-x-2 transition-all duration-300 border-b border-transparent hover:border-[#FBF8EF]/30 pb-0.5"
+              >
+                Kasturi Cabin
+              </a>
+            </li>
+            <li>
+              <a
+                href="/heritage-kampung-home/"
+                class="inline-block text-[#FBF8EF]/80 hover:text-[#FBF8EF] hover:translate-x-2 transition-all duration-300 border-b border-transparent hover:border-[#FBF8EF]/30 pb-0.5"
+              >
+                Heritage Kampung Home
+              </a>
+            </li>
+            <li>
+              <a
+                href="/norehans-place/"
+                class="inline-block text-[#FBF8EF]/80 hover:text-[#FBF8EF] hover:translate-x-2 transition-all duration-300 border-b border-transparent hover:border-[#FBF8EF]/30 pb-0.5"
+              >
+                Norehan’s Place
+              </a>
             </li>
           </ul>
         </div>
+      </div>
 
-        <!-- Book Now Button -->
-        <a
-          href="/book-now/"
-          class="inline-block bg-[#FBF8EF] text-[#005509] px-4 py-2 rounded-md text-base md:text-lg font-medium shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 hover:bg-white border-2 border-transparent hover:border-[#FBF8EF]/20"
-        >
-          Book Now
-        </a>
+      <!-- Explore + Contact + Social + Button -->
+      <div class="lg:col-span-4 flex justify-center">
+        <div class="w-full max-w-[280px] lg:max-w-none lg:w-auto">
+          <!-- Explore Section -->
+          <div class="mb-8">
+            <ul class="space-y-3 text-base md:text-lg proza-libre proza-400">
+              <li>
+                <a
+                  href="/"
+                  class="inline-block text-[#FBF8EF]/80 hover:text-[#FBF8EF] hover:translate-x-2 transition-all duration-300 border-b border-transparent hover:border-[#FBF8EF]/30 pb-0.5 proza-libre proza-600 text-base md:text-lg"
+                >
+                  Explore the Area
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/"
+                  class="inline-block text-[#FBF8EF]/80 hover:text-[#FBF8EF] hover:translate-x-2 transition-all duration-300 border-b border-transparent hover:border-[#FBF8EF]/30 pb-0.5 proza-libre proza-600 text-base md:text-lg"
+                >
+                  Contact
+                </a>
+              </li>
+              <li>
+                <div class="flex items-center flex-wrap gap-x-2 gap-y-2">
+                  <span
+                    class="inline-block proza-libre proza-600 text-base md:text-lg text-[#FBF8EF]/80 tracking-wide"
+                  >
+                    Follow Us
+                  </span>
+                  <div class="flex items-center ml-1">
+                    <a
+                      href="#"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="group"
+                    >
+                      <div class="p-2 -ml-1">
+                        <img
+                          src="/assets/images/icons/instagram-icon-green.png"
+                          alt="Instagram"
+                          class="h-6 w-auto transition-all duration-300 brightness-0 invert opacity-80 group-hover:opacity-100 group-hover:scale-110"
+                        />
+                      </div>
+                    </a>
+                    <a
+                      href="#"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="group"
+                    >
+                      <div class="p-2">
+                        <img
+                          src="/assets/images/icons/facebook-icon-green.png"
+                          alt="Facebook"
+                          class="h-6 w-auto transition-all duration-300 brightness-0 invert opacity-80 group-hover:opacity-100 group-hover:scale-110"
+                        />
+                      </div>
+                    </a>
+                    <a
+                      href="#"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="group"
+                    >
+                      <div class="p-2">
+                        <img
+                          src="/assets/images/icons/tiktok-icon-green.png"
+                          alt="TikTok"
+                          class="h-6 w-auto transition-all duration-300 brightness-0 invert opacity-80 group-hover:opacity-100 group-hover:scale-110"
+                        />
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Book Now Button -->
+          <a
+            href="/book-now/"
+            class="inline-block bg-[#FBF8EF] text-[#005509] px-6 py-2.5 rounded-md text-base md:text-lg font-medium shadow-md hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 hover:bg-white border-2 border-[#FBF8EF]/20 hover:border-[#FBF8EF]/40 proza-libre proza-600 tracking-wide"
+          >
+            Book Now
+          </a>
+        </div>
       </div>
     </div>
 
-    <!-- Privacy and Terms - Enhanced with decorative elements -->
-    <div class="relative pt-8 mb-8">
+    <!-- Privacy and Terms -->
+    <div class="relative pt-6 mb-6">
       <div
-        class="flex flex-col md:flex-row md:justify-center md:items-center md:space-x-10 text-sm md:text-base text-center space-y-4 md:space-y-0"
+        class="flex flex-col md:flex-row md:justify-center md:items-center md:space-x-8 text-sm md:text-base text-center space-y-3 md:space-y-0"
       >
         <a
           href="/privacy-policy/"
-          class="inline-block text-[#FBF8EF]/90 hover:text-[#FBF8EF] proza-libre"
+          class="inline-block text-[#FBF8EF]/70 hover:text-[#FBF8EF] transition-colors duration-300 proza-libre proza-400 text-sm md:text-base border-b border-transparent hover:border-[#FBF8EF]/30 pb-0.5"
         >
           Privacy Policy
         </a>
         <a
           href="/return-and-refund-policy/"
-          class="inline-block text-[#FBF8EF]/90 hover:text-[#FBF8EF] proza-libre"
+          class="inline-block text-[#FBF8EF]/70 hover:text-[#FBF8EF] transition-colors duration-300 proza-libre proza-400 text-sm md:text-base border-b border-transparent hover:border-[#FBF8EF]/30 pb-0.5"
         >
           Return and Refund Policy
         </a>
         <a
           href="/terms-and-conditions/"
-          class="inline-block text-[#FBF8EF]/90 hover:text-[#FBF8EF] proza-libre"
+          class="inline-block text-[#FBF8EF]/70 hover:text-[#FBF8EF] transition-colors duration-300 proza-libre proza-400 text-sm md:text-base border-b border-transparent hover:border-[#FBF8EF]/30 pb-0.5"
         >
           Terms & Conditions
         </a>
       </div>
     </div>
 
-    <!-- Copyright and Credits - Enhanced with better typography -->
-    <div class="text-center pt-8">
-      <p class="text-[#FBF8EF]/90 proza-libre">
+    <!-- Copyright and Credits -->
+    <div class="text-center pt-6">
+      <p
+        class="text-[#FBF8EF]/60 proza-libre proza-400 text-sm md:text-base tracking-wide"
+      >
         © {{ "now" | date: "%Y" }} All rights reserved.
       </p>
-      <p class="text-[#FBF8EF]/90 proza-libre">
+      <p
+        class="text-[#FBF8EF]/70 proza-libre proza-400 text-sm md:text-base mt-1.5"
+      >
         Designed and built by
         <a
           href="https://refinedislandcreations.com/"
           target="_blank"
           rel="noopener noreferrer"
-          class="text-[#FBF8EF] hover:text-white relative inline-block group"
+          class="text-[#FBF8EF]/90 hover:text-white relative inline-block group font-medium"
         >
           Refined Island Creations.
           <span
-            class="absolute -bottom-1 left-0 w-full h-0.5 bg-[#FBF8EF]/50 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"
+            class="absolute -bottom-1 left-0 w-full h-0.5 bg-[#FBF8EF]/40 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"
           ></span>
         </a>
       </p>
@@ -243,5 +252,18 @@
     outline: 2px solid #fbf8ef;
     outline-offset: 2px;
     border-radius: 2px;
+  }
+
+  /* Smooth hover transitions */
+  .transition-all {
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 300ms;
+  }
+
+  /* Better text rendering */
+  .proza-libre {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 </style>
