@@ -11,9 +11,11 @@
 
   <div class="max-w-[96rem] mx-auto px-6 relative z-10">
     <!-- Brand and Navigation -->
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 mb-12">
+    <div
+      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-12 mb-12"
+    >
       <!-- Brand Logo -->
-      <div class="lg:col-span-4 flex justify-center">
+      <div class="md:col-span-2 lg:col-span-4 flex justify-center">
         <a
           href="{{ '/' | relative_url }}"
           class="block transform hover:scale-105 transition-all duration-500 ease-out"
@@ -27,7 +29,9 @@
       </div>
 
       <!-- Villas Menu -->
-      <div class="lg:col-span-4 flex justify-center">
+      <div
+        class="md:col-span-1 lg:col-span-4 flex justify-center md:justify-end lg:justify-center"
+      >
         <div class="w-full max-w-[280px] lg:max-w-none lg:w-auto">
           <h3
             class="inline-block text-[#FBF8EF]/80 hover:text-[#FBF8EF] proza-libre proza-600 text-base md:text-lg mb-4 tracking-wide"
@@ -82,7 +86,9 @@
       </div>
 
       <!-- Explore + Contact + Social + Button -->
-      <div class="lg:col-span-4 flex justify-center">
+      <div
+        class="md:col-span-1 lg:col-span-4 flex justify-center md:justify-start lg:justify-center"
+      >
         <div class="w-full max-w-[280px] lg:max-w-none lg:w-auto">
           <!-- Explore Section -->
           <div class="mb-8">
