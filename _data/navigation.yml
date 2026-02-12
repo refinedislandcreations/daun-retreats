@@ -12,7 +12,7 @@ main_nav:
         url: "#"
       - title: Norehan's Place
         url: "#"
-  - title: Explore The Area
+  - title: Explore the Area
     url: "#"
     submenu:
       - title: Discover Hulu Langat
@@ -34,10 +34,10 @@ main_nav:
 social_links:
   - title: Instagram
     url: ""
-    icon: "/assets/images/instagram-icon.png"
+    icon: "/assets/images/icons/instagram-icon-green.png"
   - title: Facebook
     url: ""
-    icon: "/assets/images/facebook-icon.png"
+    icon: "/assets/images/icons/facebook-icon-green.png"
   - title: TikTok
     url: ""
-    icon: "/assets/images/tiktok-icon.png"
+    icon: "/assets/images/icons/tiktok-icon-green.png"

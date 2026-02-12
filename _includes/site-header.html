@@ -10,7 +10,7 @@
       <div class="flex-shrink-0">
         <a href="{{ '/' | relative_url }}">
           <img
-            src="{{ '/assets/images/daun-retreats-logo.png' | relative_url }}"
+            src="{{ '/assets/images/icons/daun-retreats-logo.png' | relative_url }}"
             alt="Daun Retreats Logo"
             class="h-[5rem] md:h-[8rem] w-auto"
           />
@@ -71,11 +71,11 @@
       </nav>
 
       <!-- Mobile Hamburger -->
-      <div class="xl:hidden flex items-center space-x-4 z-50">
+      <div class="xl:hidden flex items-center space-x-4">
         <button
           id="mobile-menu-button"
           aria-label="Toggle menu"
-          class="focus:outline-none relative w-8 h-8 flex flex-col justify-between py-1"
+          class="focus:outline-none relative w-8 h-8 flex flex-col justify-between py-1 z-[60]"
         >
           <span
             class="hamburger-line top h-1 w-full rounded transition-transform duration-300 ease-in-out origin-center bg-[#005509]"
@@ -90,75 +90,76 @@
       </div>
     </div>
 
-    <!-- Mobile Menu -->
+    <!-- Mobile Menu - Now positioned below header -->
     <nav
       id="mobile-menu"
-      class="fixed inset-0 bg-[#FBF8EF] z-40 flex flex-col p-6 xl:hidden transform translate-x-full transition-transform duration-500 ease-in-out overflow-y-auto"
+      class="fixed left-0 right-0 bg-[#FBF8EF] z-40 flex flex-col xl:hidden transform translate-x-full transition-transform duration-500 ease-in-out overflow-y-auto"
+      style="top: 70px; height: calc(100vh - 70px)"
     >
       <div
-        class="flex flex-col space-y-6 mt-20 uppercase font-bold text-base w-full max-w-xl mx-auto min-h-[calc(100vh-3rem)]"
+        class="flex flex-col items-center space-y-6 w-full max-w-xl mx-auto min-h-[calc(100vh-70px)] px-6 mt-8"
       >
         {% for item in site.data.navigation.main_nav %} {% if item.submenu %}
         <!-- Dropdown Menu -->
-        <details class="dropdown">
-          <summary
-            class="cursor-pointer py-2 flex items-center justify-between appearance-none"
-          >
-            <span class="proza-libre proza-600">{{ item.title }}</span>
-            <svg
-              class="w-4 h-4 ml-2 transform transition-transform duration-300 ease-in-out"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              aria-hidden="true"
-              focusable="false"
+        <div class="w-full border-b border-[#005509] pb-1">
+          <details class="dropdown w-full">
+            <summary
+              class="cursor-pointer py-2 flex items-center justify-between appearance-none list-none w-full px-6"
             >
-              <path d="M19 9l-7 7-7-7"></path>
-            </svg>
-          </summary>
-          <div
-            class="dropdown-content overflow-hidden transition-[max-height,opacity] duration-300 ease-in-out opacity-0 max-h-0"
-          >
-            <ul class="pl-4 space-y-2 mt-2">
-              {% for subitem in item.submenu %}
-              <li>
-                <a
-                  href="{{ subitem.url | relative_url }}"
-                  class="block pb-2 proza-libre proza-500"
-                  >{{ subitem.title }}</a
-                >
-              </li>
-              {% endfor %}
-            </ul>
-          </div>
-        </details>
+              <span class="proza-libre proza-600 text-lg"
+                >{{ item.title }}</span
+              >
+              <span class="dropdown-icon text-2xl font-light text-[#005509]"
+                >+</span
+              >
+            </summary>
+            <div
+              class="dropdown-content overflow-hidden transition-all duration-300 ease-in-out opacity-0 max-h-0 ml-8"
+            >
+              <ul class="space-y-3 mt-3 pl-2">
+                {% for subitem in item.submenu %}
+                <li>
+                  <a
+                    href="{{ subitem.url | relative_url }}"
+                    class="block py-2 proza-libre proza-500 text-sm"
+                    >{{ subitem.title }}</a
+                  >
+                </li>
+                {% endfor %}
+              </ul>
+            </div>
+          </details>
+        </div>
         {% elsif item.is_button %}
-        <div class="text-left">
+        <div class="w-full flex justify-center mt-4">
           <a
             href="{{ item.url | relative_url }}"
-            class="inline-block bg-[#005509] px-4 py-2 rounded text-[#FBF8EF] proza-libre"
+            class="inline-block bg-[#005509] px-4 py-2 rounded text-[#FBF8EF] proza-libre text-lg"
             >{{ item.title }}</a
           >
         </div>
         {% else %}
-        <a
-          href="{{ item.url | relative_url }}"
-          class="block py-2 proza-libre proza-600"
-          >{{ item.title }}</a
-        >
+        <div class="w-full border-b border-[#005509] pb-1">
+          <a
+            href="{{ item.url | relative_url }}"
+            class="block py-2 proza-libre proza-600 text-lg px-6"
+            >{{ item.title }}</a
+          >
+        </div>
         {% endif %} {% endfor %}
 
-        <!-- Social Icons -->
-        <div class="flex space-x-3 justify-start pt-6 pb-6">
+        <!-- Social Icons - Centered -->
+        <div class="flex space-x-6 justify-center w-full">
           {% for social in site.data.navigation.social_links %}
-          <a href="{{ social.url }}" target="_blank" class="">
+          <a
+            href="{{ social.url }}"
+            target="_blank"
+            class="transform hover:scale-110 transition-transform"
+          >
             <img
               src="{{ social.icon | relative_url }}"
               alt="{{ social.title }}"
-              class="h-5 w-auto"
+              class="h-6 w-auto"
             />
           </a>
           {% endfor %}
@@ -190,6 +191,7 @@
     if (isOpen) {
       menu.classList.remove("translate-x-full");
       menu.classList.add("translate-x-0");
+      document.body.style.overflow = "hidden";
 
       // Fade out middle line
       middleLine.style.opacity = "0";
@@ -200,6 +202,7 @@
     } else {
       menu.classList.add("translate-x-full");
       menu.classList.remove("translate-x-0");
+      document.body.style.overflow = "";
 
       // Restore middle line
       middleLine.style.opacity = "1";
@@ -248,84 +251,52 @@
     }
   };
 
-  const closeAllDropdowns = () => {
-    document.querySelectorAll("details.dropdown").forEach((el) => {
-      const content = el.querySelector(".dropdown-content");
-      const icon = el.querySelector("svg");
-      el.open = false;
-      content.style.maxHeight = "0px";
-      content.style.opacity = "0";
-      icon.classList.remove("rotate-180");
-    });
-  };
-
   const initializeMobileDropdowns = () => {
     document.querySelectorAll("details.dropdown").forEach((el) => {
       const summary = el.querySelector("summary");
       const content = el.querySelector(".dropdown-content");
-      const icon = summary.querySelector("svg");
+      const icon = el.querySelector(".dropdown-icon");
+
+      // Ensure all dropdowns start closed
+      el.open = false;
 
       summary.addEventListener("click", (e) => {
         e.preventDefault();
 
         const isOpen = el.open;
 
-        if (!isOpen) {
-          // Close all other dropdowns smoothly first
-          document.querySelectorAll("details.dropdown").forEach((otherEl) => {
-            if (otherEl === el) return; // skip the one we want to open
-
+        // Close all other dropdowns
+        document.querySelectorAll("details.dropdown").forEach((otherEl) => {
+          if (otherEl !== el && otherEl.open) {
             const otherContent = otherEl.querySelector(".dropdown-content");
-            const otherIcon = otherEl.querySelector("svg");
+            const otherIcon = otherEl.querySelector(".dropdown-icon");
 
-            if (otherEl.open) {
-              otherContent.style.maxHeight = otherContent.scrollHeight + "px"; // reset to full height before collapsing
-              otherContent.offsetHeight; // force reflow
-
+            otherEl.open = false;
+            if (otherContent) {
               otherContent.style.maxHeight = "0px";
               otherContent.style.opacity = "0";
-
-              const closeHandler = () => {
-                otherEl.open = false;
-                otherIcon.classList.remove("rotate-180");
-                otherContent.removeEventListener("transitionend", closeHandler);
-              };
-              otherContent.addEventListener("transitionend", closeHandler);
             }
-          });
+            if (otherIcon) otherIcon.textContent = "+";
+          }
+        });
 
-          // **Add this line before opening your clicked dropdown**
-          content.style.maxHeight = "0px";
-          content.offsetHeight; // force reflow
+        // Toggle current dropdown
+        el.open = !isOpen;
 
-          // Open clicked dropdown
-          el.open = true;
+        if (!isOpen) {
+          // Open
           content.style.maxHeight = content.scrollHeight + "px";
           content.style.opacity = "1";
-          icon.classList.add("rotate-180");
+          icon.textContent = "−"; // minus sign
         } else {
-          // Close clicked dropdown smoothly
-          content.style.maxHeight = content.scrollHeight + "px"; // reset to full height before collapsing
-          content.offsetHeight; // force reflow
-
+          // Close
           content.style.maxHeight = "0px";
           content.style.opacity = "0";
-
-          const closeHandler = () => {
-            el.open = false;
-            icon.classList.remove("rotate-180");
-            content.removeEventListener("transitionend", closeHandler);
-          };
-          content.addEventListener("transitionend", closeHandler);
+          icon.textContent = "+";
         }
       });
 
-      content.addEventListener("transitionend", () => {
-        if (el.open) {
-          content.style.maxHeight = "none"; // remove max-height limit after transition
-        }
-      });
-
+      // Close menu when clicking links
       content.querySelectorAll("a").forEach((link) => {
         link.addEventListener("click", () => {
           const button = document.getElementById("mobile-menu-button");
@@ -336,9 +307,48 @@
     });
   };
 
+  // Handle window resize
+  const handleResize = () => {
+    const menu = document.getElementById("mobile-menu");
+    const button = document.getElementById("mobile-menu-button");
+
+    if (window.innerWidth >= 1280) {
+      // xl breakpoint
+      if (menu) {
+        menu.classList.add("translate-x-full");
+        menu.classList.remove("translate-x-0");
+        document.body.style.overflow = "";
+      }
+      if (button) {
+        const topLine = button.querySelector(".top");
+        const middleLine = button.querySelector(".middle");
+        const bottomLine = button.querySelector(".bottom");
+
+        if (topLine && middleLine && bottomLine) {
+          middleLine.style.opacity = "1";
+          topLine.style.transform = "translateY(0) rotate(0deg)";
+          bottomLine.style.transform = "translateY(0) rotate(0deg)";
+        }
+      }
+
+      // Close all dropdowns
+      document.querySelectorAll("details.dropdown").forEach((el) => {
+        const content = el.querySelector(".dropdown-content");
+        const icon = el.querySelector(".dropdown-icon");
+        el.open = false;
+        if (content) {
+          content.style.maxHeight = "0px";
+          content.style.opacity = "0";
+        }
+        if (icon) icon.textContent = "+";
+      });
+    }
+  };
+
   document.addEventListener("DOMContentLoaded", () => {
     initializeMobileMenu();
     initializeDesktopDropdowns();
     initializeMobileDropdowns();
+    window.addEventListener("resize", handleResize);
   });
 </script>
