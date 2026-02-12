@@ -1,0 +1,43 @@
+main_nav:
+  - title: Villas
+    url: "#"
+    submenu:
+      - title: Gerimis Senja Villa
+        url: "#"
+      - title: Kozu Villa
+        url: "#"
+      - title: Kasturi Cabin
+        url: "#"
+      - title: Heritage Kampung Home
+        url: "#"
+      - title: Norehan's Place
+        url: "#"
+  - title: Explore The Area
+    url: "#"
+    submenu:
+      - title: Discover Hulu Langat
+        url: "#"
+      - title: Sungai Congkak
+        url: "#"
+      - title: Skytrex Sungai Congkak
+        url: "#"
+      - title: Restaurant Terra Pong
+        url: "#"
+      - title: Hulu Langat Fishing Resort
+        url: "#"
+  - title: Contact Us
+    url: "#"
+  - title: Book Now
+    url: "#"
+    is_button: true
+
+social_links:
+  - title: Instagram
+    url: ""
+    icon: "/assets/images/instagram-icon.png"
+  - title: Facebook
+    url: ""
+    icon: "/assets/images/facebook-icon.png"
+  - title: TikTok
+    url: ""
+    icon: "/assets/images/tiktok-icon.png"
