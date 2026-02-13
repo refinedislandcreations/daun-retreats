@@ -1,6 +1,7 @@
 <!-- _includes/site-header -->
 <header
-  class="bg-[#FBF8EF] bg-opacity-80 shadow-md w-full fixed top-0 z-50 h-[70px] md:h-[82px] flex items-center"
+  class="bg-[#FBF8EF] bg-opacity-80 w-full fixed top-0 z-50 h-[70px] md:h-[82px] flex items-center backdrop-blur-sm"
+  id="main-header"
 >
   <div
     class="max-w-[96rem] mx-auto w-full px-4 sm:px-6 lg:px-8 flex items-center h-full"
@@ -18,101 +19,112 @@
       </div>
 
       <!-- Desktop Menu -->
-      <nav class="hidden xl:flex space-x-8 items-center h-full">
+      <nav class="hidden lg:flex space-x-8 items-center h-full">
         {% for item in site.data.navigation.main_nav %} {% if item.submenu %}
         <!-- Dropdown Menu -->
-        <div class="relative group h-full flex items-center">
+        <div
+          class="relative group h-full flex items-center proza-libre proza-600"
+        >
           <button
-            class="inline-flex items-center focus:outline-none proze-libre proza-600"
+            class="inline-flex items-center focus:outline-none proze-libre proza-600 relative py-2"
           >
             {{ item.title }}
             <svg
-              class="w-4 h-4 ml-2 transform transition-transform duration-300 ease-in-out group-hover:rotate-180"
+              class="w-4 h-4 ml-2 transform transition-transform duration-200 ease-out group-hover:rotate-180"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
               stroke-width="2"
               stroke-linecap="round"
               stroke-linejoin="round"
-              aria-hidden="true"
-              focusable="false"
             >
               <path d="M19 9l-7 7-7-7"></path>
             </svg>
           </button>
+
           <div
-            class="absolute left-0 top-full py-2 bg-[#FBF8EF] bg-opacity-80 border-none rounded-none shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 ease-in-out transform scale-95 group-hover:scale-100 origin-top z-20 text-base tracking-widest whitespace-nowrap"
-            style="margin-top: 27px"
+            class="absolute left-0 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 ease-out transform -translate-y-1 group-hover:translate-y-0"
+            style="top: 100%"
           >
-            {% for subitem in item.submenu %}
-            <a
-              href="{{ subitem.url | relative_url }}"
-              class="block px-6 py-2 proza-libre proza-500"
-              >{{ subitem.title }}</a
+            <div
+              class="bg-[#FBF8EF] bg-opacity-95 backdrop-blur-sm shadow-lg rounded-lg overflow-hidden min-w-[250px] border border-[#005509]/10"
             >
-            {% endfor %}
+              {% for subitem in item.submenu %}
+              <a
+                href="{{ subitem.url | relative_url }}"
+                class="block px-6 py-3 proza-libre proza-500 text-[#000] hover:bg-[#005509] hover:text-[#FBF8EF] transition-all duration-200 border-b border-[#005509]/10 last:border-0"
+              >
+                {{ subitem.title }}
+              </a>
+              {% endfor %}
+            </div>
           </div>
         </div>
         {% elsif item.is_button %}
         <!-- Book Now Button -->
         <a
           href="{{ item.url | relative_url }}"
-          class="ml-4 inline-block bg-[#005509] px-4 py-2 rounded text-[#FBF8EF] proza-libre"
+          class="ml-4 inline-block bg-[#005509] hover:bg-[#006611] px-4 py-2 rounded text-[#FBF8EF] proza-libre transition-all duration-200 transform hover:-translate-y-0.5 shadow-md hover:shadow-lg"
           >{{ item.title }}</a
         >
         {% else %}
         <!-- Single Link -->
         <a
           href="{{ item.url | relative_url }}"
-          class="px-3 py-2 proza-libre proza-600"
+          class="px-3 py-2 proza-libre proza-600 relative after:absolute after:bottom-0 after:left-1/2 after:w-0 after:h-0.5 after:bg-[#005509] after:transition-all after:duration-200 hover:after:w-full hover:after:left-0"
           >{{ item.title }}</a
         >
         {% endif %} {% endfor %}
       </nav>
 
       <!-- Mobile Hamburger -->
-      <div class="xl:hidden flex items-center space-x-4">
+      <div class="lg:hidden flex items-center space-x-4">
         <button
           id="mobile-menu-button"
           aria-label="Toggle menu"
           class="focus:outline-none relative w-7 h-7 flex flex-col justify-between py-1 z-[60]"
         >
           <span
-            class="hamburger-line top h-1 w-full rounded bg-[#005509]"
+            class="hamburger-line top h-0.5 w-full rounded bg-[#005509] transition-all duration-200 ease-out"
           ></span>
           <span
-            class="hamburger-line middle h-1 w-full rounded bg-[#005509]"
+            class="hamburger-line middle h-0.5 w-full rounded bg-[#005509] transition-all duration-200 ease-out"
           ></span>
           <span
-            class="hamburger-line bottom h-1 w-full rounded bg-[#005509]"
+            class="hamburger-line bottom h-0.5 w-full rounded bg-[#005509] transition-all duration-200 ease-out"
           ></span>
         </button>
       </div>
     </div>
 
-    <!-- Mobile Menu - Now positioned below header -->
+    <!-- Mobile Menu - Fixed positioning with static values -->
     <nav
       id="mobile-menu"
-      class="fixed left-0 right-0 bg-[#FBF8EF] z-40 flex flex-col xl:hidden overflow-y-auto"
-      style="top: 70px; height: calc(100vh - 70px); visibility: hidden"
+      class="fixed left-0 right-0 top-[70px] md:top-[82px] h-[calc(100vh-70px)] md:h-[calc(100vh-82px)] bg-[#FBF8EF] z-40 flex flex-col lg:hidden overflow-y-auto"
     >
       <div
-        class="flex flex-col items-center space-y-6 w-full max-w-xl mx-auto min-h-[calc(100vh-70px)] px-6 mt-8"
+        class="flex flex-col items-center space-y-6 w-full max-w-xl mx-auto min-h-[calc(100vh-70px)] md:min-h-[calc(100vh-82px)] px-6 py-8"
       >
         {% for item in site.data.navigation.main_nav %} {% if item.submenu %}
         <!-- Dropdown Menu -->
-        <div class="w-full border-b border-[#005509] pb-1">
+        <div class="w-full border-b border-[#005509]/30 pb-1">
           <details class="dropdown w-full">
             <summary
-              class="cursor-pointer py-2 flex items-center justify-between appearance-none list-none w-full px-6"
+              class="group cursor-pointer py-2 flex items-center justify-between appearance-none list-none w-full px-6"
             >
-              <span class="proza-libre proza-600 text-lg"
-                >{{ item.title }}</span
+              <span
+                class="proza-libre proza-600 text-lg text-[#000] group-hover:text-[#005509] transition-colors duration-200"
               >
-              <span class="dropdown-icon text-2xl font-light text-[#005509]"
-                >+</span
+                {{ item.title }}
+              </span>
+
+              <span
+                class="dropdown-icon text-2xl font-light text-[#000] group-hover:text-[#005509] transition-colors duration-200"
               >
+                +
+              </span>
             </summary>
+
             <div
               class="dropdown-content overflow-hidden ml-8"
               style="max-height: 0px; opacity: 0"
@@ -122,7 +134,7 @@
                 <li>
                   <a
                     href="{{ subitem.url | relative_url }}"
-                    class="block py-2 proza-libre proza-500 text-sm"
+                    class="block py-2 proza-libre proza-500 text-sm text-[#000]/80 hover:text-[#005509] hover:translate-x-2 transition-all duration-200"
                     >{{ subitem.title }}</a
                   >
                 </li>
@@ -135,32 +147,32 @@
         <div class="w-full flex justify-center mt-4">
           <a
             href="{{ item.url | relative_url }}"
-            class="inline-block bg-[#005509] px-4 py-2 rounded text-[#FBF8EF] proza-libre text-lg"
+            class="inline-block bg-[#005509] hover:bg-[#006611] px-6 py-3 rounded text-[#FBF8EF] proza-libre text-lg transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
             >{{ item.title }}</a
           >
         </div>
         {% else %}
-        <div class="w-full border-b border-[#005509] pb-1">
+        <div class="w-full border-b border-[#005509]/30 pb-1">
           <a
             href="{{ item.url | relative_url }}"
-            class="block py-2 proza-libre proza-600 text-lg px-6"
+            class="block py-2 proza-libre proza-600 text-lg px-6 text-[#000] hover:text-[#006611] transition-colors duration-200"
             >{{ item.title }}</a
           >
         </div>
         {% endif %} {% endfor %}
 
         <!-- Social Icons - Centered -->
-        <div class="flex space-x-6 justify-center w-full">
+        <div class="flex space-x-6 justify-center w-full pt-4">
           {% for social in site.data.navigation.social_links %}
           <a
             href="{{ social.url }}"
             target="_blank"
-            class="transform hover:scale-110 transition-transform"
+            class="transform hover:scale-110 transition-transform duration-200"
           >
             <img
               src="{{ social.icon | relative_url }}"
               alt="{{ social.title }}"
-              class="h-6 w-auto"
+              class="h-6 w-auto opacity-80 hover:opacity-100 transition-opacity duration-200"
             />
           </a>
           {% endfor %}
@@ -183,20 +195,27 @@
 
     if (!button || !menu) return;
 
-    // Initialize GSAP timeline
-    menuTimeline = gsap.timeline({ paused: true, reversed: true });
-
-    // Set initial state
-    gsap.set(menu, { x: "100%", visibility: "visible" });
-
-    // Menu slide animation
-    menuTimeline.to(menu, {
-      x: "0%",
-      duration: 0.5,
-      ease: "power3.inOut",
+    // Set initial state with static values
+    gsap.set(menu, {
+      x: "100%",
+      visibility: "visible",
     });
 
-    button.addEventListener("click", () => {
+    // Initialize GSAP timeline with faster animation
+    menuTimeline = gsap.timeline({
+      paused: true,
+      reversed: true,
+    });
+
+    // Menu slide animation - faster
+    menuTimeline.to(menu, {
+      x: "0%",
+      duration: 0.3,
+      ease: "power2.inOut",
+    });
+
+    button.addEventListener("click", (e) => {
+      e.stopPropagation();
       isMenuOpen = !isMenuOpen;
       toggleMenu(menu, button, isMenuOpen);
     });
@@ -207,55 +226,56 @@
     const middleLine = button.querySelector(".middle");
     const bottomLine = button.querySelector(".bottom");
 
-    // Hamburger animation
     if (isOpen) {
       menuTimeline.play();
       document.body.style.overflow = "hidden";
 
+      // Hamburger to X animation
       gsap.to(middleLine, {
         opacity: 0,
-        duration: 0.3,
-        ease: "power2.inOut",
+        duration: 0.15,
+        ease: "power1.inOut",
       });
 
       gsap.to(topLine, {
-        y: 8,
+        y: 9,
         rotation: 45,
-        duration: 0.3,
-        ease: "power2.inOut",
+        duration: 0.2,
+        ease: "power1.inOut",
       });
 
       gsap.to(bottomLine, {
-        y: -8,
+        y: -9,
         rotation: -45,
-        duration: 0.3,
-        ease: "power2.inOut",
+        duration: 0.2,
+        ease: "power1.inOut",
       });
     } else {
       menuTimeline.reverse();
       document.body.style.overflow = "";
 
+      // X to hamburger animation
       gsap.to(middleLine, {
         opacity: 1,
-        duration: 0.3,
-        ease: "power2.inOut",
+        duration: 0.15,
+        ease: "power1.inOut",
       });
 
       gsap.to(topLine, {
         y: 0,
         rotation: 0,
-        duration: 0.3,
-        ease: "power2.inOut",
+        duration: 0.2,
+        ease: "power1.inOut",
       });
 
       gsap.to(bottomLine, {
         y: 0,
         rotation: 0,
-        duration: 0.3,
-        ease: "power2.inOut",
+        duration: 0.2,
+        ease: "power1.inOut",
       });
 
-      // Close all dropdowns when closing menu
+      // Close all dropdowns
       closeAllDropdowns();
     }
   };
@@ -271,8 +291,8 @@
         gsap.to(content, {
           maxHeight: 0,
           opacity: 0,
-          duration: 0.4,
-          ease: "power2.inOut",
+          duration: 0.2,
+          ease: "power1.inOut",
           overwrite: true,
         });
 
@@ -287,7 +307,6 @@
       const content = el.querySelector(".dropdown-content");
       const icon = el.querySelector(".dropdown-icon");
 
-      // Ensure all dropdowns start closed
       el.open = false;
       gsap.set(content, { maxHeight: 0, opacity: 0 });
 
@@ -295,9 +314,9 @@
         e.preventDefault();
 
         const isOpen = el.open;
-        const duration = 0.4; // Same duration for both open and close
+        const duration = 0.25;
 
-        // Close all other dropdowns with GSAP
+        // Close all other dropdowns
         document.querySelectorAll("details.dropdown").forEach((otherEl) => {
           if (otherEl !== el && otherEl.open) {
             const otherContent = otherEl.querySelector(".dropdown-content");
@@ -309,7 +328,7 @@
               maxHeight: 0,
               opacity: 0,
               duration: duration,
-              ease: "power2.inOut",
+              ease: "power1.inOut",
               overwrite: true,
             });
 
@@ -317,26 +336,24 @@
           }
         });
 
-        // Toggle current dropdown with GSAP
+        // Toggle current dropdown
         el.open = !isOpen;
 
         if (!isOpen) {
-          // Open
           gsap.to(content, {
             maxHeight: content.scrollHeight,
             opacity: 1,
             duration: duration,
-            ease: "power2.inOut",
+            ease: "power1.inOut",
             overwrite: true,
           });
           icon.textContent = "−";
         } else {
-          // Close - now with same duration as open
           gsap.to(content, {
             maxHeight: 0,
             opacity: 0,
             duration: duration,
-            ease: "power2.inOut",
+            ease: "power1.inOut",
             overwrite: true,
           });
           icon.textContent = "+";
@@ -348,82 +365,63 @@
         link.addEventListener("click", () => {
           const button = document.getElementById("mobile-menu-button");
           const menu = document.getElementById("mobile-menu");
+          if (menuTimeline && menuTimeline.isActive()) return;
           toggleMenu(menu, button, false);
         });
       });
     });
   };
 
+  // Improved desktop dropdowns
   const initializeDesktopDropdowns = () => {
-    document.querySelectorAll(".xl\\:flex .group").forEach((dropdown) => {
-      const menu = dropdown.querySelector("div.absolute");
-      if (!menu) return;
+    document.querySelectorAll(".group").forEach((dropdown) => {
+      const menuWrapper = dropdown.querySelector("div.absolute");
+      if (!menuWrapper) return;
 
       let timeout;
 
       dropdown.addEventListener("mouseenter", () => {
         clearTimeout(timeout);
-        gsap.to(menu, {
+        gsap.to(menuWrapper, {
           opacity: 1,
           visibility: "visible",
-          scale: 1,
-          duration: 0.3,
-          ease: "power2.out",
+          y: 0,
+          duration: 0.15,
+          ease: "power1.out",
           overwrite: true,
         });
       });
 
       dropdown.addEventListener("mouseleave", () => {
         timeout = setTimeout(() => {
-          gsap.to(menu, {
+          gsap.to(menuWrapper, {
             opacity: 0,
             visibility: "hidden",
-            scale: 0.95,
-            duration: 0.3,
-            ease: "power2.in",
+            y: -4,
+            duration: 0.15,
+            ease: "power1.in",
             overwrite: true,
           });
-        }, 150);
+        }, 50);
       });
 
-      menu.addEventListener("mouseenter", () => clearTimeout(timeout));
-      menu.addEventListener("mouseleave", () => {
-        timeout = setTimeout(() => {
-          gsap.to(menu, {
-            opacity: 0,
-            visibility: "hidden",
-            scale: 0.95,
-            duration: 0.3,
-            ease: "power2.in",
-            overwrite: true,
-          });
-        }, 150);
-      });
-
-      dropdown.querySelector("button").addEventListener("click", (e) => {
-        e.preventDefault();
-        const isOpen = gsap.getProperty(menu, "opacity") === 1;
-
-        if (isOpen) {
-          gsap.to(menu, {
-            opacity: 0,
-            visibility: "hidden",
-            scale: 0.95,
-            duration: 0.3,
-            ease: "power2.in",
-            overwrite: true,
-          });
-        } else {
-          gsap.to(menu, {
-            opacity: 1,
-            visibility: "visible",
-            scale: 1,
-            duration: 0.3,
-            ease: "power2.out",
-            overwrite: true,
-          });
-        }
-      });
+      if (menuWrapper.firstElementChild) {
+        menuWrapper.firstElementChild.addEventListener("mouseenter", () =>
+          clearTimeout(timeout),
+        );
+        menuWrapper.firstElementChild.addEventListener("mouseleave", () => {
+          timeout = setTimeout(() => {
+            gsap.to(menuWrapper, {
+              opacity: 0,
+              visibility: "hidden",
+              y: -4,
+              duration: 0.15,
+              ease: "power1.in",
+              overwrite: true,
+            });
+          }, 50);
+        });
+      }
     });
   };
 
@@ -432,17 +430,22 @@
     const menu = document.getElementById("mobile-menu");
     const button = document.getElementById("mobile-menu-button");
 
-    if (window.innerWidth >= 1280) {
+    if (window.innerWidth >= 1024) {
+      // lg breakpoint
       if (menu) {
         gsap.set(menu, { x: "100%", visibility: "hidden" });
         document.body.style.overflow = "";
-      }
-      if (button) {
-        const topLine = button.querySelector(".top");
-        const middleLine = button.querySelector(".middle");
-        const bottomLine = button.querySelector(".bottom");
 
-        gsap.set([topLine, middleLine, bottomLine], { clearProps: "all" });
+        // Reset hamburger icon
+        if (button) {
+          const topLine = button.querySelector(".top");
+          const middleLine = button.querySelector(".middle");
+          const bottomLine = button.querySelector(".bottom");
+
+          gsap.set(topLine, { y: 0, rotation: 0 });
+          gsap.set(middleLine, { opacity: 1 });
+          gsap.set(bottomLine, { y: 0, rotation: 0 });
+        }
       }
 
       closeAllDropdowns();
@@ -455,7 +458,6 @@
 
   // Initialize everything
   document.addEventListener("DOMContentLoaded", () => {
-    // Load GSAP if not already loaded
     if (typeof gsap === "undefined") {
       const script = document.createElement("script");
       script.src =
