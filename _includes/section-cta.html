@@ -1,0 +1,39 @@
+<section class="relative py-28 overflow-hidden bg-[#FBF8EF]">
+  <!-- ================= BACKGROUND IMAGE ================= -->
+  <div class="absolute inset-0 max-w-screen-2xl mx-auto">
+    <img
+      src="{{ include.section.background }}"
+      alt=""
+      class="w-full h-full object-cover"
+      loading="lazy"
+    />
+  </div>
+
+  <!-- ================= CONTENT ================= -->
+  <div class="relative mx-auto px-6 z-10 py-16">
+    <div class="max-w-screen-2xl mx-auto lg:px-16">
+      <!-- Soft cream overlay -->
+      <div
+        class="absolute inset-0 -z-10 bg-[#FBF8EF]/90 backdrop-blur-[1px]"
+      ></div>
+
+      <!-- CTA Content -->
+      <div class="max-w-4xl mx-auto text-center">
+        <!-- Title -->
+        <h2
+          class="font-serif tracking-[0.2em] text-4xl md:text-5xl lg:text-6xl text-[#000] cormorant-garamond whitespace-pre-line uppercase"
+        >
+          {{ include.section.title }}
+        </h2>
+
+        <!-- Button -->
+        <a
+          href="{{ include.section.button_link }}"
+          class="inline-block bg-[#005509] hover:bg-[#0c6a13] text-white px-8 py-3 rounded-md text-sm md:text-base tracking-wide proza-libre proza-500 transition duration-300"
+        >
+          {{ include.section.button_text }}
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
