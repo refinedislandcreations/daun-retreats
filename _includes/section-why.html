@@ -1,0 +1,49 @@
+<!-- _includes/section-why.html -->
+<section class="py-28 bg-[#FBF8EF]">
+  <div class="max-w-7xl mx-auto px-6">
+    <!-- Title -->
+    <div class="mb-12 text-center">
+      <h2
+        class="cormorant-garamond tracking-[0.08em] text-3xl xs:text-4xl sm:text-5xl md:text-6xl font-medium text-[#111]"
+      >
+        {{ include.section.title }}
+      </h2>
+    </div>
+
+    <!-- Grid -->
+    <div class="grid md:grid-cols-2">
+      {% for item in include.section.items %}
+
+      <div
+        class="p-10 md:p-14 border-t border-b border-[#005509]/40 {% if forloop.first %} border-t-0 {% endif %} {% if forloop.last %} border-b-0 {% endif %} md:even:border-l md:border-[#005509]/40 {% if forloop.index0 < 2 %} md:border-t-0 {% endif %} {% if forloop.index0 > 3 %} md:border-b-0 {% endif %}"
+      >
+        <div class="flex items-start gap-5">
+          <!-- Icon -->
+          <img
+            src="{{ item.icon }}"
+            alt=""
+            class="w-7 h-7 mt-1 shrink-0"
+            loading="lazy"
+          />
+
+          <!-- Text -->
+          <div>
+            <!-- Item Title (matches h4 from first section) -->
+            <h3 class="proza-libre text-xl font-semibold text-[#111] mb-4">
+              {{ item.title }}
+            </h3>
+
+            <!-- Paragraph (matches body style) -->
+            <p
+              class="proza-libre text-base sm:text-lg leading-relaxed text-[#333]"
+            >
+              {{ item.description }}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {% endfor %}
+    </div>
+  </div>
+</section>
