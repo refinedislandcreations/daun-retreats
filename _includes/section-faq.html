@@ -1,0 +1,69 @@
+<section class="py-32 bg-[#E9E6DC]">
+  <div class="w-[85%] mx-auto space-y-28">
+    <!-- Title -->
+    <h2
+      class="font-serif text-5xl md:text-7xl tracking-wide mb-20 cormorant-garamond"
+    >
+      YOUR QUESTIONS ANSWERED
+    </h2>
+
+    {% for group in include.section.groups %}
+    <div class="grid md:grid-cols-3 gap-12">
+      <!-- Left title -->
+      <div>
+        <h3 class="text-xl tracking-wide proza-libre proza-500">
+          {{ group.title }}
+        </h3>
+      </div>
+
+      <!-- Right accordion -->
+      <div class="md:col-span-2 border-t border-[#005509]/60">
+        {% for item in group.items %}
+        <div class="faq-item border-b border-[#005509]/60">
+          <button
+            class="faq-toggle w-full flex justify-between items-center py-6 text-left"
+          >
+            <span class="proza-libre proza-600"> {{ item.question }} </span>
+
+            <span class="faq-icon text-xl text-[#005509]">+</span>
+          </button>
+
+          <div
+            class="faq-content hidden pb-6 pr-10 text-neutral-700 leading-relaxed proza-libre proza-400"
+          >
+            {{ item.answer }}
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const items = document.querySelectorAll(".faq-item");
+
+    items.forEach((item) => {
+      const btn = item.querySelector(".faq-toggle");
+      const content = item.querySelector(".faq-content");
+      const icon = item.querySelector(".faq-icon");
+
+      btn.addEventListener("click", () => {
+        const isOpen = !content.classList.contains("hidden");
+
+        // close all
+        items.forEach((i) => {
+          i.querySelector(".faq-content").classList.add("hidden");
+          i.querySelector(".faq-icon").textContent = "+";
+        });
+
+        if (!isOpen) {
+          content.classList.remove("hidden");
+          icon.textContent = "−";
+        }
+      });
+    });
+  });
+</script>
