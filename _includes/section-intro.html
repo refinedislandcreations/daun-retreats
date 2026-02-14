@@ -1,0 +1,58 @@
+<!-- _includes/section-intro.html -->
+<section class="relative py-28 overflow-hidden bg-[#FBF8EF]">
+  <!-- ================= BACKGROUND IMAGE ================= -->
+  {% if include.section.background %}
+  <div class="absolute inset-0 max-w-screen-2xl mx-auto">
+    <img
+      src="{{ include.section.background }}"
+      alt=""
+      class="w-full h-full object-cover"
+      loading="lazy"
+    />
+  </div>
+  {% endif %}
+
+  <!-- ================= CONTENT ================= -->
+  <div class="relative mx-auto px-6 z-10 py-16">
+    <div class="max-w-screen-2xl mx-auto lg:px-16">
+      <!-- Soft cream overlay -->
+      {% if include.section.background %}
+      <div class="absolute inset-0 -z-10 bg-[#FBF8EF]/80"></div>
+      {% endif %}
+
+      <div class="max-w-4xl mx-auto text-center">
+        <!-- ================= TITLE ================= -->
+        {% if include.section.title %}
+        <h2
+          class="cormorant-garamond tracking-[0.2em] text-4xl md:text-5xl lg:text-6xl text-[#000] whitespace-pre-line uppercase"
+        >
+          {{ include.section.title }}
+        </h2>
+        {% endif %}
+
+        <!-- ================= DESCRIPTION ================= -->
+        {% if include.section.description %}
+        <p class="proza-libre text-base sm:text-lg leading-relaxed text-[#222]">
+          {{ include.section.description }}
+        </p>
+        {% endif %}
+      </div>
+
+      <!-- ================= OPTIONAL IMAGE GRID ================= -->
+      {% if include.section.images %}
+      <div class="mt-20 grid md:grid-cols-2 gap-12">
+        {% for image in include.section.images %}
+        <div class="overflow-hidden shadow-lg">
+          <img
+            src="{{ image }}"
+            alt=""
+            class="w-full aspect-[4/3] object-cover"
+            loading="lazy"
+          />
+        </div>
+        {% endfor %}
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
