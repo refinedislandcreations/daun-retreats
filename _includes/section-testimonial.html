@@ -1,7 +1,7 @@
 <!-- _includes/section-testimonial.html -->
 <section class="py-28 bg-[#FBF8EF] overflow-hidden">
   <!-- Wider container -->
-  <div class="w-[95%] lg:w-[90%] xl:w-[85%] mx-auto">
+  <div class="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8">
     <!-- Title -->
     <div class="text-center mb-10 md:mb-20">
       <h2
@@ -14,7 +14,7 @@
     <!-- Slider Wrapper -->
     <div class="relative px-0">
       <!-- Track Container with visible overflow -->
-      <div class="overflow-visible">
+      <div class="overflow-hidden">
         <div id="testimonial-track" class="flex">
           {% for item in include.section.items %}
           <!-- Slide -->
@@ -169,7 +169,7 @@
       const startContinuousScroll = () => {
         const slideCount = allSlides.length;
         const totalWidth = slideCount * slideWidth;
-        const duration = slideCount * 8; // 2 seconds per slide, adjust as needed
+        const duration = slideCount * 8; // 8 seconds per slide
 
         // Kill any existing animation
         if (window.__testimonialTl) {
