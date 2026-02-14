@@ -1,0 +1,249 @@
+<!-- _includes/section-testimonial.html -->
+<section class="py-28 bg-[#FBF8EF] overflow-hidden">
+  <!-- Wider container -->
+  <div class="w-[95%] lg:w-[90%] xl:w-[85%] mx-auto">
+    <!-- Title -->
+    <div class="text-center mb-20">
+      <h2
+        class="tracking-[0.18em] text-4xl md:text-5xl lg:text-6xl text-[#000] cormorant-garamond"
+      >
+        {{ include.section.title }}
+      </h2>
+    </div>
+
+    <!-- Slider Wrapper -->
+    <div class="relative px-0">
+      <!-- Track Container with visible overflow -->
+      <div class="overflow-visible">
+        <div id="testimonial-track" class="flex">
+          {% for item in include.section.items %}
+          <!-- Slide -->
+          <div
+            class="testimonial-slide min-w-full md:min-w-1/2 lg:min-w-1/3 px-2 sm:px-3 md:px-4"
+          >
+            <div
+              class="h-full bg-[#FBF8EF] border border-[#005509] rounded-md p-6 sm:p-8 md:p-10 shadow-lg group relative"
+            >
+              <!-- Quote + Villa Type -->
+              <div class="flex items-center gap-2 sm:gap-3 mb-6 sm:mb-8">
+                <!-- Quote Icon -->
+                <div class="p-2">
+                  <img
+                    src="{{ '/assets/images/icons/quote-icon.png' | relative_url }}"
+                    alt=""
+                    class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 opacity-70 shrink-0"
+                    loading="lazy"
+                  />
+                </div>
+
+                <!-- Decorative Line -->
+                <span
+                  class="h-[2px] flex-1 bg-[#005509]/40 group-hover:bg-[#005509]/60 transition-colors duration-300"
+                ></span>
+
+                <!-- Villa Name -->
+                <p
+                  class="proza-libre text-xs md:text-sm tracking-[0.18em] text-[#000] font-medium whitespace-nowrap"
+                >
+                  {{ item.villa }}
+                </p>
+              </div>
+
+              <!-- Quote text -->
+              <div class="mb-8 sm:mb-10">
+                <p
+                  class="text-neutral-700 leading-relaxed text-base sm:text-lg proza-libre proza-400 whitespace-pre-line wrap-break-word"
+                >
+                  {{ item.quote | newline_to_br }}
+                </p>
+              </div>
+
+              <!-- Footer with name -->
+              <div class="mt-auto pt-4">
+                <div class="flex items-center gap-3">
+                  <!-- Decorative dot -->
+                  <span
+                    class="w-2 h-2 rounded-full bg-[#005509] flex-shrink-0"
+                  ></span>
+
+                  <!-- Name -->
+                  <p
+                    class="font-semibold text-[#000] text-sm md:text-base proza-libre"
+                  >
+                    {{ item.name }}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GSAP -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+<!-- Continuous Loop Script -->
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const track = document.getElementById("testimonial-track");
+    const originalSlides = Array.from(track.children);
+    const slidesPerView =
+      window.innerWidth >= 1024 ? 3 : window.innerWidth >= 768 ? 2 : 1;
+
+    // Clone slides for seamless looping
+    const cloneSlides = () => {
+      const slides = Array.from(track.children);
+      const slidesToClone = Math.min(slidesPerView, slides.length);
+
+      // Clone first few slides and append to end
+      for (let i = 0; i < slidesToClone; i++) {
+        const clone = slides[i].cloneNode(true);
+        track.appendChild(clone);
+      }
+
+      // Clone last few slides and prepend to beginning
+      for (let i = slides.length - slidesToClone; i < slides.length; i++) {
+        const clone = slides[i].cloneNode(true);
+        track.insertBefore(clone, track.firstChild);
+      }
+    };
+
+    cloneSlides();
+
+    const allSlides = Array.from(track.children);
+    const slideWidth = 100 / slidesPerView; // Width percentage for each slide
+
+    // Calculate center offset for desktop (3 cards)
+    const getInitialPosition = () => {
+      if (slidesPerView === 3) {
+        // Start with first original card centered
+        const originalFirstIndex = slidesPerView; // After prepending clones
+        return -(originalFirstIndex * slideWidth);
+      } else {
+        // For 2 or 1 cards, start at beginning
+        return 0;
+      }
+    };
+
+    // Set initial position
+    gsap.set(track, { x: `${getInitialPosition()}%` });
+
+    // Make all cards equal styling (no highlights)
+    allSlides.forEach((slide) => {
+      const card = slide.querySelector("div");
+      gsap.set(card, {
+        scale: 1,
+        opacity: 1,
+        boxShadow: "0 10px 15px -3px rgba(0, 0, 0, 0.1)",
+      });
+    });
+
+    // Continuous scroll animation
+    const startContinuousScroll = () => {
+      const slideCount = allSlides.length;
+      const totalWidth = slideCount * slideWidth;
+      const duration = slideCount * 2; // 2 seconds per slide, adjust as needed
+
+      // Create infinite scroll timeline
+      const scrollTl = gsap.timeline({ repeat: -1, ease: "none" });
+
+      scrollTl.to(track, {
+        x: `-${totalWidth - slidesPerView * slideWidth}%`,
+        duration: duration,
+        ease: "none",
+      });
+
+      // Reset position seamlessly when reaching the end
+      scrollTl.call(() => {
+        gsap.set(track, { x: `${getInitialPosition()}%` });
+      });
+
+      return scrollTl;
+    };
+
+    let masterTl = startContinuousScroll();
+
+    // Pause on hover
+    track.addEventListener("mouseenter", () => {
+      masterTl.pause();
+    });
+
+    track.addEventListener("mouseleave", () => {
+      masterTl.resume();
+    });
+
+    // Handle window resize
+    let resizeTimeout;
+    window.addEventListener("resize", () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        // Kill current animation
+        masterTl.kill();
+
+        // Recalculate slides per view
+        const newSlidesPerView =
+          window.innerWidth >= 1024 ? 3 : window.innerWidth >= 768 ? 2 : 1;
+
+        if (newSlidesPerView !== slidesPerView) {
+          // Reload page or rebuild carousel for simplicity
+          location.reload();
+        } else {
+          // Restart animation with same settings
+          masterTl = startContinuousScroll();
+        }
+      }, 250);
+    });
+  });
+</script>
+
+<style>
+  /* Font consistency */
+  .cormorant-garamond {
+    font-family: "Cormorant Garamond", serif;
+    font-weight: 600;
+  }
+
+  .proza-libre {
+    font-family: "Proza Libre", sans-serif;
+  }
+
+  /* Custom card styling */
+  .group {
+    position: relative;
+  }
+
+  /* Hover effect */
+  .group:hover .bg-\[\#005509\]\/40 {
+    background-color: rgba(0, 85, 9, 0.6);
+  }
+
+  /* Ensure cards have consistent height */
+  #testimonial-track > div > div {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Desktop: Allow overflow for side cards */
+  @media (min-width: 1024px) {
+    .overflow-visible {
+      overflow: visible !important;
+    }
+    .relative.px-0 {
+      overflow: visible;
+    }
+  }
+
+  /* Consistent card appearance */
+  .testimonial-slide > div {
+    transition: box-shadow 0.3s ease;
+  }
+
+  .testimonial-slide > div:hover {
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15) !important;
+  }
+</style>
