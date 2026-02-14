@@ -35,7 +35,107 @@ welcome:
     - image: "/assets/images/index/hero.jpg"
       title: "Gerimis Senja Villa"
       link: "/gerimis-senja"
+
+collection:
+  title: "OUR COLLECTION"
+
+  groups:
+    - title: "Private Villas for Overnight Stays"
+      items:
+        - name: "Gerimis Senja Villa"
+          image: "/assets/images/index/hero1.jpg"
+          description: "A Balinese-inspired retreat nestled in the forest, thoughtfully designed for larger groups seeking both privacy and peace."
+          button: "/gerimis-senja"
+          features:
+            items:
+              - icon: "/assets/images/icons/door-icon.png"
+                description: "3 Bedrooms"
+              - icon: "/assets/images/icons/shower-icon.png"
+                description: "3 Bathrooms + Outdoor Bathtub"
+              - icon: "/assets/images/icons/person-icon.png"
+                description: "Up to 15 adults + 6 kids"
+              - icon: "/assets/images/icons/pool-icon.png"
+                description: "Private Infinity Pool"
+              - icon: "/assets/images/icons/car-icon.png"
+                description: "Parking for up to 6 cars"
+
+        - name: "Kozu Villa"
+          image: "/assets/images/index/hero2.jpg"
+          description: "A serene Japanese-style villa that embraces minimalist design and offers a peaceful retreat surrounded by nature."
+          button: "/kozu"
+          features:
+            items:
+              - icon: "/assets/images/icons/door-icon.png"
+                description: "3 Bedrooms"
+              - icon: "/assets/images/icons/shower-icon.png"
+                description: "2 Bathrooms"
+              - icon: "/assets/images/icons/person-icon.png"
+                description: "Up to 8 adults + 3 children"
+              - icon: "/assets/images/icons/pool-icon.png"
+                description: "Private Swimming Pool"
+              - icon: "/assets/images/icons/tree-icon.png"
+                description: "20,000 sqft Compound"
+              - icon: "/assets/images/icons/pin-icon.png"
+                description: "Close to Sungai Gabai Waterfall"
+
+        - name: "Kasturi Cabin"
+          image: "/assets/images/index/hero2.jpg"
+          description: "An eco-friendly container villa surrounded by lush forest views, thoughtfully blending modern comfort with the beauty of nature."
+          button: "/kasturi-cabin"
+          features:
+            items:
+              - icon: "/assets/images/icons/door-icon.png"
+                description: "3 Bedrooms"
+              - icon: "/assets/images/icons/shower-icon.png"
+                description: "2 Bathrooms"
+              - icon: "/assets/images/icons/person-icon.png"
+                description: "Up to 8 guests"
+              - icon: "/assets/images/icons/pool-icon.png"
+                description: "Private Infinity Pool"
+              - icon: "/assets/images/icons/tree-icon.png"
+                description: "Hill & Forest Views"
+              - icon: "/assets/images/icons/pin-icon.png"
+                description: "Indoor & Outdoor Pantry"
+
+    - title: "Photoshoot & Filming Locations"
+      items:
+        - name: "Heritage Kampung Home"
+          image: "/assets/images/index/hero.jpg"
+          description: "A beautifully preserved traditional kampung house that offers an authentic glimpse of heritage surrounded by nature’s calm."
+          button: "/heritage"
+          features:
+            items:
+              - icon: "/assets/images/icons/camera-icon.png"
+                description: "Photoshoots Only"
+              - icon: "/assets/images/icons/film-icon.png"
+                description: "Film Shoots Allowed"
+              - icon: "/assets/images/icons/wood-beam-icon.png"
+                description: "Traditional Kampung Architecture"
+              - icon: "/assets/images/icons/tree-icon.png"
+                description: "Rustic & Cultural Setting"
+              - icon: "/assets/images/icons/stop-icon.png"
+                description: "No Overnight Stays"
+
+        - name: "Norehan’s Place"
+          image: "/assets/images/index/hero2.jpg"
+          description: "A classic bungalow set on spacious grounds, thoughtfully designed for elegant photoshoots and inspiring film projects."
+          button: "/heritage"
+          features:
+            items:
+              - icon: "/assets/images/icons/camera-icon.png"
+                description: "Photoshoots Only"
+              - icon: "/assets/images/icons/film-icon.png"
+                description: "Film Shoots Allowed"
+              - icon: "/assets/images/icons/pool-icon.png"
+                description: "Large Pool"
+              - icon: "/assets/images/icons/tree-icon.png"
+                description: "3-Acre Grounds"
+              - icon: "/assets/images/icons/home-icon.png"
+                description: "Timeless Architecture"
+              - icon: "/assets/images/icons/stop-icon.png"
+                description: "No Overnight Stays"
 ---
 
 {% include section-hero.html section=page.hero %} {% include
-section-welcome.html section=page.welcome %}
+section-welcome.html section=page.welcome %} {% include section-collection.html
+section=page.collection %}

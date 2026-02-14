@@ -1,0 +1,77 @@
+<section class="py-28 bg-[#FBF8EF]">
+  <div class="max-w-7xl mx-auto px-6">
+    <!-- Title -->
+    <div class="mb-12">
+      <h2
+        class="font-serif tracking-[0.08em] text-3xl xs:text-4xl sm:text-5xl md:text-6xl font-medium text-[#111]"
+      >
+        {{ include.section.title }}
+      </h2>
+    </div>
+
+    {% for group in include.section.groups %}
+
+    <!-- Group Title -->
+    <h3 class="proza-libre text-lg sm:text-xl font-medium text-[#222] mb-10">
+      {{ group.title }}
+    </h3>
+
+    <div class="space-y-12 mb-6">
+      {% for item in group.items %}
+      <div class="grid md:grid-cols-2 gap-16 items-start md:mb-24">
+        <!-- ================= IMAGE ================= -->
+        <div class="overflow-hidden shadow-lg">
+          <img
+            src="{{ item.image }}"
+            alt="{{ item.name }}"
+            class="w-full aspect-[4/3] object-cover"
+            loading="lazy"
+          />
+        </div>
+
+        <!-- ================= CONTENT ================= -->
+        <div>
+          <h4 class="proza-libre text-xl font-semibold text-[#111] mb-4">
+            {{ item.name }}
+          </h4>
+
+          <p
+            class="proza-libre text-base sm:text-lg leading-relaxed text-[#333] mb-7 max-w-lg"
+          >
+            {{ item.description }}
+          </p>
+
+          <!-- ================= FEATURES CARD ================= -->
+          <div class="border border-[#005509] rounded-lg p-6 mb-7">
+            <ul class="grid grid-cols-1 gap-5">
+              {% for feature in item.features.items %}
+              <li class="flex items-center gap-3">
+                <img
+                  src="{{ feature.icon }}"
+                  alt=""
+                  class="w-6 h-6 object-contain shrink-0"
+                  loading="lazy"
+                />
+
+                <span class="text-sm proza-libre text-[#444]">
+                  {{ feature.description }}
+                </span>
+              </li>
+              {% endfor %}
+            </ul>
+          </div>
+
+          <a
+            href="{{ item.button }}"
+            class="block w-fit ml-auto bg-[#005509] hover:bg-[#0c6a13] text-white px-6 py-2.5 rounded-md text-sm font-medium tracking-wide transition proza-libre"
+          >
+            View Villa
+          </a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    {% endfor %}
+  </div>
+</section>
