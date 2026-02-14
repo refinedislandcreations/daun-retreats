@@ -1,8 +1,13 @@
 ---
 layout: default
 title: Home
+
+hero:
+  title: "DAUN RETREATS"
+  subtitle: "Boutique Villas Surrounded by Nature."
+  image: "/assets/images/index/hero.jpg"
+  button_text: "Book Now"
+  button_link: "/booking"
 ---
 
-{% include section-hero.html title="DAUN RETREATS" subtitle="Boutique Villas
-Sorrounded by Nature." image="/assets/images/index/hero.jpg" button_text="Book
-Now" button_link="/booking" %}
+{% include section-hero.html section=page.hero %}

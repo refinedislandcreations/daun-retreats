@@ -9,8 +9,8 @@
       <!-- Mobile: Full screen background (within max-width) -->
       <div class="absolute inset-0 md:hidden">
         <img
-          src="{{ include.image }}"
-          alt="{{ include.title }}"
+          src="{{ include.section.image }}"
+          alt="{{ include.section.title }}"
           class="w-full h-full object-cover"
           loading="lazy"
         />
@@ -22,8 +22,8 @@
         class="relative w-full md:w-[70%] lg:w-[65%] h-full md:ml-6 lg:ml-12 xl:ml-16 hidden md:block"
       >
         <img
-          src="{{ include.image }}"
-          alt="{{ include.title }}"
+          src="{{ include.section.image }}"
+          alt="{{ include.section.title }}"
           class="w-full h-full object-cover"
           loading="lazy"
         />
@@ -39,12 +39,12 @@
       <div
         class="relative bg-[#FBF8EF]/80 md:bg-[#FBF8EF]/70 rounded-2xl px-8 sm:px-10 md:px-12 lg:px-16 xl:px-20 py-10 sm:py-12 md:py-14 lg:py-16 xl:py-20 text-center md:text-right mx-4 sm:mx-6 md:mx-0 inline-block"
       >
-        {% if include.button_text %}
+        {% if include.section.button_text %}
         <a
-          href="{{ include.button_link | default: '#' }}"
+          href="{{ include.section.button_link | default: '#' }}"
           class="absolute -bottom-5 right-4 sm:right-6 md:right-8 lg:right-10 md:-bottom-5 z-20 bg-[#005509] hover:bg-[#006611] text-[#FBF8EF] px-6 sm:px-7 md:px-8 lg:px-10 py-2.5 sm:py-3 lg:py-4 rounded-lg font-medium transition-all duration-300 shadow-lg hover:shadow-xl transform border-2 border-transparent hover:border-[#FBF8EF]/20 tracking-wide proza-libre text-sm sm:text-base lg:text-lg"
         >
-          {{ include.button_text }}
+          {{ include.section.button_text }}
         </a>
         {% endif %}
 
@@ -52,14 +52,14 @@
         <h1
           class="font-serif tracking-wide text-[clamp(2.2rem,7vw,6rem)] sm:text-[clamp(2.5rem,6.5vw,6.5rem)] md:text-[clamp(3rem,5vw,7rem)] lg:text-[clamp(3.5rem,4.5vw,7.5rem)] xl:text-[clamp(4rem,4vw,8rem)] text-[#000] mb-2 md:mb-0 leading-[1.1] cormorant-garamond"
         >
-          {{ include.title }}
+          {{ include.section.title }}
         </h1>
 
         <!-- Subtitle - also scales proportionally -->
         <p
           class="text-[clamp(0.9rem,2.5vw,1.2rem)] sm:text-[clamp(1rem,2vw,1.4rem)] md:text-[clamp(1.05rem,1.8vw,1.5rem)] lg:text-[clamp(1.1rem,1.6vw,1.6rem)] text-[#000]/80 leading-relaxed max-w-3xl mx-auto md:mx-0 md:ml-auto mb-2 md:mb-0 proza-libre"
         >
-          {{ include.subtitle }}
+          {{ include.section.subtitle }}
         </p>
       </div>
     </div>
