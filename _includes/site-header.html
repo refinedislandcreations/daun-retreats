@@ -184,296 +184,310 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 
+<!-- Isolated GSAP Header Script -->
 <script>
-  // GSAP animations for mobile menu
-  let menuTimeline = null;
+  (function () {
+    "use strict";
 
-  const initializeMobileMenu = () => {
-    const button = document.getElementById("mobile-menu-button");
-    const menu = document.getElementById("mobile-menu");
-    let isMenuOpen = false;
-
-    if (!button || !menu) return;
-
-    // Set initial state with static values
-    gsap.set(menu, {
-      x: "100%",
-      visibility: "visible",
-    });
-
-    // Initialize GSAP timeline with faster animation
-    menuTimeline = gsap.timeline({
-      paused: true,
-      reversed: true,
-    });
-
-    // Menu slide animation - faster
-    menuTimeline.to(menu, {
-      x: "0%",
-      duration: 0.3,
-      ease: "power2.inOut",
-    });
-
-    button.addEventListener("click", (e) => {
-      e.stopPropagation();
-      isMenuOpen = !isMenuOpen;
-      toggleMenu(menu, button, isMenuOpen);
-    });
-  };
-
-  const toggleMenu = (menu, button, isOpen) => {
-    const topLine = button.querySelector(".top");
-    const middleLine = button.querySelector(".middle");
-    const bottomLine = button.querySelector(".bottom");
-
-    if (isOpen) {
-      menuTimeline.play();
-      document.body.style.overflow = "hidden";
-
-      // Hamburger to X animation
-      gsap.to(middleLine, {
-        opacity: 0,
-        duration: 0.15,
-        ease: "power1.inOut",
-      });
-
-      gsap.to(topLine, {
-        y: 9,
-        rotation: 45,
-        duration: 0.2,
-        ease: "power1.inOut",
-      });
-
-      gsap.to(bottomLine, {
-        y: -9,
-        rotation: -45,
-        duration: 0.2,
-        ease: "power1.inOut",
-      });
+    // Wait for DOM and GSAP to be ready
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", initHeader);
     } else {
-      menuTimeline.reverse();
-      document.body.style.overflow = "";
-
-      // X to hamburger animation
-      gsap.to(middleLine, {
-        opacity: 1,
-        duration: 0.15,
-        ease: "power1.inOut",
-      });
-
-      gsap.to(topLine, {
-        y: 0,
-        rotation: 0,
-        duration: 0.2,
-        ease: "power1.inOut",
-      });
-
-      gsap.to(bottomLine, {
-        y: 0,
-        rotation: 0,
-        duration: 0.2,
-        ease: "power1.inOut",
-      });
-
-      // Close all dropdowns
-      closeAllDropdowns();
+      initHeader();
     }
-  };
 
-  const closeAllDropdowns = () => {
-    document.querySelectorAll("details.dropdown").forEach((el) => {
-      if (el.open) {
-        const content = el.querySelector(".dropdown-content");
-        const icon = el.querySelector(".dropdown-icon");
+    function initHeader() {
+      // Check if GSAP is loaded
+      if (typeof gsap === "undefined") {
+        console.warn("GSAP not loaded yet, retrying in 100ms...");
+        setTimeout(initHeader, 100);
+        return;
+      }
 
-        el.open = false;
+      // Store timeline in closure
+      let menuTimeline = null;
 
-        gsap.to(content, {
-          maxHeight: 0,
-          opacity: 0,
-          duration: 0.2,
-          ease: "power1.inOut",
-          overwrite: true,
+      const initializeMobileMenu = () => {
+        const button = document.getElementById("mobile-menu-button");
+        const menu = document.getElementById("mobile-menu");
+        let isMenuOpen = false;
+
+        if (!button || !menu) return;
+
+        // Set initial state with static values
+        gsap.set(menu, {
+          x: "100%",
+          visibility: "visible",
         });
 
-        if (icon) icon.textContent = "+";
-      }
-    });
-  };
+        // Initialize GSAP timeline with faster animation
+        menuTimeline = gsap.timeline({
+          paused: true,
+          reversed: true,
+        });
 
-  const initializeMobileDropdowns = () => {
-    document.querySelectorAll("details.dropdown").forEach((el) => {
-      const summary = el.querySelector("summary");
-      const content = el.querySelector(".dropdown-content");
-      const icon = el.querySelector(".dropdown-icon");
+        // Menu slide animation - faster
+        menuTimeline.to(menu, {
+          x: "0%",
+          duration: 0.3,
+          ease: "power2.inOut",
+        });
 
-      el.open = false;
-      gsap.set(content, { maxHeight: 0, opacity: 0 });
+        button.addEventListener("click", (e) => {
+          e.stopPropagation();
+          isMenuOpen = !isMenuOpen;
+          toggleMenu(menu, button, isMenuOpen);
+        });
+      };
 
-      summary.addEventListener("click", (e) => {
-        e.preventDefault();
+      const toggleMenu = (menu, button, isOpen) => {
+        const topLine = button.querySelector(".top");
+        const middleLine = button.querySelector(".middle");
+        const bottomLine = button.querySelector(".bottom");
 
-        const isOpen = el.open;
-        const duration = 0.25;
+        if (isOpen) {
+          menuTimeline.play();
+          document.body.style.overflow = "hidden";
 
-        // Close all other dropdowns
-        document.querySelectorAll("details.dropdown").forEach((otherEl) => {
-          if (otherEl !== el && otherEl.open) {
-            const otherContent = otherEl.querySelector(".dropdown-content");
-            const otherIcon = otherEl.querySelector(".dropdown-icon");
+          // Hamburger to X animation
+          gsap.to(middleLine, {
+            opacity: 0,
+            duration: 0.15,
+            ease: "power1.inOut",
+          });
 
-            otherEl.open = false;
+          gsap.to(topLine, {
+            y: 9,
+            rotation: 45,
+            duration: 0.2,
+            ease: "power1.inOut",
+          });
 
-            gsap.to(otherContent, {
+          gsap.to(bottomLine, {
+            y: -9,
+            rotation: -45,
+            duration: 0.2,
+            ease: "power1.inOut",
+          });
+        } else {
+          menuTimeline.reverse();
+          document.body.style.overflow = "";
+
+          // X to hamburger animation
+          gsap.to(middleLine, {
+            opacity: 1,
+            duration: 0.15,
+            ease: "power1.inOut",
+          });
+
+          gsap.to(topLine, {
+            y: 0,
+            rotation: 0,
+            duration: 0.2,
+            ease: "power1.inOut",
+          });
+
+          gsap.to(bottomLine, {
+            y: 0,
+            rotation: 0,
+            duration: 0.2,
+            ease: "power1.inOut",
+          });
+
+          // Close all dropdowns
+          closeAllDropdowns();
+        }
+      };
+
+      const closeAllDropdowns = () => {
+        document.querySelectorAll("details.dropdown").forEach((el) => {
+          if (el.open) {
+            const content = el.querySelector(".dropdown-content");
+            const icon = el.querySelector(".dropdown-icon");
+
+            el.open = false;
+
+            gsap.to(content, {
               maxHeight: 0,
               opacity: 0,
-              duration: duration,
+              duration: 0.2,
               ease: "power1.inOut",
               overwrite: true,
             });
 
-            if (otherIcon) otherIcon.textContent = "+";
+            if (icon) icon.textContent = "+";
           }
         });
+      };
 
-        // Toggle current dropdown
-        el.open = !isOpen;
+      const initializeMobileDropdowns = () => {
+        document.querySelectorAll("details.dropdown").forEach((el) => {
+          const summary = el.querySelector("summary");
+          const content = el.querySelector(".dropdown-content");
+          const icon = el.querySelector(".dropdown-icon");
 
-        if (!isOpen) {
-          gsap.to(content, {
-            maxHeight: content.scrollHeight,
-            opacity: 1,
-            duration: duration,
-            ease: "power1.inOut",
-            overwrite: true,
+          el.open = false;
+          gsap.set(content, { maxHeight: 0, opacity: 0 });
+
+          summary.addEventListener("click", (e) => {
+            e.preventDefault();
+
+            const isOpen = el.open;
+            const duration = 0.25;
+
+            // Close all other dropdowns
+            document.querySelectorAll("details.dropdown").forEach((otherEl) => {
+              if (otherEl !== el && otherEl.open) {
+                const otherContent = otherEl.querySelector(".dropdown-content");
+                const otherIcon = otherEl.querySelector(".dropdown-icon");
+
+                otherEl.open = false;
+
+                gsap.to(otherContent, {
+                  maxHeight: 0,
+                  opacity: 0,
+                  duration: duration,
+                  ease: "power1.inOut",
+                  overwrite: true,
+                });
+
+                if (otherIcon) otherIcon.textContent = "+";
+              }
+            });
+
+            // Toggle current dropdown
+            el.open = !isOpen;
+
+            if (!isOpen) {
+              gsap.to(content, {
+                maxHeight: content.scrollHeight,
+                opacity: 1,
+                duration: duration,
+                ease: "power1.inOut",
+                overwrite: true,
+              });
+              icon.textContent = "−";
+            } else {
+              gsap.to(content, {
+                maxHeight: 0,
+                opacity: 0,
+                duration: duration,
+                ease: "power1.inOut",
+                overwrite: true,
+              });
+              icon.textContent = "+";
+            }
           });
-          icon.textContent = "−";
-        } else {
-          gsap.to(content, {
-            maxHeight: 0,
-            opacity: 0,
-            duration: duration,
-            ease: "power1.inOut",
-            overwrite: true,
-          });
-          icon.textContent = "+";
-        }
-      });
 
-      // Close menu when clicking links
-      content.querySelectorAll("a").forEach((link) => {
-        link.addEventListener("click", () => {
-          const button = document.getElementById("mobile-menu-button");
-          const menu = document.getElementById("mobile-menu");
-          if (menuTimeline && menuTimeline.isActive()) return;
-          toggleMenu(menu, button, false);
+          // Close menu when clicking links
+          content.querySelectorAll("a").forEach((link) => {
+            link.addEventListener("click", () => {
+              const button = document.getElementById("mobile-menu-button");
+              const menu = document.getElementById("mobile-menu");
+              if (menuTimeline && menuTimeline.isActive()) return;
+              toggleMenu(menu, button, false);
+            });
+          });
         });
-      });
-    });
-  };
+      };
 
-  // Improved desktop dropdowns
-  const initializeDesktopDropdowns = () => {
-    document.querySelectorAll(".group").forEach((dropdown) => {
-      const menuWrapper = dropdown.querySelector("div.absolute");
-      if (!menuWrapper) return;
+      // Improved desktop dropdowns
+      const initializeDesktopDropdowns = () => {
+        document.querySelectorAll(".group").forEach((dropdown) => {
+          const menuWrapper = dropdown.querySelector("div.absolute");
+          if (!menuWrapper) return;
 
-      let timeout;
+          let timeout;
 
-      dropdown.addEventListener("mouseenter", () => {
-        clearTimeout(timeout);
-        gsap.to(menuWrapper, {
-          opacity: 1,
-          visibility: "visible",
-          y: 0,
-          duration: 0.15,
-          ease: "power1.out",
-          overwrite: true,
-        });
-      });
-
-      dropdown.addEventListener("mouseleave", () => {
-        timeout = setTimeout(() => {
-          gsap.to(menuWrapper, {
-            opacity: 0,
-            visibility: "hidden",
-            y: -4,
-            duration: 0.15,
-            ease: "power1.in",
-            overwrite: true,
-          });
-        }, 50);
-      });
-
-      if (menuWrapper.firstElementChild) {
-        menuWrapper.firstElementChild.addEventListener("mouseenter", () =>
-          clearTimeout(timeout),
-        );
-        menuWrapper.firstElementChild.addEventListener("mouseleave", () => {
-          timeout = setTimeout(() => {
+          dropdown.addEventListener("mouseenter", () => {
+            clearTimeout(timeout);
             gsap.to(menuWrapper, {
-              opacity: 0,
-              visibility: "hidden",
-              y: -4,
+              opacity: 1,
+              visibility: "visible",
+              y: 0,
               duration: 0.15,
-              ease: "power1.in",
+              ease: "power1.out",
               overwrite: true,
             });
-          }, 50);
+          });
+
+          dropdown.addEventListener("mouseleave", () => {
+            timeout = setTimeout(() => {
+              gsap.to(menuWrapper, {
+                opacity: 0,
+                visibility: "hidden",
+                y: -4,
+                duration: 0.15,
+                ease: "power1.in",
+                overwrite: true,
+              });
+            }, 50);
+          });
+
+          if (menuWrapper.firstElementChild) {
+            menuWrapper.firstElementChild.addEventListener("mouseenter", () =>
+              clearTimeout(timeout),
+            );
+            menuWrapper.firstElementChild.addEventListener("mouseleave", () => {
+              timeout = setTimeout(() => {
+                gsap.to(menuWrapper, {
+                  opacity: 0,
+                  visibility: "hidden",
+                  y: -4,
+                  duration: 0.15,
+                  ease: "power1.in",
+                  overwrite: true,
+                });
+              }, 50);
+            });
+          }
         });
-      }
-    });
-  };
-
-  // Handle window resize
-  const handleResize = () => {
-    const menu = document.getElementById("mobile-menu");
-    const button = document.getElementById("mobile-menu-button");
-
-    if (window.innerWidth >= 1024) {
-      // lg breakpoint
-      if (menu) {
-        gsap.set(menu, { x: "100%", visibility: "hidden" });
-        document.body.style.overflow = "";
-
-        // Reset hamburger icon
-        if (button) {
-          const topLine = button.querySelector(".top");
-          const middleLine = button.querySelector(".middle");
-          const bottomLine = button.querySelector(".bottom");
-
-          gsap.set(topLine, { y: 0, rotation: 0 });
-          gsap.set(middleLine, { opacity: 1 });
-          gsap.set(bottomLine, { y: 0, rotation: 0 });
-        }
-      }
-
-      closeAllDropdowns();
-
-      if (menuTimeline) {
-        menuTimeline.reverse();
-      }
-    }
-  };
-
-  // Initialize everything
-  document.addEventListener("DOMContentLoaded", () => {
-    if (typeof gsap === "undefined") {
-      const script = document.createElement("script");
-      script.src =
-        "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js";
-      script.onload = () => {
-        initializeMobileMenu();
-        initializeDesktopDropdowns();
-        initializeMobileDropdowns();
       };
-      document.head.appendChild(script);
-    } else {
+
+      // Handle window resize
+      const handleResize = () => {
+        const menu = document.getElementById("mobile-menu");
+        const button = document.getElementById("mobile-menu-button");
+
+        if (window.innerWidth >= 1024) {
+          // lg breakpoint
+          if (menu) {
+            gsap.set(menu, { x: "100%", visibility: "hidden" });
+            document.body.style.overflow = "";
+
+            // Reset hamburger icon
+            if (button) {
+              const topLine = button.querySelector(".top");
+              const middleLine = button.querySelector(".middle");
+              const bottomLine = button.querySelector(".bottom");
+
+              gsap.set(topLine, { y: 0, rotation: 0 });
+              gsap.set(middleLine, { opacity: 1 });
+              gsap.set(bottomLine, { y: 0, rotation: 0 });
+            }
+          }
+
+          closeAllDropdowns();
+
+          if (menuTimeline) {
+            menuTimeline.reverse();
+          }
+        }
+      };
+
+      // Initialize everything
       initializeMobileMenu();
       initializeDesktopDropdowns();
       initializeMobileDropdowns();
-    }
 
-    window.addEventListener("resize", handleResize);
-  });
+      window.addEventListener("resize", handleResize);
+
+      // Clean up on page unload
+      window.addEventListener("beforeunload", () => {
+        if (menuTimeline) {
+          menuTimeline.kill();
+        }
+      });
+    }
+  })();
 </script>

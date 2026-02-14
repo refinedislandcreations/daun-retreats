@@ -86,131 +86,161 @@
 <!-- GSAP -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 
-<!-- Continuous Loop Script -->
+<!-- Continuous Loop Script - Isolated GSAP Implementation -->
 <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const track = document.getElementById("testimonial-track");
-    const originalSlides = Array.from(track.children);
-    const slidesPerView =
-      window.innerWidth >= 1024 ? 3 : window.innerWidth >= 768 ? 2 : 1;
+  (function () {
+    "use strict";
 
-    // Clone slides for seamless looping
-    const cloneSlides = () => {
-      const slides = Array.from(track.children);
-      const slidesToClone = Math.min(slidesPerView, slides.length);
+    // Wait for DOM and GSAP to be ready
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", initTestimonialSlider);
+    } else {
+      initTestimonialSlider();
+    }
 
-      // Clone first few slides and append to end
-      for (let i = 0; i < slidesToClone; i++) {
-        const clone = slides[i].cloneNode(true);
-        track.appendChild(clone);
+    function initTestimonialSlider() {
+      // Check if GSAP is loaded
+      if (typeof gsap === "undefined") {
+        console.warn("GSAP not loaded yet, retrying in 100ms...");
+        setTimeout(initTestimonialSlider, 100);
+        return;
       }
 
-      // Clone last few slides and prepend to beginning
-      for (let i = slides.length - slidesToClone; i < slides.length; i++) {
-        const clone = slides[i].cloneNode(true);
-        track.insertBefore(clone, track.firstChild);
-      }
-    };
+      const track = document.getElementById("testimonial-track");
+      if (!track) return;
 
-    cloneSlides();
+      const originalSlides = Array.from(track.children);
+      if (originalSlides.length === 0) return;
 
-    const allSlides = Array.from(track.children);
-    const slideWidth = 100 / slidesPerView; // Width percentage for each slide
+      const slidesPerView =
+        window.innerWidth >= 1024 ? 3 : window.innerWidth >= 768 ? 2 : 1;
 
-    // Calculate center offset for desktop (3 cards)
-    const getInitialPosition = () => {
-      if (slidesPerView === 3) {
-        // Start with first original card centered
-        const originalFirstIndex = slidesPerView; // After prepending clones
-        return -(originalFirstIndex * slideWidth);
-      } else {
-        // For 2 or 1 cards, start at beginning
-        return 0;
-      }
-    };
+      // Clone slides for seamless looping
+      const cloneSlides = () => {
+        const slides = Array.from(track.children);
+        const slidesToClone = Math.min(slidesPerView, slides.length);
 
-    // Set initial position
-    gsap.set(track, { x: `${getInitialPosition()}%` });
-
-    // Make all cards equal styling (no highlights)
-    allSlides.forEach((slide) => {
-      const card = slide.querySelector("div");
-      gsap.set(card, {
-        scale: 1,
-        opacity: 1,
-        boxShadow: "0 10px 15px -3px rgba(0, 0, 0, 0.1)",
-      });
-    });
-
-    // Continuous scroll animation
-    const startContinuousScroll = () => {
-      const slideCount = allSlides.length;
-      const totalWidth = slideCount * slideWidth;
-      const duration = slideCount * 2; // 2 seconds per slide, adjust as needed
-
-      // Create infinite scroll timeline
-      const scrollTl = gsap.timeline({ repeat: -1, ease: "none" });
-
-      scrollTl.to(track, {
-        x: `-${totalWidth - slidesPerView * slideWidth}%`,
-        duration: duration,
-        ease: "none",
-      });
-
-      // Reset position seamlessly when reaching the end
-      scrollTl.call(() => {
-        gsap.set(track, { x: `${getInitialPosition()}%` });
-      });
-
-      return scrollTl;
-    };
-
-    let masterTl = startContinuousScroll();
-
-    // Pause on hover
-    track.addEventListener("mouseenter", () => {
-      masterTl.pause();
-    });
-
-    track.addEventListener("mouseleave", () => {
-      masterTl.resume();
-    });
-
-    // Handle window resize
-    let resizeTimeout;
-    window.addEventListener("resize", () => {
-      clearTimeout(resizeTimeout);
-      resizeTimeout = setTimeout(() => {
-        // Kill current animation
-        masterTl.kill();
-
-        // Recalculate slides per view
-        const newSlidesPerView =
-          window.innerWidth >= 1024 ? 3 : window.innerWidth >= 768 ? 2 : 1;
-
-        if (newSlidesPerView !== slidesPerView) {
-          // Reload page or rebuild carousel for simplicity
-          location.reload();
-        } else {
-          // Restart animation with same settings
-          masterTl = startContinuousScroll();
+        // Clone first few slides and append to end
+        for (let i = 0; i < slidesToClone; i++) {
+          const clone = slides[i].cloneNode(true);
+          track.appendChild(clone);
         }
-      }, 250);
-    });
-  });
+
+        // Clone last few slides and prepend to beginning
+        for (let i = slides.length - slidesToClone; i < slides.length; i++) {
+          const clone = slides[i].cloneNode(true);
+          track.insertBefore(clone, track.firstChild);
+        }
+      };
+
+      cloneSlides();
+
+      const allSlides = Array.from(track.children);
+      const slideWidth = 100 / slidesPerView; // Width percentage for each slide
+
+      // Calculate center offset for desktop (3 cards)
+      const getInitialPosition = () => {
+        if (slidesPerView === 3) {
+          // Start with first original card centered
+          const originalFirstIndex = slidesPerView; // After prepending clones
+          return -(originalFirstIndex * slideWidth);
+        } else {
+          // For 2 or 1 cards, start at beginning
+          return 0;
+        }
+      };
+
+      // Set initial position
+      gsap.set(track, { x: `${getInitialPosition()}%` });
+
+      // Make all cards equal styling (no highlights)
+      allSlides.forEach((slide) => {
+        const card = slide.querySelector("div");
+        if (card) {
+          gsap.set(card, {
+            scale: 1,
+            opacity: 1,
+            boxShadow: "0 10px 15px -3px rgba(0, 0, 0, 0.1)",
+          });
+        }
+      });
+
+      // Continuous scroll animation
+      const startContinuousScroll = () => {
+        const slideCount = allSlides.length;
+        const totalWidth = slideCount * slideWidth;
+        const duration = slideCount * 8; // 2 seconds per slide, adjust as needed
+
+        // Kill any existing animation
+        if (window.__testimonialTl) {
+          window.__testimonialTl.kill();
+        }
+
+        // Create infinite scroll timeline
+        const scrollTl = gsap.timeline({
+          repeat: -1,
+          ease: "none",
+          onRepeat: () => {
+            // Reset position when reaching the end (seamless loop)
+            gsap.set(track, { x: `${getInitialPosition()}%` });
+          },
+        });
+
+        scrollTl.to(track, {
+          x: `-${totalWidth - slidesPerView * slideWidth}%`,
+          duration: duration,
+          ease: "none",
+        });
+
+        // Store timeline globally within this scope
+        window.__testimonialTl = scrollTl;
+        return scrollTl;
+      };
+
+      let masterTl = startContinuousScroll();
+
+      // Pause on hover
+      track.addEventListener("mouseenter", () => {
+        if (masterTl) masterTl.pause();
+      });
+
+      track.addEventListener("mouseleave", () => {
+        if (masterTl) masterTl.resume();
+      });
+
+      // Handle window resize
+      let resizeTimeout;
+      window.addEventListener("resize", () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+          // Kill current animation
+          if (masterTl) masterTl.kill();
+
+          // Recalculate slides per view
+          const newSlidesPerView =
+            window.innerWidth >= 1024 ? 3 : window.innerWidth >= 768 ? 2 : 1;
+
+          if (newSlidesPerView !== slidesPerView) {
+            // Reload page when breakpoint changes
+            location.reload();
+          } else {
+            // Restart animation with same settings
+            masterTl = startContinuousScroll();
+          }
+        }, 250);
+      });
+
+      // Clean up on page unload
+      window.addEventListener("beforeunload", () => {
+        if (window.__testimonialTl) {
+          window.__testimonialTl.kill();
+        }
+      });
+    }
+  })();
 </script>
 
 <style>
-  /* Font consistency */
-  .cormorant-garamond {
-    font-family: "Cormorant Garamond", serif;
-    font-weight: 600;
-  }
-
-  .proza-libre {
-    font-family: "Proza Libre", sans-serif;
-  }
-
   /* Custom card styling */
   .group {
     position: relative;
@@ -245,5 +275,12 @@
 
   .testimonial-slide > div:hover {
     box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15) !important;
+  }
+
+  /* Text wrapping */
+  .wrap-break-word {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
   }
 </style>
