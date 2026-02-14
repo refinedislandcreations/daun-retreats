@@ -14,6 +14,28 @@ hero:
       caption: "Kasturi Cabin"
   button_text: "Book Now"
   button_link: "/booking"
+
+welcome:
+  title: "WELCOME"
+
+  background: "/assets/images/index/hero.jpg"
+
+  description: >
+    Welcome to Daun Retreats, a boutique collection of villas inspired by nature and thoughtfully designed for meaningful getaways and creative projects. Each villa has its own charm, shaped by warmth, comfort, and careful attention to detail. Whether you’re dreaming of a quiet family retreat, a stylish weekend with friends, or a unique setting to spark your next idea, Daun Retreats brings together nature, design, and heartfelt hospitality in the lush surrounds of Hulu Langat, Malaysia.
+
+  items:
+    - image: "/assets/images/index/hero1.jpg"
+      title: "Gerimis Senja Villa"
+      link: "/gerimis-senja"
+
+    - image: "/assets/images/index/hero2.jpg"
+      title: "Kasturi Cabin"
+      link: "/kasturi-cabin"
+
+    - image: "/assets/images/index/hero.jpg"
+      title: "Gerimis Senja Villa"
+      link: "/gerimis-senja"
 ---
 
-{% include section-hero.html section=page.hero %}
+{% include section-hero.html section=page.hero %} {% include
+section-welcome.html section=page.welcome %}
