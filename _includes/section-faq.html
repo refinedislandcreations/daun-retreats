@@ -29,9 +29,14 @@
           </button>
 
           <div
-            class="faq-content hidden pb-6 pr-10 text-neutral-700 leading-relaxed proza-libre proza-400"
+            class="faq-content overflow-hidden"
+            style="max-height: 0; opacity: 0"
           >
-            {{ item.answer }}
+            <div
+              class="pb-6 pr-10 text-neutral-700 leading-relaxed proza-libre proza-400"
+            >
+              {{ item.answer }}
+            </div>
           </div>
         </div>
         {% endfor %}
@@ -41,29 +46,155 @@
   </div>
 </section>
 
+<!-- GSAP -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+<!-- Isolated GSAP FAQ Script -->
 <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const items = document.querySelectorAll(".faq-item");
+  (function () {
+    "use strict";
 
-    items.forEach((item) => {
-      const btn = item.querySelector(".faq-toggle");
-      const content = item.querySelector(".faq-content");
-      const icon = item.querySelector(".faq-icon");
+    // Wait for DOM and GSAP to be ready
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", initFAQ);
+    } else {
+      initFAQ();
+    }
 
-      btn.addEventListener("click", () => {
-        const isOpen = !content.classList.contains("hidden");
+    function initFAQ() {
+      // Check if GSAP is loaded
+      if (typeof gsap === "undefined") {
+        console.warn("GSAP not loaded yet, retrying in 100ms...");
+        setTimeout(initFAQ, 100);
+        return;
+      }
 
-        // close all
-        items.forEach((i) => {
-          i.querySelector(".faq-content").classList.add("hidden");
-          i.querySelector(".faq-icon").textContent = "+";
+      const items = document.querySelectorAll(".faq-item");
+      if (!items.length) return;
+
+      // Store active timelines to prevent conflicts
+      const activeTimelines = new Map();
+
+      items.forEach((item) => {
+        const btn = item.querySelector(".faq-toggle");
+        const content = item.querySelector(".faq-content");
+        const icon = item.querySelector(".faq-icon");
+        const answerDiv = content.querySelector("div");
+
+        // Set initial state with GSAP
+        gsap.set(content, {
+          maxHeight: 0,
+          opacity: 0,
+          padding: 0,
+          margin: 0,
         });
 
-        if (!isOpen) {
-          content.classList.remove("hidden");
-          icon.textContent = "−";
-        }
+        btn.addEventListener("click", (e) => {
+          e.preventDefault();
+
+          const isOpen =
+            content._gsap?.maxHeight > 0 || content.style.maxHeight !== "0px";
+          const duration = 0.4;
+
+          // Kill any existing animation for this content
+          if (activeTimelines.has(content)) {
+            activeTimelines.get(content).kill();
+            activeTimelines.delete(content);
+          }
+
+          if (isOpen) {
+            // Close this dropdown
+            const tl = gsap.timeline({
+              onComplete: () => {
+                activeTimelines.delete(content);
+              },
+            });
+
+            tl.to(content, {
+              maxHeight: 0,
+              opacity: 0,
+              padding: 0,
+              margin: 0,
+              duration: duration,
+              ease: "power2.inOut",
+            });
+
+            tl.set(icon, { textContent: "+" }, 0);
+
+            activeTimelines.set(content, tl);
+          } else {
+            // Close all other dropdowns first
+            items.forEach((otherItem) => {
+              const otherContent = otherItem.querySelector(".faq-content");
+              const otherIcon = otherItem.querySelector(".faq-icon");
+
+              if (
+                otherContent !== content &&
+                (otherContent._gsap?.maxHeight > 0 ||
+                  otherContent.style.maxHeight !== "0px")
+              ) {
+                if (activeTimelines.has(otherContent)) {
+                  activeTimelines.get(otherContent).kill();
+                  activeTimelines.delete(otherContent);
+                }
+
+                const closeTl = gsap.timeline();
+                closeTl.to(otherContent, {
+                  maxHeight: 0,
+                  opacity: 0,
+                  padding: 0,
+                  margin: 0,
+                  duration: duration * 0.8,
+                  ease: "power2.inOut",
+                });
+                closeTl.set(otherIcon, { textContent: "+" }, 0);
+              }
+            });
+
+            // Open this dropdown
+            const answerHeight = answerDiv.offsetHeight;
+
+            const tl = gsap.timeline({
+              onComplete: () => {
+                activeTimelines.delete(content);
+              },
+            });
+
+            tl.set(content, {
+              maxHeight: 0,
+              opacity: 0,
+              padding: 0,
+              margin: 0,
+            });
+
+            tl.to(content, {
+              maxHeight: answerHeight + 32, // Add padding
+              opacity: 1,
+              padding: "0 2.5rem 1.5rem 0", // pr-10 (2.5rem) + pb-6 (1.5rem)
+              margin: 0,
+              duration: duration,
+              ease: "power2.out",
+            });
+
+            tl.set(icon, { textContent: "−" }, 0);
+
+            activeTimelines.set(content, tl);
+          }
+        });
       });
-    });
-  });
+
+      // Clean up on page unload
+      window.addEventListener("beforeunload", () => {
+        activeTimelines.forEach((tl) => tl.kill());
+        activeTimelines.clear();
+      });
+    }
+  })();
 </script>
+
+<style>
+  /* FAQ transitions are handled by GSAP */
+  .faq-content {
+    will-change: max-height, opacity;
+  }
+</style>
