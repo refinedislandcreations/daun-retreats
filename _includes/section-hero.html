@@ -79,9 +79,20 @@
             <!-- Left Arrow -->
             <button
               id="hero-prev"
-              class="text-2xl font-light hover:opacity-60 transition text-[#005509] w-12 h-12 flex items-center justify-center"
+              class="w-12 h-12 flex items-center justify-center hover:opacity-60 transition"
+              aria-label="Previous"
             >
-              ←
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 12 24"
+                class="w-4 h-8 rotate-180"
+              >
+                <path
+                  fill="#005509"
+                  fill-rule="evenodd"
+                  d="M10.157 12.711L4.5 18.368l-1.414-1.414l4.95-4.95l-4.95-4.95L4.5 5.64l5.657 5.657a1 1 0 0 1 0 1.414"
+                />
+              </svg>
             </button>
 
             <!-- Line + Caption + Right Arrow -->
@@ -103,9 +114,20 @@
               <!-- Right Arrow -->
               <button
                 id="hero-next"
-                class="text-2xl font-light hover:opacity-60 transition text-[#005509] w-12 h-12 flex items-center justify-center"
+                class="w-12 h-12 flex items-center justify-center hover:opacity-60 transition"
+                aria-label="Next"
               >
-                →
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 12 24"
+                  class="w-4 h-8"
+                >
+                  <path
+                    fill="#005509"
+                    fill-rule="evenodd"
+                    d="M10.157 12.711L4.5 18.368l-1.414-1.414l4.95-4.95l-4.95-4.95L4.5 5.64l5.657 5.657a1 1 0 0 1 0 1.414"
+                  />
+                </svg>
               </button>
             </div>
           </div>

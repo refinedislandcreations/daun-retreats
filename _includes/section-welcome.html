@@ -1,44 +1,55 @@
 <!-- _includes/section-welcome.html -->
+{% assign section = include.section %} {% if section %}
 <section class="relative py-28 overflow-hidden bg-[#FBF8EF]">
   <!-- ================= BACKGROUND IMAGE ================= -->
+  {% if section.background %}
   <div class="absolute inset-0 max-w-screen-2xl mx-auto">
     <img
-      src="{{ include.section.background }}"
+      src="{{ section.background }}"
       alt=""
       class="w-full h-full object-cover"
       loading="lazy"
     />
   </div>
+  {% endif %}
 
   <!-- ================= CONTENT ================= -->
   <div class="relative mx-auto px-6 z-10 py-16">
     <div class="max-w-screen-2xl mx-auto lg:px-16">
-      <!-- Soft cream overlay -->
+      <!-- Soft overlay (only if background exists) -->
+      {% if section.background %}
       <div class="absolute inset-0 -z-10 bg-[#FBF8EF]/80"></div>
+      {% endif %}
 
-      <!-- Title -->
+      <!-- ================= TITLE ================= -->
+      {% if section.title %}
       <h2
-        class="text-center font-serif tracking-[0.2em] text-4xl md:text-5xl lg:text-6xl text-[#000] mb-20 cormorant-garamond"
+        class="text-center font-serif tracking-[0.2em] text-4xl md:text-5xl lg:text-6xl text-[#000] mb-20 cormorant-garamond uppercase whitespace-pre-line"
       >
-        {{ include.section.title }}
+        {{ section.title }}
       </h2>
+      {% endif %}
 
-      <!-- Cards grid -->
+      <!-- ================= ITEMS ================= -->
+      {% if section.items and section.items.size > 0 %}
       <div class="grid md:grid-cols-3 gap-8 lg:gap-10 mb-20">
-        {% for item in include.section.items %}
-        <a href="{{ item.link }}" class="group block">
+        {% for item in section.items %} {% if item %}
+        <a href="{{ item.link | default: '#' }}" class="group block">
           <div
             class="overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300"
           >
+            {% if item.image %}
             <img
               src="{{ item.image }}"
-              alt="{{ item.title }}"
+              alt="{{ item.title | default: '' }}"
               class="w-full aspect-square object-cover transition duration-700 group-hover:scale-105"
               loading="lazy"
             />
+            {% endif %}
           </div>
 
-          <!-- Caption-->
+          {% if item.title %}
+          <!-- Caption -->
           <div class="mt-5 flex items-center justify-end gap-3">
             <span
               class="h-[2px] w-[30%] md:w-[20%] lg:w-[40%] bg-[#005509]/60 transition-all duration-300"
@@ -49,21 +60,26 @@
               {{ item.title }}
             </p>
           </div>
+          {% endif %}
         </a>
-        {% endfor %}
+        {% endif %} {% endfor %}
       </div>
+      {% endif %}
 
-      <!-- Description -->
+      <!-- ================= DESCRIPTION ================= -->
+      {% if section.description %}
       <div class="max-w-4xl mx-auto text-center">
         <p
           class="text-[#000]/80 leading-relaxed text-base md:text-lg lg:text-xl proza-libre proza-400"
         >
-          {{ include.section.description }}
+          {{ section.description }}
         </p>
       </div>
+      {% endif %}
     </div>
   </div>
 </section>
+{% endif %}
 
 <style>
   /* Ensure consistent font rendering */
