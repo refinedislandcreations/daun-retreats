@@ -68,12 +68,12 @@
 
       <!-- ================= DESCRIPTION ================= -->
       {% if section.description %}
-      <div class="max-w-4xl mx-auto text-center">
-        <p
-          class="text-[#000]/80 leading-relaxed text-base md:text-lg lg:text-xl proza-libre proza-400"
+      <div class="max-w-4xl mx-auto">
+        <div
+          class="text-[#000]/80 leading-relaxed text-base md:text-lg lg:text-xl proza-libre proza-400 text-justify space-y-2"
         >
-          {{ section.description }}
-        </p>
+          {{ section.description | markdownify}}
+        </div>
       </div>
       {% endif %}
     </div>

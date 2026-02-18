@@ -20,7 +20,7 @@ welcome:
 
   background: "/assets/images/index/hero.jpg"
 
-  description: >
+  description: |
     Gerimis Senja Villa is a Balinese-inspired retreat tucked deep within the lush woodlands of Hulu Langat. Designed with open-air living spaces, a thatched roof, and natural materials like timber and stone, the villa blends effortlessly with its forest setting. Soft light, gentle breezes, and the rhythm of nature create a calm, restorative atmosphere that’s perfect for guests seeking privacy, relaxation, and a peaceful escape from city life.
 
 property:
@@ -49,9 +49,20 @@ gallery:
     main: "/assets/images/index/hero.jpg"
     side_top: "/assets/images/index/hero1.jpg"
     side_bottom: "/assets/images/index/hero2.jpg"
+
+stay:
+  title: "Your Stay at Gerimis Senja Villa"
+
+  background: "/assets/images/index/hero.jpg"
+
+  description: |
+    Gerimis Senja Villa can comfortably accommodate up to 15 adults and 6 children. To maintain a peaceful environment for all guests, day visitors are not permitted, and on-site surveys are not allowed.
+
+    Check-in begins at 2:00 PM, and check-out is at 11:00 AM.
 ---
 
 {% include section-hero.html section=page.hero %} {% include
 section-welcome.html section=page.welcome %} {% include
 section-property-details.html section=page.property %} {% include
-section-gallery.html section=page.gallery %}
+section-gallery.html section=page.gallery %} {% include section-welcome.html
+section=page.stay %}

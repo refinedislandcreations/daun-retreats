@@ -3,7 +3,7 @@ main_nav:
     url: "#"
     submenu:
       - title: Gerimis Senja Villa
-        url: "#"
+        url: "/gerimis-senja"
       - title: Kozu Villa
         url: "#"
       - title: Kasturi Cabin
