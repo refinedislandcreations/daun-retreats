@@ -2,38 +2,34 @@
 
 <section class="py-28 bg-[#E9E6DC] overflow-hidden">
   <div class="max-w-screen-2xl mx-auto px-6">
-    <!-- Title with GSAP animation -->
+    <!-- Title -->
     <div class="text-center max-w-4xl mx-auto mb-16">
       <h2
-        class="font-serif text-5xl md:text-6xl tracking-[0.15em] mb-8 opacity-0"
+        class="font-serif text-5xl md:text-6xl tracking-[0.15em] mb-8 opacity-0 translate-y-8"
         id="sectionTitle"
       >
         {{ include.section.title }}
       </h2>
 
       <p
-        class="text-lg text-neutral-700 leading-relaxed opacity-0"
+        class="text-lg text-neutral-700 leading-relaxed opacity-0 translate-y-8"
         id="sectionDescription"
       >
         {{ include.section.description }}
       </p>
     </div>
 
-    <!-- Slider Wrapper with smaller images -->
-    <div class="relative">
-      <!-- Track -->
-      <div
-        id="bedroomTrack"
-        class="flex gap-6 transition-transform duration-700 ease-out items-center"
-      >
+    <!-- Slider -->
+    <div class="relative overflow-hidden">
+      <div id="bedroomTrack" class="flex gap-4 md:gap-6 items-center">
         {% for slide in include.section.slides %}
         <div
-          class="min-w-[70%] md:min-w-[28%] overflow-hidden flex-shrink-0 group {% if forloop.index == 2 %}scale-110 shadow-2xl{% else %}scale-90 opacity-80{% endif %} transition-all duration-500"
+          class="w-[75%] sm:w-[60%] md:w-[32%] lg:w-[28%] flex-shrink-0 overflow-hidden group transition-all duration-500"
         >
           <div class="overflow-hidden">
             <img
               src="{{ slide.image }}"
-              class="w-full h-[400px] object-cover transition-transform duration-700 group-hover:scale-105"
+              class="w-full h-[400px] object-cover transition-transform duration-700"
               alt=""
             />
           </div>
@@ -42,20 +38,20 @@
       </div>
     </div>
 
-    <!-- Caption + CTA - positioned below center image -->
-    <div
-      class="flex items-center justify-between mt-12 max-w-screen-2xl mx-auto"
-    >
+    <!-- Caption + Arrows -->
+    <div class="flex items-center justify-between mt-12">
       <button
         id="prevBtn"
-        class="text-4xl w-12 h-12 flex text-[#005509] hover:text-[#005509]/80 items-center justify-center"
+        class="text-4xl w-12 h-12 flex items-center justify-center text-[#005509] opacity-0 scale-75"
         aria-label="Previous slide"
       >
         ‹
       </button>
 
       <div class="flex items-center gap-6">
-        <div class="w-24 h-[2px] bg-green-700"></div>
+        <div
+          class="caption-line w-24 h-[2px] bg-green-700 scale-x-50 opacity-0 origin-left"
+        ></div>
         <span id="captionText" class="text-lg opacity-0">
           {{ include.section.slides[1].caption }}
         </span>
@@ -63,18 +59,18 @@
 
       <button
         id="nextBtn"
-        class="text-4xl w-12 h-12 flex text-[#005509] hover:text-[#005509]/80 items-center justify-center"
+        class="text-4xl w-12 h-12 flex items-center justify-center text-[#005509] opacity-0 scale-75"
         aria-label="Next slide"
       >
         ›
       </button>
     </div>
 
-    <!-- Navigation buttons -->
-    <div class="flex justify-end items-center gap-4 mt-8">
+    <!-- CTA -->
+    <div class="flex justify-end mt-8">
       <a
         href="{{ include.section.button.url }}"
-        class="bg-green-800 text-white px-8 py-4 rounded-lg hover:opacity-90 transition-all duration-300 hover:shadow-lg hover:scale-105 opacity-0"
+        class="bg-green-800 text-white px-8 py-4 rounded-lg hover:opacity-90 transition-all duration-300 hover:shadow-lg hover:scale-105 opacity-0 scale-90"
         id="bookNowBtn"
       >
         {{ include.section.button.label }}
@@ -83,14 +79,124 @@
   </div>
 </section>
 
-<!-- GSAP Enhanced Slider -->
+<!-- GSAP -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
 <script>
   document.addEventListener("DOMContentLoaded", () => {
-    // Initialize GSAP
+
+    const track = document.getElementById("bedroomTrack");
+    const slides = Array.from(track.children);
+    const caption = document.getElementById("captionText");
+    const captions = {{ include.section.slides | map: "caption" | jsonify }};
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+
+    let index = 1;
+    let isAnimating = false;
+
+    function getGap() {
+      const style = window.getComputedStyle(track);
+      return parseFloat(style.columnGap || style.gap || 0);
+    }
+
+    function updateSlider(animate = true) {
+      if (isAnimating) return;
+      isAnimating = true;
+
+      const gap = getGap();
+      const containerWidth = track.parentElement.offsetWidth;
+
+      const slideWidth = slides[index].offsetWidth;
+      const scaleFactor = 1.1;
+
+      const centerOffset =
+        (containerWidth / 2) - ((slideWidth * scaleFactor) / 2);
+
+      const slidePosition = slides[index].offsetLeft;
+
+      const translateX = slidePosition - centerOffset;
+
+      gsap.to(track, {
+        x: -translateX,
+        duration: animate ? 0.8 : 0,
+        ease: "power3.inOut",
+        onComplete: () => isAnimating = false
+      });
+
+      slides.forEach((slide, i) => {
+        if (i === index) {
+          gsap.to(slide, {
+            scale: 1,
+            opacity: 1,
+            duration: 0.6,
+            ease: "power2.out"
+          });
+        } else {
+          gsap.to(slide, {
+            scale: 1,
+            opacity: 0.6,
+            duration: 0.6,
+            ease: "power2.out"
+          });
+        }
+      });
+
+      gsap.to(caption, {
+        opacity: 0,
+        duration: 0.3,
+        onComplete: () => {
+          caption.textContent = captions[index];
+          gsap.to(caption, { opacity: 1, duration: 0.5 });
+        }
+      });
+
+      gsap.fromTo(".caption-line",
+        { scaleX: 0.3, opacity: 0.5 },
+        { scaleX: 1, opacity: 1, duration: 0.6, ease: "power2.out" }
+      );
+    }
+
+    function nextSlide() {
+      if (isAnimating) return;
+      index = (index + 1) % slides.length;
+      updateSlider();
+    }
+
+    function prevSlide() {
+      if (isAnimating) return;
+      index = (index - 1 + slides.length) % slides.length;
+      updateSlider();
+    }
+
+    nextBtn.addEventListener("click", nextSlide);
+    prevBtn.addEventListener("click", prevSlide);
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowRight") nextSlide();
+      if (e.key === "ArrowLeft") prevSlide();
+    });
+
+    // Touch support
+    let touchStartX = 0;
+    track.addEventListener("touchstart", e => {
+      touchStartX = e.changedTouches[0].screenX;
+    });
+
+    track.addEventListener("touchend", e => {
+      const diff = touchStartX - e.changedTouches[0].screenX;
+      if (diff > 50) nextSlide();
+      if (diff < -50) prevSlide();
+    });
+
+    // Resize fix
+    window.addEventListener("resize", () => {
+      updateSlider(false);
+    });
+
+    // Initial animation timeline
     const tl = gsap.timeline();
 
-    // Animate title and description
     tl.to("#sectionTitle", {
       opacity: 1,
       y: 0,
@@ -103,7 +209,6 @@
       duration: 1,
       ease: "power3.out"
     }, "-=0.8")
-    // Animate arrows at the bottom
     .to("#prevBtn, #nextBtn", {
       opacity: 1,
       scale: 1,
@@ -111,21 +216,16 @@
       stagger: 0.2,
       ease: "back.out(1.7)"
     }, "-=0.5")
-    // Animate caption line
-    .to(".w-24.h-\\[2px\\]", {
-      width: "6rem",
+    .to(".caption-line", {
       opacity: 1,
+      scaleX: 1,
       duration: 0.8,
       ease: "power2.out"
     }, "-=0.3")
-    // Animate caption text
     .to("#captionText", {
       opacity: 1,
-      x: 0,
-      duration: 0.8,
-      ease: "power2.out"
+      duration: 0.8
     }, "-=0.6")
-    // Animate book now button
     .to("#bookNowBtn", {
       opacity: 1,
       scale: 1,
@@ -133,147 +233,8 @@
       ease: "back.out(1.7)"
     }, "-=0.4");
 
-    // Slider functionality
-    const track = document.getElementById("bedroomTrack");
-    const slides = Array.from(track.children);
-    const caption = document.getElementById("captionText");
+    // Initialize
+    setTimeout(() => updateSlider(false), 100);
 
-    // Get captions from data attribute or use provided slides
-    const captions = {{ include.section.slides | map: "caption" | jsonify }};
-
-    let index = 1; // Start with center image (index 1)
-    let isAnimating = false;
-
-    function updateSlider() {
-      if (isAnimating) return;
-      isAnimating = true;
-
-      const slideWidth = slides[0].offsetWidth + 24; // width + gap (reduced gap)
-      const containerWidth = track.parentElement.offsetWidth;
-      const centerOffset = (containerWidth / 2) - (slides[index].offsetWidth / 2);
-      const slidePosition = slides[index].offsetLeft;
-      const translateX = slidePosition - centerOffset;
-
-      // GSAP animation for slide transition
-      gsap.to(track, {
-        x: -translateX,
-        duration: 0.8,
-        ease: "power3.inOut",
-        onComplete: () => {
-          isAnimating = false;
-        }
-      });
-
-      // Update scale and opacity for each slide
-      slides.forEach((slide, i) => {
-        if (i === index) {
-          // Center slide - larger and fully opaque
-          gsap.to(slide, {
-            scale: 1.1,
-            opacity: 1,
-            duration: 0.6,
-            ease: "power2.out"
-          });
-        } else {
-          // Side slides - smaller and slightly transparent
-          gsap.to(slide, {
-            scale: 0.9,
-            opacity: 0.8,
-            duration: 0.6,
-            ease: "power2.out"
-          });
-        }
-      });
-
-      // Animate caption change with crossfade
-      gsap.to(caption, {
-        opacity: 0,
-        duration: 0.3,
-        onComplete: () => {
-          caption.textContent = captions[index];
-          gsap.to(caption, {
-            opacity: 1,
-            duration: 0.5
-          });
-        }
-      });
-
-      // Animate the green line
-      gsap.fromTo(".w-24.h-\\[2px\\]",
-        { scaleX: 0.3, opacity: 0.5 },
-        { scaleX: 1, opacity: 1, duration: 0.6, ease: "power2.out" }
-      );
-    }
-
-    // Next button
-    document.getElementById("nextBtn").addEventListener("click", () => {
-      if (isAnimating) return;
-      index = (index + 1) % slides.length;
-      updateSlider();
-    });
-
-    // Previous button
-    document.getElementById("prevBtn").addEventListener("click", () => {
-      if (isAnimating) return;
-      index = (index - 1 + slides.length) % slides.length;
-      updateSlider();
-    });
-
-    // Keyboard navigation
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "ArrowLeft") {
-        e.preventDefault();
-        document.getElementById("prevBtn").click();
-      } else if (e.key === "ArrowRight") {
-        e.preventDefault();
-        document.getElementById("nextBtn").click();
-      }
-    });
-
-    // Touch/swipe support for mobile
-    let touchStartX = 0;
-    let touchEndX = 0;
-
-    track.addEventListener("touchstart", (e) => {
-      touchStartX = e.changedTouches[0].screenX;
-    });
-
-    track.addEventListener("touchend", (e) => {
-      touchEndX = e.changedTouches[0].screenX;
-      if (touchStartX - touchEndX > 50) {
-        // Swipe left
-        document.getElementById("nextBtn").click();
-      } else if (touchEndX - touchStartX > 50) {
-        // Swipe right
-        document.getElementById("prevBtn").click();
-      }
-    });
-
-    // Auto-play (optional)
-    let autoplayInterval;
-
-    function startAutoplay() {
-      autoplayInterval = setInterval(() => {
-        if (!isAnimating) {
-          document.getElementById("nextBtn").click();
-        }
-      }, 5000);
-    }
-
-    function stopAutoplay() {
-      clearInterval(autoplayInterval);
-    }
-
-    // Start autoplay (uncomment if desired)
-    // startAutoplay();
-
-    // Stop autoplay on user interaction
-    document.getElementById("prevBtn").addEventListener("click", stopAutoplay);
-    document.getElementById("nextBtn").addEventListener("click", stopAutoplay);
-
-    // Initialize first slide with center focus
-    setTimeout(() => {
-      updateSlider();
-    }, 100);
   });
 </script>
