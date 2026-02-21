@@ -76,6 +76,33 @@ gallery_masonry:
 
 map:
   embed_url: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4053.3969792286416!2d101.83823700542867!3d3.157304411609673!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31cc3057d513914f%3A0x447f58e4938617e3!2sGerimis%20Senja%20Villa!5e0!3m2!1sen!2sid!4v1771660077738!5m2!1sen!2sid"
+
+bedrooms:
+  title: "BEDROOMS"
+  description: "The villa features three inviting bedrooms designed for comfort and rest. On the ground floor, there is a master bedroom with a queen bed and a separate single bedroom. Upstairs, a second master bedroom includes a queen bed and a sofa bed, making it ideal for families or small groups. For larger gatherings, up to five additional mattresses are available, each prepared with pillows and blankets for a restful stay."
+
+  button:
+    label: "Book Now"
+    url: "/booking"
+
+  slides:
+    - image: "/assets/images/index/hero.jpg"
+      caption: "Master Bedroom"
+
+    - image: "/assets/images/index/hero1.jpg"
+      caption: "Second Bedroom"
+
+    - image: "/assets/images/index/hero2.jpg"
+      caption: "Garden View Room"
+
+    - image: "/assets/images/index/hero1.jpg"
+      caption: "Master Bedroom"
+
+    - image: "/assets/images/index/hero2.jpg"
+      caption: "Second Bedroom"
+
+    - image: "/assets/images/index/hero.jpg"
+      caption: "Garden View Room"
 ---
 
 {% include section-hero.html section=page.hero %} {% include
@@ -84,3 +111,4 @@ section-property-details.html section=page.property %} {% include
 section-gallery.html section=page.gallery %} {% include section-welcome.html
 section=page.stay %} {% include section-gallery-masonry.html
 section=page.gallery_masonry %} {% include section-map.html section=page.map %}
+{% include section-property-carousel.html section=page.bedrooms %}
