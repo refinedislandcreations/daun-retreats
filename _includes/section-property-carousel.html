@@ -28,7 +28,7 @@
       >
         {% for slide in include.section.slides %}
         <div
-          class="min-w-[70%] md:min-w-[28%] rounded-xl overflow-hidden flex-shrink-0 group {% if forloop.index == 2 %}scale-110 shadow-2xl{% else %}scale-90 opacity-80{% endif %} transition-all duration-500"
+          class="min-w-[70%] md:min-w-[28%] overflow-hidden flex-shrink-0 group {% if forloop.index == 2 %}scale-110 shadow-2xl{% else %}scale-90 opacity-80{% endif %} transition-all duration-500"
         >
           <div class="overflow-hidden">
             <img
@@ -43,7 +43,17 @@
     </div>
 
     <!-- Caption + CTA - positioned below center image -->
-    <div class="flex items-center justify-between mt-12 max-w-4xl mx-auto">
+    <div
+      class="flex items-center justify-between mt-12 max-w-screen-2xl mx-auto"
+    >
+      <button
+        id="prevBtn"
+        class="text-4xl w-12 h-12 flex text-[#005509] hover:text-[#005509]/80 items-center justify-center"
+        aria-label="Previous slide"
+      >
+        ‹
+      </button>
+
       <div class="flex items-center gap-6">
         <div class="w-24 h-[2px] bg-green-700"></div>
         <span id="captionText" class="text-lg opacity-0">
@@ -51,6 +61,17 @@
         </span>
       </div>
 
+      <button
+        id="nextBtn"
+        class="text-4xl w-12 h-12 flex text-[#005509] hover:text-[#005509]/80 items-center justify-center"
+        aria-label="Next slide"
+      >
+        ›
+      </button>
+    </div>
+
+    <!-- Navigation buttons -->
+    <div class="flex justify-end items-center gap-4 mt-8">
       <a
         href="{{ include.section.button.url }}"
         class="bg-green-800 text-white px-8 py-4 rounded-lg hover:opacity-90 transition-all duration-300 hover:shadow-lg hover:scale-105 opacity-0"
@@ -58,25 +79,6 @@
       >
         {{ include.section.button.label }}
       </a>
-    </div>
-
-    <!-- Navigation buttons -->
-    <div class="flex justify-center items-center gap-4 mt-8">
-      <button
-        id="prevBtn"
-        class="text-4xl w-12 h-12 flex items-center justify-center bg-white/80 backdrop-blur-sm rounded-full shadow-lg hover:bg-white transition-all duration-300 opacity-0"
-        aria-label="Previous slide"
-      >
-        ‹
-      </button>
-
-      <button
-        id="nextBtn"
-        class="text-4xl w-12 h-12 flex items-center justify-center bg-white/80 backdrop-blur-sm rounded-full shadow-lg hover:bg-white transition-all duration-300 opacity-0"
-        aria-label="Next slide"
-      >
-        ›
-      </button>
     </div>
   </div>
 </section>
