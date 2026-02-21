@@ -59,10 +59,25 @@ stay:
     Gerimis Senja Villa can comfortably accommodate up to 15 adults and 6 children. To maintain a peaceful environment for all guests, day visitors are not permitted, and on-site surveys are not allowed.
 
     Check-in begins at 2:00 PM, and check-out is at 11:00 AM.
+
+gallery_masonry:
+  group_1:
+    - src: "/assets/images/index/hero.jpg"
+    - src: "/assets/images/index/hero1.jpg"
+    - src: "/assets/images/index/hero2.jpg"
+    - src: "/assets/images/index/hero.jpg"
+    - src: "/assets/images/index/hero1.jpg"
+  group_2:
+    - src: "/assets/images/index/hero2.jpg"
+    - src: "/assets/images/index/hero.jpg"
+    - src: "/assets/images/index/hero1.jpg"
+    - src: "/assets/images/index/hero.jpg"
+    - src: "/assets/images/index/hero1.jpg"
 ---
 
 {% include section-hero.html section=page.hero %} {% include
 section-welcome.html section=page.welcome %} {% include
 section-property-details.html section=page.property %} {% include
 section-gallery.html section=page.gallery %} {% include section-welcome.html
-section=page.stay %}
+section=page.stay %} {% include section-gallery-masonry.html
+section=page.gallery_masonry %}
