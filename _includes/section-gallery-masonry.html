@@ -1,22 +1,21 @@
-<!-- ===== GROUP 1: BIG LEFT ===== -->
 <section class="py-12 md:py-16 lg:py-24 bg-[#FBF8EF]">
-  <div class="max-w-screen-2xl mx-auto px-6 lg:px-0">
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 lg:gap-6 md:auto-rows-[220px]">
+
+  <!-- ===== GROUP 1: BIG LEFT ===== -->
+  <div class="max-w-screen-2xl mx-auto px-6 lg:px-8">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 lg:gap-6
+                auto-rows-[35vh] md:auto-rows-[30vh] lg:auto-rows-[28vh]">
 
       {% assign images = include.section.group_1 %}
       {% for image in images %}
         {% case forloop.index %}
         {% when 1 %}
-          <!-- BIG LEFT: first on mobile, spans 2x2 on desktop -->
+          <!-- BIG LEFT -->
           <div class="col-span-2 md:col-span-2 md:row-span-2 order-first md:order-none overflow-hidden">
         {% when 2 %}
-          <!-- Small image -->
           <div class="col-span-1 md:col-start-3 md:row-start-1 order-2 md:order-none overflow-hidden">
         {% when 3 %}
-          <!-- Small image, hidden on mobile -->
           <div class="hidden md:block md:col-start-3 md:row-start-2 overflow-hidden">
         {% when 4 %}
-          <!-- Small image, hidden on mobile -->
           <div class="hidden md:block md:col-start-4 md:row-start-1 overflow-hidden">
         {% else %}
           <div class="col-span-1 overflow-hidden">
@@ -24,7 +23,7 @@
             <img
               src="{{ image.src | default: image }}"
               alt="{{ image.alt | default: '' }}"
-              class="w-full h-full object-cover hover:scale-105 transition duration-500"
+              class="w-full h-full object-cover hover:scale-105 transition duration-500 ease-out"
               loading="lazy"
             />
           </div>
@@ -34,31 +33,29 @@
   </div>
 
   <!-- ===== GROUP 2: BIG RIGHT ===== -->
-  <div class="max-w-screen-2xl mx-auto px-6 lg:px-0 pt-4 lg:pt-6">
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 lg:gap-6 md:auto-rows-[220px]">
+  <div class="max-w-screen-2xl mx-auto px-6 lg:px-8 pt-4 lg:pt-6">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 lg:gap-6
+                auto-rows-[35vh] md:auto-rows-[30vh] lg:auto-rows-[28vh]">
 
       {% assign images = include.section.group_2 %}
       {% for image in images %}
         {% case forloop.index %}
         {% when 1 %}
-          <!-- Small top left -->
           <div class="col-span-1 order-1 md:order-none overflow-hidden">
         {% when 2 %}
-          <!-- Small top right, hidden on mobile -->
           <div class="hidden md:block md:row-start-2 overflow-hidden">
         {% when 3 %}
-          <!-- Optional extra small, hidden on mobile -->
           <div class="hidden md:block overflow-hidden">
         {% when 4 %}
-          <!-- BIG RIGHT: spans 2x2 on desktop, comes last on mobile -->
-          <div class="col-span-2 md:col-start-3 md:row-start-1 order-3 md:order-none md:row-span-2 overflow-hidden">
+          <!-- BIG RIGHT -->
+          <div class="col-span-2 md:col-start-3 md:row-start-1 md:row-span-2 order-3 md:order-none overflow-hidden">
         {% else %}
           <div class="col-span-1 overflow-hidden">
         {% endcase %}
             <img
               src="{{ image.src | default: image }}"
               alt="{{ image.alt | default: '' }}"
-              class="w-full h-full object-cover hover:scale-105 transition duration-500"
+              class="w-full h-full object-cover hover:scale-105 transition duration-500 ease-out"
               loading="lazy"
             />
           </div>
@@ -66,5 +63,5 @@
 
     </div>
   </div>
-</section>
 
+</section>
