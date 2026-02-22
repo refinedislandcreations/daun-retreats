@@ -1,19 +1,22 @@
 <!-- _includes/section-property-carousel.html -->
 
-<section class="py-28 bg-[#E9E6DC] overflow-hidden">
+<section
+  class="py-28 overflow-hidden {% if include.bg_color %}{{ include.bg_color }}{% else %}bg-[#E9E6DC]{% endif %}"
+  style="{% if include.custom_bg %}background-color: {{ include.custom_bg }};{% endif %}"
+>
   <div class="max-w-screen-2xl mx-auto px-6">
     <!-- Title -->
-    <div class="text-center max-w-4xl mx-auto mb-16">
+    <div class="text-center max-w-5xl mx-auto mb-16">
       <h2
-        class="font-serif text-5xl md:text-6xl tracking-[0.15em] mb-8 opacity-0 translate-y-8"
-        id="sectionTitle"
+        class="text-5xl md:text-6xl tracking-[0.15em] mb-8 opacity-0 translate-y-8 uppercase cormorant-garamond"
+        id="sectionTitle-{{ include.id }}"
       >
         {{ include.section.title }}
       </h2>
 
       <p
-        class="text-lg text-neutral-700 leading-relaxed opacity-0 translate-y-8"
-        id="sectionDescription"
+        class="text-lg text-neutral-700 leading-relaxed opacity-0 translate-y-8 proza-libre proza-400 text-justify whitespace-pre-line"
+        id="sectionDescription-{{ include.id }}"
       >
         {{ include.section.description }}
       </p>
@@ -21,7 +24,7 @@
 
     <!-- Slider -->
     <div class="relative overflow-hidden">
-      <div id="bedroomTrack" class="flex gap-4 md:gap-6 items-center">
+      <div id="track-{{ include.id }}" class="flex gap-4 md:gap-6 items-center">
         {% for slide in include.section.slides %}
         <div
           class="w-[75%] sm:w-[60%] md:w-[32%] lg:w-[28%] flex-shrink-0 overflow-hidden group transition-all duration-500"
@@ -41,7 +44,7 @@
     <!-- Caption + Arrows -->
     <div class="flex items-center justify-between mt-12">
       <button
-        id="prevBtn"
+        id="prevBtn-{{ include.id }}"
         class="text-4xl w-12 h-12 flex items-center justify-center text-[#005509] opacity-0 scale-75"
         aria-label="Previous slide"
       >
@@ -50,15 +53,16 @@
 
       <div class="flex items-center gap-6">
         <div
+          id="captionLine-{{ include.id }}"
           class="caption-line w-24 h-[2px] bg-green-700 scale-x-50 opacity-0 origin-left"
         ></div>
-        <span id="captionText" class="text-lg opacity-0">
+        <span id="captionText-{{ include.id }}" class="text-lg opacity-0">
           {{ include.section.slides[1].caption }}
         </span>
       </div>
 
       <button
-        id="nextBtn"
+        id="nextBtn-{{ include.id }}"
         class="text-4xl w-12 h-12 flex items-center justify-center text-[#005509] opacity-0 scale-75"
         aria-label="Next slide"
       >
@@ -71,7 +75,7 @@
       <a
         href="{{ include.section.button.url }}"
         class="bg-green-800 text-white px-8 py-4 rounded-lg hover:opacity-90 transition-all duration-300 hover:shadow-lg hover:scale-105 opacity-0 scale-90"
-        id="bookNowBtn"
+        id="bookNowBtn-{{ include.id }}"
       >
         {{ include.section.button.label }}
       </a>
@@ -84,13 +88,19 @@
 
 <script>
   document.addEventListener("DOMContentLoaded", () => {
+    // Initialize carousel for this specific instance
+    const sectionId = "{{ include.id }}";
 
-    const track = document.getElementById("bedroomTrack");
+    const track = document.getElementById(`track-${sectionId}`);
     const slides = Array.from(track.children);
-    const caption = document.getElementById("captionText");
+    const caption = document.getElementById(`captionText-${sectionId}`);
     const captions = {{ include.section.slides | map: "caption" | jsonify }};
-    const prevBtn = document.getElementById("prevBtn");
-    const nextBtn = document.getElementById("nextBtn");
+    const prevBtn = document.getElementById(`prevBtn-${sectionId}`);
+    const nextBtn = document.getElementById(`nextBtn-${sectionId}`);
+    const sectionTitle = document.getElementById(`sectionTitle-${sectionId}`);
+    const sectionDescription = document.getElementById(`sectionDescription-${sectionId}`);
+    const captionLine = document.getElementById(`captionLine-${sectionId}`);
+    const bookNowBtn = document.getElementById(`bookNowBtn-${sectionId}`);
 
     let index = 1;
     let isAnimating = false;
@@ -151,7 +161,7 @@
         }
       });
 
-      gsap.fromTo(".caption-line",
+      gsap.fromTo(captionLine,
         { scaleX: 0.3, opacity: 0.5 },
         { scaleX: 1, opacity: 1, duration: 0.6, ease: "power2.out" }
       );
@@ -173,6 +183,7 @@
     prevBtn.addEventListener("click", prevSlide);
 
     document.addEventListener("keydown", (e) => {
+      // Only handle keyboard if this carousel is in view (optional)
       if (e.key === "ArrowRight") nextSlide();
       if (e.key === "ArrowLeft") prevSlide();
     });
@@ -197,36 +208,36 @@
     // Initial animation timeline
     const tl = gsap.timeline();
 
-    tl.to("#sectionTitle", {
+    tl.to(sectionTitle, {
       opacity: 1,
       y: 0,
       duration: 1,
       ease: "power3.out"
     })
-    .to("#sectionDescription", {
+    .to(sectionDescription, {
       opacity: 1,
       y: 0,
       duration: 1,
       ease: "power3.out"
     }, "-=0.8")
-    .to("#prevBtn, #nextBtn", {
+    .to([prevBtn, nextBtn], {
       opacity: 1,
       scale: 1,
       duration: 0.8,
       stagger: 0.2,
       ease: "back.out(1.7)"
     }, "-=0.5")
-    .to(".caption-line", {
+    .to(captionLine, {
       opacity: 1,
       scaleX: 1,
       duration: 0.8,
       ease: "power2.out"
     }, "-=0.3")
-    .to("#captionText", {
+    .to(caption, {
       opacity: 1,
       duration: 0.8
     }, "-=0.6")
-    .to("#bookNowBtn", {
+    .to(bookNowBtn, {
       opacity: 1,
       scale: 1,
       duration: 0.8,
