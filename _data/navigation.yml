@@ -5,7 +5,7 @@ main_nav:
       - title: Gerimis Senja Villa
         url: "/gerimis-senja"
       - title: Kozu Villa
-        url: "#"
+        url: "/kozu-villa"
       - title: Kasturi Cabin
         url: "#"
       - title: Heritage Kampung Home
