@@ -16,15 +16,15 @@ main_nav:
     url: "#"
     submenu:
       - title: Discover Hulu Langat
-        url: "#hulu-langat"
+        url: "/explore-the-area/#hulu-langat"
       - title: Sungai Congkak
-        url: "#sungai-congkak"
+        url: "/explore-the-area/#sungai-congkak"
       - title: Skytrex Sungai Congkak
-        url: "#skytrex-sungai-congkak"
-      - title: Restaurant Terra Pong
-        url: "#restaurant-terra-pong"
+        url: "/explore-the-area/#skytrex-sungai-congkak"
+      - title: Restoran Terra Pong
+        url: "/explore-the-area/#restoran-terra-pong"
       - title: Hulu Langat Fishing Resort
-        url: "#fishing-resort"
+        url: "/explore-the-area/#fishing-resort"
   - title: Contact Us
     url: "/contact"
   - title: Book Now

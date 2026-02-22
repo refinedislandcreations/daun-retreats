@@ -2,27 +2,38 @@
 
 <section
   class="py-28 overflow-hidden {% if include.bg_color %}{{ include.bg_color }}{% else %}bg-[#E9E6DC]{% endif %}"
-  style="{% if include.custom_bg %}background-color: {{ include.custom_bg }};{% endif %}"
+  {%
+  if
+  include.custom_bg
+  %}style="background-color: {{ include.custom_bg }};"
+  {%
+  endif
+  %}
 >
   <div class="max-w-screen-2xl mx-auto px-6">
     <!-- Title -->
+    {% if include.section.title or include.section.description %}
     <div class="text-center max-w-5xl mx-auto mb-16">
+      {% if include.section.title %}
       <h2
         class="text-5xl md:text-6xl tracking-[0.15em] mb-8 opacity-0 translate-y-8 uppercase cormorant-garamond"
         id="sectionTitle-{{ include.id }}"
       >
         {{ include.section.title }}
       </h2>
-
+      {% endif %} {% if include.section.description %}
       <p
         class="text-lg text-neutral-700 leading-relaxed opacity-0 translate-y-8 proza-libre proza-400 text-justify whitespace-pre-line"
         id="sectionDescription-{{ include.id }}"
       >
         {{ include.section.description }}
       </p>
+      {% endif %}
     </div>
+    {% endif %}
 
     <!-- Slider -->
+    {% if include.section.slides and include.section.slides.size > 0 %}
     <div class="relative overflow-hidden">
       <div id="track-{{ include.id }}" class="flex gap-4 md:gap-6 items-center">
         {% for slide in include.section.slides %}
@@ -30,19 +41,23 @@
           class="w-[75%] sm:w-[60%] md:w-[32%] lg:w-[28%] flex-shrink-0 overflow-hidden group transition-all duration-500"
         >
           <div class="overflow-hidden">
+            {% if slide.image %}
             <img
               src="{{ slide.image }}"
               class="w-full h-[400px] object-cover transition-transform duration-700"
-              alt=""
+              alt="{% if slide.caption %}{{ slide.caption }}{% else %}{{ include.section.title }}{% endif %}"
             />
+            {% endif %}
           </div>
         </div>
         {% endfor %}
       </div>
     </div>
+    {% endif %}
 
     <!-- Caption + Arrows -->
-    <div class="flex items-center justify-between mt-12">
+    {% if include.section.slides and include.section.slides.size > 1 %}
+    <div class="flex items-center justify-between">
       <button
         id="prevBtn-{{ include.id }}"
         class="text-4xl w-12 h-12 flex items-center justify-center text-[#005509] opacity-0 scale-75"
@@ -51,6 +66,7 @@
         ‹
       </button>
 
+      {% if include.section.slides[1].caption %}
       <div class="flex items-center gap-6">
         <div
           id="captionLine-{{ include.id }}"
@@ -60,6 +76,7 @@
           {{ include.section.slides[1].caption }}
         </span>
       </div>
+      {% endif %}
 
       <button
         id="nextBtn-{{ include.id }}"
@@ -69,8 +86,11 @@
         ›
       </button>
     </div>
+    {% endif %}
 
     <!-- CTA -->
+    {% if include.section.button and include.section.button.label and
+    include.section.button.url %}
     <div class="flex justify-end mt-8">
       <a
         href="{{ include.section.button.url }}"
@@ -80,19 +100,25 @@
         {{ include.section.button.label }}
       </a>
     </div>
+    {% endif %}
   </div>
 </section>
 
 <!-- GSAP -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 
+{% if include.section.slides and include.section.slides.size > 0 %}
 <script>
   document.addEventListener("DOMContentLoaded", () => {
     // Initialize carousel for this specific instance
     const sectionId = "{{ include.id }}";
 
     const track = document.getElementById(`track-${sectionId}`);
+    if (!track) return; // Exit if no track found
+
     const slides = Array.from(track.children);
+    if (slides.length === 0) return; // Exit if no slides
+
     const caption = document.getElementById(`captionText-${sectionId}`);
     const captions = {{ include.section.slides | map: "caption" | jsonify }};
     const prevBtn = document.getElementById(`prevBtn-${sectionId}`);
@@ -103,6 +129,13 @@
     const bookNowBtn = document.getElementById(`bookNowBtn-${sectionId}`);
 
     let index = 1;
+    // Adjust index if less than 3 slides
+    if (slides.length < 3) {
+      index = 0;
+    } else if (slides.length === 2) {
+      index = 0;
+    }
+
     let isAnimating = false;
 
     function getGap() {
@@ -112,6 +145,8 @@
 
     function updateSlider(animate = true) {
       if (isAnimating) return;
+      if (slides.length === 0) return;
+
       isAnimating = true;
 
       const gap = getGap();
@@ -152,35 +187,43 @@
         }
       });
 
-      gsap.to(caption, {
-        opacity: 0,
-        duration: 0.3,
-        onComplete: () => {
-          caption.textContent = captions[index];
-          gsap.to(caption, { opacity: 1, duration: 0.5 });
-        }
-      });
+      {% if include.section.slides[0].caption %}
+      if (caption && captions && captions[index]) {
+        gsap.to(caption, {
+          opacity: 0,
+          duration: 0.3,
+          onComplete: () => {
+            caption.textContent = captions[index];
+            gsap.to(caption, { opacity: 1, duration: 0.5 });
+          }
+        });
+      }
+      {% endif %}
 
-      gsap.fromTo(captionLine,
-        { scaleX: 0.3, opacity: 0.5 },
-        { scaleX: 1, opacity: 1, duration: 0.6, ease: "power2.out" }
-      );
+      if (captionLine) {
+        gsap.fromTo(captionLine,
+          { scaleX: 0.3, opacity: 0.5 },
+          { scaleX: 1, opacity: 1, duration: 0.6, ease: "power2.out" }
+        );
+      }
     }
 
     function nextSlide() {
       if (isAnimating) return;
+      if (slides.length === 0) return;
       index = (index + 1) % slides.length;
       updateSlider();
     }
 
     function prevSlide() {
       if (isAnimating) return;
+      if (slides.length === 0) return;
       index = (index - 1 + slides.length) % slides.length;
       updateSlider();
     }
 
-    nextBtn.addEventListener("click", nextSlide);
-    prevBtn.addEventListener("click", prevSlide);
+    if (nextBtn) nextBtn.addEventListener("click", nextSlide);
+    if (prevBtn) prevBtn.addEventListener("click", prevSlide);
 
     document.addEventListener("keydown", (e) => {
       // Only handle keyboard if this carousel is in view (optional)
@@ -208,44 +251,64 @@
     // Initial animation timeline
     const tl = gsap.timeline();
 
-    tl.to(sectionTitle, {
-      opacity: 1,
-      y: 0,
-      duration: 1,
-      ease: "power3.out"
-    })
-    .to(sectionDescription, {
-      opacity: 1,
-      y: 0,
-      duration: 1,
-      ease: "power3.out"
-    }, "-=0.8")
-    .to([prevBtn, nextBtn], {
-      opacity: 1,
-      scale: 1,
-      duration: 0.8,
-      stagger: 0.2,
-      ease: "back.out(1.7)"
-    }, "-=0.5")
-    .to(captionLine, {
-      opacity: 1,
-      scaleX: 1,
-      duration: 0.8,
-      ease: "power2.out"
-    }, "-=0.3")
-    .to(caption, {
-      opacity: 1,
-      duration: 0.8
-    }, "-=0.6")
-    .to(bookNowBtn, {
-      opacity: 1,
-      scale: 1,
-      duration: 0.8,
-      ease: "back.out(1.7)"
-    }, "-=0.4");
+    if (sectionTitle) {
+      tl.to(sectionTitle, {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        ease: "power3.out"
+      });
+    }
+
+    if (sectionDescription) {
+      tl.to(sectionDescription, {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        ease: "power3.out"
+      }, "-=0.8");
+    }
+
+    if (prevBtn && nextBtn) {
+      tl.to([prevBtn, nextBtn], {
+        opacity: 1,
+        scale: 1,
+        duration: 0.8,
+        stagger: 0.2,
+        ease: "back.out(1.7)"
+      }, "-=0.5");
+    }
+
+    if (captionLine) {
+      tl.to(captionLine, {
+        opacity: 1,
+        scaleX: 1,
+        duration: 0.8,
+        ease: "power2.out"
+      }, "-=0.3");
+    }
+
+    {% if include.section.slides[0].caption %}
+    if (caption) {
+      tl.to(caption, {
+        opacity: 1,
+        duration: 0.8
+      }, "-=0.6");
+    }
+    {% endif %}
+
+    if (bookNowBtn) {
+      tl.to(bookNowBtn, {
+        opacity: 1,
+        scale: 1,
+        duration: 0.8,
+        ease: "back.out(1.7)"
+      }, "-=0.4");
+    }
 
     // Initialize
     setTimeout(() => updateSlider(false), 100);
 
   });
 </script>
+{% endif %}
