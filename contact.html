@@ -1,0 +1,58 @@
+---
+layout: default
+title: Contact Us | Daun Retreats
+
+hero:
+  title: "Get in Touch"
+  subtitle: "Or Book a Villa Directly"
+  slides:
+    - image: "/assets/images/index/hero.jpg"
+      caption: "Master Bedroom"
+    - image: "/assets/images/index/hero1.jpg"
+      caption: "Kozu Villa"
+    - image: "/assets/images/index/hero2.jpg"
+      caption: "Kasturi Cabin"
+  button_text: "Book Now"
+  button_link: "/booking"
+
+welcome:
+  title: "We’re Here to Help."
+
+  background: "/assets/images/index/hero.jpg"
+
+  description: |
+    We’d love to hear from you. Whether you’re planning a stay, organising a photoshoot, or simply have a question about our villas, our team is here to help. Fill out the form below, and we’ll get back to you as soon as possible.
+
+contact_form:
+  title: "CONTACT OUR TEAM"
+
+  image: "/assets/images/index/hero.jpg"
+  caption: "Gerimis Senja Villa"
+
+  form:
+    action: "#"
+    button: "Send Enquiry"
+    properties:
+      - "Gerimis Senja Villa"
+      - "Kozu Villa"
+      - "Kasturi Cabin"
+      - "Heritage Kampung Home"
+      - "Norehan’s Place"
+      - "Other"
+
+  details:
+    email: "daunretreats@gmail.com"
+    phone: "+60 12-252 2235"
+
+  socials:
+    - icon: "/assets/images/icons/instagram-icon-green.png"
+      url: "https://www.instagram.com/daunretreats/"
+    - icon: "/assets/images/icons/facebook-icon-green.png"
+      url: "https://www.facebook.com/daunretreats/"
+    - icon: "/assets/images/icons/tiktok-icon-green.png"
+      url: "https://www.tiktok.com/@daunretreats"
+---
+
+{% include section-hero.html section=page.hero %} {% include
+section-welcome.html section=page.welcome %} {% include
+section-contact-form.html section=page.contact_form %}

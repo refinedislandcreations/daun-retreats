@@ -1,0 +1,178 @@
+<!-- ======================================== -->
+<!-- Section Contact Form -->
+<!-- ======================================== -->
+
+<section class="py-28 bg-[#E9E6DC]">
+  <div class="max-w-screen-2xl mx-auto px-6">
+    <!-- ================= Title ================= -->
+    <h2 class="cormorant-garamond text-5xl md:text-6xl tracking-[0.12em] mb-12">
+      {{ include.section.title }}
+    </h2>
+
+    <!-- Main Grid -->
+    <div class="grid md:grid-cols-2 gap-20 items-start">
+      <!-- LEFT : FORM -->
+      <form
+        action="{{ include.section.form.action | default:'#' }}"
+        method="POST"
+        class="space-y-6"
+      >
+        <!-- Name -->
+        <div class="group">
+          <label
+            class="block proza-libre mb-2 text-sm md:text-base font-medium text-neutral-700 group-focus-within:text-green-800 transition"
+          >
+            Your Name <span class="text-green-800">*</span>
+          </label>
+
+          <input
+            type="text"
+            name="name"
+            required
+            placeholder="John Doe"
+            class="w-full proza-libre border-2 border-green-800/30 rounded-lg px-5 py-4 bg-[#FBF8EF] backdrop-blur-sm focus:bg-[#FFF]/80 focus:border-green-800 focus:outline-none focus:ring-4 focus:ring-green-800/10 transition-all duration-300"
+          />
+        </div>
+
+        <!-- Email -->
+        <div class="group">
+          <label
+            class="block proza-libre mb-2 text-sm md:text-base font-medium text-neutral-700 group-focus-within:text-green-800 transition"
+          >
+            Your E-Mail <span class="text-green-800">*</span>
+          </label>
+
+          <input
+            type="email"
+            name="email"
+            required
+            placeholder="hello@example.com"
+            class="w-full border-2 border-green-800/30 rounded-lg px-5 py-4 bg-[#FBF8EF] backdrop-blur-sm focus:bg-[#FFF]/80 focus:border-green-800 focus:outline-none focus:ring-4 focus:ring-green-800/10 transition-all duration-300"
+          />
+        </div>
+
+        <!-- Property Select -->
+        <div class="group">
+          <label
+            class="block proza-libre mb-2 text-sm md:text-base font-medium text-neutral-700 group-focus-within:text-green-800 transition"
+          >
+            Which property are you enquiring about?
+            <span class="text-green-800">*</span>
+          </label>
+
+          <div class="relative">
+            <select
+              name="property"
+              required
+              class="w-full proza-libre border-2 border-green-800/30 rounded-lg px-5 py-4 bg-[#FBF8EF] backdrop-blur-sm focus:bg-[#FFF]/80 focus:border-green-800 focus:outline-none focus:ring-4 focus:ring-green-800/10 transition-all duration-300 appearance-none cursor-pointer"
+            >
+              <option value="" disabled selected>
+                Choose your villa or select "Other"
+              </option>
+
+              {% for option in include.section.form.properties %}
+              <option value="{{ option | slugify }}">{{ option }}</option>
+              {% endfor %}
+            </select>
+
+            <!-- Custom Arrow -->
+            <div
+              class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-5 text-green-800"
+            >
+              <svg
+                class="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M19 9l-7 7-7-7"
+                />
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- Message -->
+        <div class="group">
+          <label
+            class="block mb-2 text-sm md:text-base font-medium text-neutral-700 group-focus-within:text-green-800 transition"
+          >
+            Message <span class="text-green-800">*</span>
+          </label>
+
+          <textarea
+            rows="5"
+            name="message"
+            required
+            placeholder="Tell us about your inquiry..."
+            class="w-full proza-libre border-2 border-green-800/30 rounded-lg px-5 py-4 bg-[#FBF8EF] backdrop-blur-sm focus:bg-[#FFF]/80 focus:border-green-800 focus:outline-none focus:ring-4 focus:ring-green-800/10 transition-all duration-300 resize-none"
+          ></textarea>
+        </div>
+
+        <!-- Button -->
+        <div class="">
+          <button
+            type="submit"
+            class="group relative !bg-[#005509] !text-[#FBF8EF] px-6 py-4 rounded-lg hover:!bg-[#005509]/80 transition-all duration-300 justify-end flex items-center gap-3 ml-auto proza-libre"
+          >
+            {{ include.section.form.button }}
+          </button>
+        </div>
+      </form>
+
+      <!-- RIGHT : IMAGE -->
+      <div class="space-y-6">
+        <img
+          src="{{ include.section.image }}"
+          alt=""
+          class="w-full h-[520px] object-cover"
+          loading="lazy"
+        />
+
+        {% if include.section.caption %}
+        <div class="flex items-center justify-end gap-4 text-sm">
+          <div class="flex-1 h-[1px] bg-black/40 max-w-[12rem]"></div>
+          <span class="whitespace-nowrap"> {{ include.section.caption }} </span>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+
+    <!-- ===================================================== -->
+    <!-- Bottom Info -->
+    <!-- ===================================================== -->
+    <div class="grid md:grid-cols-2 gap-20 mt-24">
+      <!-- Contact Details -->
+      <div class="proza-libre">
+        <h3 class="font-medium mb-4 text-lg">Contact Details</h3>
+        <p>{{ include.section.details.email }}</p>
+        <p>{{ include.section.details.phone }}</p>
+      </div>
+
+      <!-- Socials -->
+      <div>
+        <h3 class="font-medium mb-4 proza-libre text-lg">Follow Us</h3>
+
+        <div class="flex gap-6 items-center">
+          {% for s in include.section.socials %}
+          <a
+            href="{{ s.url }}"
+            target="_blank"
+            class="hover:opacity-70 transition"
+          >
+            <img
+              src="{{ s.icon }}"
+              class="w-6 h-6 md:w-7 md:h-7 object-contain"
+              alt=""
+            />
+          </a>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
