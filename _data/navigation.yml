@@ -9,24 +9,24 @@ main_nav:
       - title: Kasturi Cabin
         url: "/kasturi-cabin"
       - title: Heritage Kampung Home
-        url: "#"
+        url: "/heritage-kampung-home"
       - title: Norehan's Place
-        url: "#"
+        url: "/norehans-place"
   - title: Explore the Area
     url: "#"
     submenu:
       - title: Discover Hulu Langat
-        url: "#"
+        url: "#hulu-langat"
       - title: Sungai Congkak
-        url: "#"
+        url: "#sungai-congkak"
       - title: Skytrex Sungai Congkak
-        url: "#"
+        url: "#skytrex-sungai-congkak"
       - title: Restaurant Terra Pong
-        url: "#"
+        url: "#restaurant-terra-pong"
       - title: Hulu Langat Fishing Resort
-        url: "#"
+        url: "#fishing-resort"
   - title: Contact Us
-    url: "#"
+    url: "/contact"
   - title: Book Now
     url: "#"
     is_button: true
