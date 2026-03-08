@@ -52,16 +52,18 @@
           </div>
 
           {% if item.title %}
-          <!-- Caption -->
+          <!-- Caption with hover animation container -->
           <div class="mt-5 flex items-center justify-end gap-3">
             <span
               class="h-[2px] w-[30%] md:w-[20%] lg:w-[40%] bg-[#005509]/60 transition-all duration-300"
             ></span>
-            <p
-              class="text-sm md:text-base tracking-wide text-[#000] proza-libre proza-500"
-            >
-              {{ item.title }}
-            </p>
+            <div class="overflow-hidden h-[24px] md:h-[28px]">
+              <p
+                class="item-title text-sm md:text-base tracking-wide text-[#000] proza-libre proza-500"
+              >
+                {{ item.title }}
+              </p>
+            </div>
           </div>
           {% endif %}
         </a>
@@ -150,6 +152,37 @@
           },
         });
       }
+
+      // Button hover animation for item titles
+      const itemTitles = gsap.utils.toArray(".item-title");
+      itemTitles.forEach((title) => {
+        // Create timeline for each title
+        let tl = gsap.timeline({ paused: true });
+
+        tl.to(title, {
+          duration: 0.2,
+          yPercent: -150,
+          ease: "power2.in",
+        });
+        tl.set(title, { yPercent: 150 });
+        tl.to(title, {
+          duration: 0.2,
+          yPercent: 0,
+          ease: "power2.out",
+        });
+
+        // Find the parent anchor to attach hover events
+        const parentLink = title.closest("a");
+        if (parentLink) {
+          parentLink.addEventListener("mouseenter", () => tl.play(0));
+          // Optional: reset on mouseleave if you want it to reset immediately
+          parentLink.addEventListener("mouseleave", () => {
+            // Kill current animation and reset
+            tl.kill();
+            gsap.set(title, { yPercent: 0 });
+          });
+        }
+      });
     });
   });
 </script>
