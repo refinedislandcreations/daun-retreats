@@ -23,11 +23,14 @@
 
       <!-- ================= TITLE ================= -->
       {% if section.title %}
-      <h2
-        class="text-center tracking-[0.2em] text-4xl md:text-5xl lg:text-6xl text-[#000] mb-20 cormorant-garamond uppercase whitespace-pre-line"
-      >
-        {{ section.title }}
-      </h2>
+      <div class="text-center mb-20">
+        <h2
+          class="split-title text-center tracking-[0.2em] text-4xl md:text-5xl lg:text-6xl text-[#000] mb-20 cormorant-garamond uppercase whitespace-pre-line"
+          style="opacity: 0"
+        >
+          {{ section.title }}
+        </h2>
+      </div>
       {% endif %}
 
       <!-- ================= ITEMS ================= -->
@@ -70,19 +73,100 @@
       {% if section.description %}
       <div class="max-w-4xl mx-auto">
         <div
-          class="text-[#000]/80 leading-relaxed text-base md:text-lg lg:text-xl proza-libre proza-400 text-justify space-y-2"
+          class="split-description text-[#000]/80 leading-relaxed text-base md:text-lg lg:text-xl proza-libre proza-400 text-justify space-y-2"
+          style="opacity: 0"
         >
-          {{ section.description | markdownify}}
+          {{ section.description | markdownify }}
         </div>
       </div>
       {% endif %}
     </div>
   </div>
 </section>
-{% endif %}
+
+<!-- Add GSAP and SplitText -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://assets.codepen.io/16327/SplitText.min.js"></script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    gsap.registerPlugin(SplitText, ScrollTrigger);
+
+    document.fonts.ready.then(() => {
+      // Title animation
+      const titleElement = document.querySelector(".split-title");
+      if (titleElement) {
+        gsap.set(titleElement, { opacity: 1 });
+
+        SplitText.create(titleElement, {
+          type: "words,lines",
+          linesClass: "line",
+          autoSplit: true,
+          mask: "lines",
+          onSplit: (self) => {
+            // Create scroll-triggered animation
+            gsap.from(self.lines, {
+              scrollTrigger: {
+                trigger: titleElement,
+                start: "top 80%",
+                toggleActions: "play reverse play reverse",
+              },
+              duration: 1.2,
+              yPercent: 100,
+              opacity: 0,
+              stagger: 0.1,
+              ease: "power2.out",
+            });
+          },
+        });
+      }
+
+      // Description animation
+      const descriptionElement = document.querySelector(".split-description");
+      if (descriptionElement) {
+        gsap.set(descriptionElement, { opacity: 1 });
+
+        SplitText.create(descriptionElement, {
+          type: "words,lines",
+          linesClass: "line",
+          autoSplit: true,
+          mask: "lines",
+          onSplit: (self) => {
+            // Create scroll-triggered animation
+            gsap.from(self.lines, {
+              scrollTrigger: {
+                trigger: descriptionElement,
+                start: "top 80%",
+                toggleActions: "play reverse play reverse",
+              },
+              duration: 1.2,
+              yPercent: 100,
+              opacity: 0,
+              stagger: 0.08,
+              ease: "power2.out",
+              delay: 0.2,
+            });
+          },
+        });
+      }
+    });
+  });
+</script>
 
 <style>
-  /* Ensure consistent font rendering */
+  /* Line class for SplitText */
+  .line {
+    overflow: hidden;
+  }
+
+  /* Ensure smooth animations */
+  .split-title *,
+  .split-description * {
+    will-change: transform;
+  }
+
+  /* Preserve all your original styles */
   .cormorant-garamond {
     font-family: "Cormorant Garamond", serif;
     font-weight: 600;
@@ -101,21 +185,14 @@
     font-weight: 500;
   }
 
-  /* Smooth hover transitions */
   .group:hover .bg-\[\#005509\]\/60 {
     background-color: rgba(0, 85, 9, 0.8);
   }
 
-  /* Better image handling */
   .aspect-square img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-  }
-
-  /* Ensure overlay only covers content area */
-  .relative.max-w-7xl {
-    position: relative;
   }
 
   .absolute.inset-0.-z-10 {
@@ -126,6 +203,7 @@
     bottom: 0;
     width: 100%;
     height: 100%;
-    pointer-events: none; /* Allows clicking through to links */
+    pointer-events: none;
   }
 </style>
+{% endif %}
