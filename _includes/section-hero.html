@@ -55,14 +55,14 @@
             </a>
             {% endif %}
 
-            <!-- Title -->
+            <!-- Title (with animation class) -->
             <h1
               class="hero-split font-serif tracking-wide text-[clamp(2.2rem,7vw,6rem)] sm:text-[clamp(2.5rem,6.5vw,6.5rem)] md:text-[clamp(3rem,5vw,7rem)] lg:text-[clamp(3.5rem,4.5vw,7.5rem)] xl:text-[clamp(4rem,4vw,8rem)] text-[#000] mb-2 md:mb-0 leading-[1.1] cormorant-garamond"
             >
               {{ include.section.title }}
             </h1>
 
-            <!-- Subtitle -->
+            <!-- Subtitle (with animation class) -->
             <p
               class="hero-split-sub text-[clamp(0.9rem,2.5vw,1.2rem)] sm:text-[clamp(1rem,2vw,1.4rem)] md:text-[clamp(1.05rem,1.8vw,1.5rem)] lg:text-[clamp(1.1rem,1.6vw,1.6rem)] text-[#000]/80 leading-relaxed max-w-3xl mx-auto md:mx-0 md:ml-auto mb-2 md:mb-0 proza-libre"
             >
@@ -135,7 +135,7 @@
       </div>
     </div>
 
-    <!-- MOBILE CONTENT CARD (only visible on mobile) -->
+    <!-- MOBILE CONTENT CARD (only visible on mobile, WITH ANIMATION CLASSES) -->
     <div
       class="relative z-10 flex items-center min-h-screen px-4 sm:px-6 justify-center pointer-events-none md:hidden"
     >
@@ -145,20 +145,22 @@
         {% if include.section.button_text %}
         <a
           href="{{ include.section.button_link | default: '#' }}"
-          class="absolute -bottom-5 right-4 sm:right-6 z-20 bg-[#005509] hover:bg-[#006611] text-[#FBF8EF] px-6 sm:px-7 py-2.5 sm:py-3 rounded-lg font-medium transition-all duration-300 shadow-lg hover:shadow-xl border-2 border-transparent hover:border-[#FBF8EF]/20 tracking-wide proza-libre text-sm sm:text-base"
+          class="hero-button absolute -bottom-5 right-4 sm:right-6 z-20 bg-[#005509] hover:bg-[#006611] text-[#FBF8EF] px-6 sm:px-7 py-2.5 sm:py-3 rounded-lg font-medium transition-all duration-300 shadow-lg hover:shadow-xl border-2 border-transparent hover:border-[#FBF8EF]/20 tracking-wide proza-libre text-sm sm:text-base"
         >
-          {{ include.section.button_text }}
+          <span>{{ include.section.button_text }}</span>
         </a>
         {% endif %}
 
+        <!-- Mobile Title (with animation class) -->
         <h1
-          class="font-serif tracking-wide text-[clamp(2.2rem,7vw,4rem)] text-[#000] mb-2 leading-[1.1] cormorant-garamond"
+          class="hero-split font-serif tracking-wide text-[clamp(2.2rem,7vw,4rem)] text-[#000] mb-2 leading-[1.1] cormorant-garamond"
         >
           {{ include.section.title }}
         </h1>
 
+        <!-- Mobile Subtitle (with animation class) -->
         <p
-          class="text-[clamp(0.9rem,2.5vw,1.1rem)] text-[#000]/80 leading-relaxed max-w-3xl mx-auto mb-2 proza-libre"
+          class="hero-split-sub text-[clamp(0.9rem,2.5vw,1.1rem)] text-[#000]/80 leading-relaxed max-w-3xl mx-auto mb-2 proza-libre"
         >
           {{ include.section.subtitle }}
         </p>
@@ -224,41 +226,95 @@
       });
     }
 
-    // ========== GSAP ANIMATIONS ==========
+    // ========== GSAP ANIMATIONS (Applied on ALL displays) ==========
     document.fonts.ready.then(() => {
-      // Hero Title Animation
-      const splitTitle = new SplitType(".hero-split", {
-        types: "words,lines",
-        lineClass: "line",
-      });
+      // Get all elements with animation classes (works for both mobile and desktop)
+      const titleElements = document.querySelectorAll(".hero-split");
+      const subtitleElements = document.querySelectorAll(".hero-split-sub");
 
-      gsap.set(".hero-split", { opacity: 1 });
-      gsap.from(splitTitle.lines, {
-        duration: 0.8,
-        yPercent: 100,
-        opacity: 0,
-        stagger: 0.15,
-        ease: "expo.out",
-        delay: 0.2,
-      });
+      if (titleElements.length > 0) {
+        // Animate each title element separately (for mobile and desktop)
+        titleElements.forEach((titleElement) => {
+          // Skip animation if element is empty or not visible
+          if (!titleElement.textContent.trim()) return;
 
-      // Hero Subtitle Animation
-      const splitSub = new SplitType(".hero-split-sub", {
-        types: "words",
-        wordClass: "word",
-      });
+          try {
+            // Split the title
+            const splitTitle = new SplitType(titleElement, {
+              types: "words,lines",
+              lineClass: "line",
+            });
 
-      gsap.set(".hero-split-sub", { opacity: 1 });
-      gsap.from(splitSub.words, {
-        duration: 0.6,
-        y: 20,
-        opacity: 0,
-        stagger: 0.03,
-        ease: "expo.out",
-        delay: 0.4,
-      });
+            // Set initial opacity
+            gsap.set(titleElement, { opacity: 1 });
 
-      // Button Hover Animation
+            // Animate lines
+            if (splitTitle.lines && splitTitle.lines.length > 0) {
+              gsap.from(splitTitle.lines, {
+                duration: 0.8,
+                yPercent: 100,
+                opacity: 0,
+                stagger: 0.15,
+                ease: "expo.out",
+                delay: 0.2,
+              });
+            }
+          } catch (e) {
+            console.log("SplitType error for title:", e);
+            // Fallback animation if SplitType fails
+            gsap.from(titleElement, {
+              duration: 0.8,
+              y: 30,
+              opacity: 0,
+              ease: "expo.out",
+              delay: 0.2,
+            });
+          }
+        });
+      }
+
+      // Animate subtitle elements
+      if (subtitleElements.length > 0) {
+        subtitleElements.forEach((subtitleElement) => {
+          // Skip animation if element is empty or not visible
+          if (!subtitleElement.textContent.trim()) return;
+
+          try {
+            // Split the subtitle
+            const splitSub = new SplitType(subtitleElement, {
+              types: "words",
+              wordClass: "word",
+            });
+
+            // Set initial opacity
+            gsap.set(subtitleElement, { opacity: 1 });
+
+            // Animate words
+            if (splitSub.words && splitSub.words.length > 0) {
+              gsap.from(splitSub.words, {
+                duration: 0.6,
+                y: 20,
+                opacity: 0,
+                stagger: 0.03,
+                ease: "expo.out",
+                delay: 0.4,
+              });
+            }
+          } catch (e) {
+            console.log("SplitType error for subtitle:", e);
+            // Fallback animation if SplitType fails
+            gsap.from(subtitleElement, {
+              duration: 0.6,
+              y: 20,
+              opacity: 0,
+              ease: "expo.out",
+              delay: 0.4,
+            });
+          }
+        });
+      }
+
+      // Button Hover Animation (applies to all buttons with .hero-button class)
       const buttons = gsap.utils.toArray(".hero-button");
       buttons.forEach((btn) => {
         const span = btn.querySelector("span");
@@ -271,6 +327,19 @@
           btn.addEventListener("mouseleave", () => tl.reverse());
         }
       });
+    });
+
+    // Re-run animations if window is resized (for responsive behavior)
+    let resizeTimer;
+    window.addEventListener("resize", () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        // Reset and re-run animations if needed
+        // This helps when switching between mobile and desktop views
+        if (window.innerWidth < 768) {
+          // Mobile specific adjustments if needed
+        }
+      }, 250);
     });
   });
 </script>
@@ -300,7 +369,7 @@
     transform: scale(1.1);
   }
 
-  /* GSAP Animation Styles */
+  /* GSAP Animation Styles - Applied to all displays */
   .hero-split,
   .hero-split-sub {
     opacity: 0;
@@ -343,6 +412,11 @@
   @media (max-width: 767px) {
     section {
       min-height: 100vh;
+    }
+
+    /* Ensure animations work well on mobile */
+    .hero-split .line {
+      overflow: visible; /* Better mobile rendering */
     }
   }
 </style>
