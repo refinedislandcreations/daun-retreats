@@ -16,15 +16,17 @@
     <div class="text-center max-w-5xl mx-auto mb-16">
       {% if include.section.title %}
       <h2
-        class="text-5xl md:text-6xl tracking-[0.15em] mb-8 opacity-0 translate-y-8 uppercase cormorant-garamond"
+        class="carousel-split-title text-5xl md:text-6xl tracking-[0.15em] mb-8 uppercase cormorant-garamond"
         id="sectionTitle-{{ include.id }}"
+        style="opacity: 0"
       >
         {{ include.section.title }}
       </h2>
       {% endif %} {% if include.section.description %}
       <p
-        class="text-lg text-neutral-700 leading-relaxed opacity-0 translate-y-8 proza-libre proza-400 text-justify whitespace-pre-line"
+        class="carousel-split-description text-lg text-neutral-700 leading-relaxed proza-libre proza-400 text-justify whitespace-pre-line"
         id="sectionDescription-{{ include.id }}"
+        style="opacity: 0"
       >
         {{ include.section.description }}
       </p>
@@ -94,18 +96,20 @@
     <div class="flex justify-end mt-8">
       <a
         href="{{ include.section.button.url }}"
-        class="bg-green-800 text-white px-8 py-4 rounded-lg hover:opacity-90 transition-all duration-300 hover:shadow-lg hover:scale-105 opacity-0 scale-90"
+        class="carousel-button bg-green-800 text-white px-8 py-4 rounded-lg hover:opacity-90 transition-all duration-300 hover:shadow-lg hover:scale-105 opacity-0 scale-90 overflow-hidden inline-block"
         id="bookNowBtn-{{ include.id }}"
       >
-        {{ include.section.button.label }}
+        <span>{{ include.section.button.label }}</span>
       </a>
     </div>
     {% endif %}
   </div>
 </section>
 
-<!-- GSAP -->
+<!-- GSAP and SplitText -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://assets.codepen.io/16327/SplitText.min.js"></script>
 
 {% if include.section.slides and include.section.slides.size > 0 %}
 <script>
@@ -248,67 +252,192 @@
       updateSlider(false);
     });
 
-    // Initial animation timeline
-    const tl = gsap.timeline();
+    // ========== SPLIT TEXT ANIMATIONS ==========
+    // Wait for fonts to load
+    document.fonts.ready.then(() => {
 
-    if (sectionTitle) {
-      tl.to(sectionTitle, {
-        opacity: 1,
-        y: 0,
-        duration: 1,
-        ease: "power3.out"
+      // Title animation (using SplitText)
+      if (sectionTitle) {
+        gsap.set(sectionTitle, { opacity: 1 });
+
+        SplitText.create(sectionTitle, {
+          type: "words,lines",
+          linesClass: "line",
+          autoSplit: true,
+          mask: "lines",
+          onSplit: (self) => {
+            gsap.from(self.lines, {
+              scrollTrigger: {
+                trigger: sectionTitle,
+                start: "top 80%",
+                toggleActions: "play reverse play reverse",
+              },
+              duration: 1.2,
+              yPercent: 100,
+              opacity: 0,
+              stagger: 0.1,
+              ease: "power2.out",
+            });
+          }
+        });
+      }
+
+      // Description animation (using SplitText)
+      if (sectionDescription) {
+        gsap.set(sectionDescription, { opacity: 1 });
+
+        SplitText.create(sectionDescription, {
+          type: "lines",
+          linesClass: "line",
+          autoSplit: true,
+          mask: "lines",
+          onSplit: (self) => {
+            gsap.from(self.lines, {
+              scrollTrigger: {
+                trigger: sectionDescription,
+                start: "top 80%",
+                toggleActions: "play reverse play reverse",
+              },
+              duration: 1,
+              yPercent: 100,
+              opacity: 0,
+              stagger: 0.05,
+              ease: "power2.out",
+              delay: 0.2,
+            });
+          }
+        });
+      }
+
+      // Arrow buttons and caption line animations (preserved from original)
+      if (prevBtn && nextBtn) {
+        gsap.to([prevBtn, nextBtn], {
+          scrollTrigger: {
+            trigger: prevBtn.parentElement,
+            start: "top 80%",
+          },
+          opacity: 1,
+          scale: 1,
+          duration: 0.8,
+          stagger: 0.2,
+          ease: "back.out(1.7)"
+        });
+      }
+
+      if (captionLine) {
+        gsap.to(captionLine, {
+          scrollTrigger: {
+            trigger: captionLine,
+            start: "top 80%",
+          },
+          opacity: 1,
+          scaleX: 1,
+          duration: 0.8,
+          ease: "power2.out"
+        });
+      }
+
+      {% if include.section.slides[0].caption %}
+      if (caption) {
+        gsap.to(caption, {
+          scrollTrigger: {
+            trigger: caption,
+            start: "top 80%",
+          },
+          opacity: 1,
+          duration: 0.8
+        });
+      }
+      {% endif %}
+
+      // Button hover animation
+      const carouselButtons = document.querySelectorAll(`#bookNowBtn-${sectionId}`);
+      carouselButtons.forEach((btn) => {
+        const span = btn.querySelector("span");
+        if (span) {
+          // Initial animation for button appearance (from original)
+          gsap.to(btn, {
+            scrollTrigger: {
+              trigger: btn,
+              start: "top 80%",
+            },
+            opacity: 1,
+            scale: 1,
+            duration: 0.8,
+            ease: "back.out(1.7)"
+          });
+
+          // Hover animation
+          let tl = gsap.timeline({ paused: true });
+          tl.to(span, {
+            duration: 0.2,
+            yPercent: -150,
+            ease: "power2.in",
+          });
+          tl.set(span, { yPercent: 150 });
+          tl.to(span, {
+            duration: 0.2,
+            yPercent: 0,
+            ease: "power2.out",
+          });
+
+          btn.addEventListener("mouseenter", () => tl.play(0));
+          btn.addEventListener("mouseleave", () => {
+            tl.kill();
+            gsap.set(span, { yPercent: 0 });
+          });
+        }
       });
-    }
 
-    if (sectionDescription) {
-      tl.to(sectionDescription, {
-        opacity: 1,
-        y: 0,
-        duration: 1,
-        ease: "power3.out"
-      }, "-=0.8");
-    }
+      ScrollTrigger.refresh();
+    });
 
-    if (prevBtn && nextBtn) {
-      tl.to([prevBtn, nextBtn], {
-        opacity: 1,
-        scale: 1,
-        duration: 0.8,
-        stagger: 0.2,
-        ease: "back.out(1.7)"
-      }, "-=0.5");
-    }
-
-    if (captionLine) {
-      tl.to(captionLine, {
-        opacity: 1,
-        scaleX: 1,
-        duration: 0.8,
-        ease: "power2.out"
-      }, "-=0.3");
-    }
-
-    {% if include.section.slides[0].caption %}
-    if (caption) {
-      tl.to(caption, {
-        opacity: 1,
-        duration: 0.8
-      }, "-=0.6");
-    }
-    {% endif %}
-
-    if (bookNowBtn) {
-      tl.to(bookNowBtn, {
-        opacity: 1,
-        scale: 1,
-        duration: 0.8,
-        ease: "back.out(1.7)"
-      }, "-=0.4");
-    }
-
-    // Initialize
+    // Initial carousel position
     setTimeout(() => updateSlider(false), 100);
 
   });
 </script>
 {% endif %}
+
+<style>
+  /* SplitText animation styles */
+  .carousel-split-title *,
+  .carousel-split-description * {
+    will-change: transform;
+  }
+
+  .carousel-split-title .line {
+    display: block;
+    overflow: hidden;
+    line-height: 1.3;
+  }
+
+  .carousel-split-description .line {
+    display: block;
+    overflow: hidden;
+    line-height: 1.6;
+  }
+
+  /* Button hover styles */
+  .carousel-button {
+    display: inline-block;
+    overflow: hidden;
+    text-decoration: none;
+    text-align: center;
+  }
+
+  .carousel-button span {
+    display: inline-block;
+    will-change: transform;
+  }
+
+  /* Preserve original styles */
+  .cormorant-garamond {
+    font-family: "Cormorant Garamond", serif;
+    font-weight: 600;
+  }
+
+  .proza-libre {
+    font-family: "Proza Libre", sans-serif;
+  }
+</style>

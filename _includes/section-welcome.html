@@ -91,64 +91,74 @@
     gsap.registerPlugin(SplitText, ScrollTrigger);
 
     document.fonts.ready.then(() => {
-      // Title animation
-      const titleElement = document.querySelector(".split-title");
-      if (titleElement) {
-        gsap.set(titleElement, { opacity: 1 });
+      // ========== TITLE ANIMATION ==========
+      // Use querySelectorAll to get ALL titles
+      const titleElements = document.querySelectorAll(".split-title");
 
-        SplitText.create(titleElement, {
-          type: "words,lines",
-          linesClass: "line",
-          autoSplit: true,
-          mask: "lines",
-          onSplit: (self) => {
-            // Create scroll-triggered animation
-            gsap.from(self.lines, {
-              scrollTrigger: {
-                trigger: titleElement,
-                start: "top 80%",
-                toggleActions: "play reverse play reverse",
-              },
-              duration: 1.2,
-              yPercent: 100,
-              opacity: 0,
-              stagger: 0.1,
-              ease: "power2.out",
-            });
-          },
-        });
-      }
+      titleElements.forEach((titleElement) => {
+        if (titleElement) {
+          gsap.set(titleElement, { opacity: 1 });
 
-      // Description animation
-      const descriptionElement = document.querySelector(".split-description");
-      if (descriptionElement) {
-        gsap.set(descriptionElement, { opacity: 1 });
+          SplitText.create(titleElement, {
+            type: "words,lines",
+            linesClass: "line",
+            autoSplit: true,
+            mask: "lines",
+            onSplit: (self) => {
+              // Create scroll-triggered animation
+              gsap.from(self.lines, {
+                scrollTrigger: {
+                  trigger: titleElement,
+                  start: "top 80%",
+                  toggleActions: "play reverse play reverse",
+                },
+                duration: 1.2,
+                yPercent: 100,
+                opacity: 0,
+                stagger: 0.1,
+                ease: "power2.out",
+              });
+            },
+          });
+        }
+      });
 
-        SplitText.create(descriptionElement, {
-          type: "words,lines",
-          linesClass: "line",
-          autoSplit: true,
-          mask: "lines",
-          onSplit: (self) => {
-            // Create scroll-triggered animation
-            gsap.from(self.lines, {
-              scrollTrigger: {
-                trigger: descriptionElement,
-                start: "top 80%",
-                toggleActions: "play reverse play reverse",
-              },
-              duration: 1.2,
-              yPercent: 100,
-              opacity: 0,
-              stagger: 0.08,
-              ease: "power2.out",
-              delay: 0.01,
-            });
-          },
-        });
-      }
+      // ========== DESCRIPTION ANIMATION ==========
+      // Use querySelectorAll to get ALL descriptions
+      const descriptionElements =
+        document.querySelectorAll(".split-description");
 
-      // Button hover animation for item titles
+      descriptionElements.forEach((descriptionElement) => {
+        if (descriptionElement) {
+          gsap.set(descriptionElement, { opacity: 1 });
+
+          SplitText.create(descriptionElement, {
+            type: "words,lines",
+            linesClass: "line",
+            autoSplit: true,
+            mask: "lines",
+            onSplit: (self) => {
+              // Create scroll-triggered animation
+              gsap.from(self.lines, {
+                scrollTrigger: {
+                  trigger: descriptionElement,
+                  start: "top 80%",
+                  toggleActions: "play reverse play reverse",
+                },
+                duration: 1.2,
+                yPercent: 100,
+                opacity: 0,
+                stagger: 0.08,
+                ease: "power2.out",
+                delay: 0.01,
+              });
+            },
+          });
+        }
+      });
+
+      // ========== BUTTON HOVER ANIMATION FOR ITEM TITLES ==========
+      // This already uses gsap.utils.toArray() which works for multiple elements
       const itemTitles = gsap.utils.toArray(".item-title");
       itemTitles.forEach((title) => {
         // Create timeline for each title
@@ -178,6 +188,9 @@
           });
         }
       });
+
+      // Refresh ScrollTrigger to ensure all triggers are properly calculated
+      ScrollTrigger.refresh();
     });
   });
 </script>
