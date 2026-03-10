@@ -4,7 +4,8 @@
     <!-- Title -->
     <div class="mb-12 text-center">
       <h2
-        class="cormorant-garamond tracking-[0.08em] text-3xl xs:text-4xl sm:text-5xl md:text-6xl font-medium text-[#111]"
+        class="why-split-title cormorant-garamond tracking-[0.08em] text-3xl xs:text-4xl sm:text-5xl md:text-6xl font-medium text-[#111]"
+        style="opacity: 0"
       >
         {{ include.section.title }}
       </h2>
@@ -28,14 +29,18 @@
 
           <!-- Text -->
           <div>
-            <!-- Item Title (matches h4 from first section) -->
-            <h3 class="proza-libre text-xl font-semibold text-[#111] mb-4">
+            <!-- Item Title with animation -->
+            <h3
+              class="why-item-title proza-libre text-xl font-semibold text-[#111] mb-4"
+              style="opacity: 0"
+            >
               {{ item.title }}
             </h3>
 
-            <!-- Paragraph (matches body style) -->
+            <!-- Description with animation -->
             <p
-              class="proza-libre text-base sm:text-lg leading-relaxed text-[#333]"
+              class="why-item-description proza-libre text-base sm:text-lg leading-relaxed text-[#333]"
+              style="opacity: 0"
             >
               {{ item.description }}
             </p>
@@ -47,3 +52,134 @@
     </div>
   </div>
 </section>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // Make sure GSAP and SplitText are loaded
+    if (typeof gsap === "undefined" || typeof SplitText === "undefined") {
+      console.log("GSAP or SplitText not loaded yet");
+      return;
+    }
+
+    document.fonts.ready.then(() => {
+      // ========== SECTION TITLE ANIMATION ==========
+      const whyTitle = document.querySelector(".why-split-title");
+      if (whyTitle) {
+        gsap.set(whyTitle, { opacity: 1 });
+
+        SplitText.create(whyTitle, {
+          type: "words,lines",
+          linesClass: "line",
+          autoSplit: true,
+          mask: "lines",
+          onSplit: (self) => {
+            gsap.from(self.lines, {
+              scrollTrigger: {
+                trigger: whyTitle,
+                start: "top 80%",
+                toggleActions: "play reverse play reverse",
+              },
+              duration: 1.2,
+              yPercent: 100,
+              opacity: 0,
+              stagger: 0.1,
+              ease: "power2.out",
+            });
+          },
+        });
+      }
+
+      // ========== ITEM TITLES ANIMATION ==========
+      const itemTitles = document.querySelectorAll(".why-item-title");
+      itemTitles.forEach((title) => {
+        gsap.set(title, { opacity: 1 });
+
+        SplitText.create(title, {
+          type: "words,lines",
+          linesClass: "line",
+          autoSplit: true,
+          mask: "lines",
+          onSplit: (self) => {
+            gsap.from(self.lines, {
+              scrollTrigger: {
+                trigger: title,
+                start: "top 80%",
+                toggleActions: "play reverse play reverse",
+              },
+              duration: 1,
+              yPercent: 100,
+              opacity: 0,
+              stagger: 0.06,
+              ease: "power2.out",
+            });
+          },
+        });
+      });
+
+      // ========== ITEM DESCRIPTIONS ANIMATION ==========
+      const itemDescriptions = document.querySelectorAll(
+        ".why-item-description",
+      );
+      itemDescriptions.forEach((desc) => {
+        gsap.set(desc, { opacity: 1 });
+
+        SplitText.create(desc, {
+          type: "lines",
+          linesClass: "line",
+          autoSplit: true,
+          mask: "lines",
+          onSplit: (self) => {
+            gsap.from(self.lines, {
+              scrollTrigger: {
+                trigger: desc,
+                start: "top 80%",
+                toggleActions: "play reverse play reverse",
+              },
+              duration: 0.9,
+              yPercent: 100,
+              opacity: 0,
+              stagger: 0.05,
+              ease: "power2.out",
+              delay: 0.1,
+            });
+          },
+        });
+      });
+
+      ScrollTrigger.refresh();
+    });
+  });
+</script>
+
+<style>
+  /* Animation styles */
+  .why-split-title *,
+  .why-item-title *,
+  .why-item-description * {
+    will-change: transform;
+  }
+
+  .why-split-title .line,
+  .why-item-title .line,
+  .why-item-description .line {
+    display: block;
+    overflow: hidden;
+    line-height: 1.3;
+  }
+
+  /* Preserve original styles */
+  .cormorant-garamond {
+    font-family: "Cormorant Garamond", serif;
+    font-weight: 600;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);
+  }
+
+  .proza-libre {
+    font-family: "Proza Libre", sans-serif;
+  }
+
+  /* Border styles remain the same */
+  .border-\[\#005509\]\/40 {
+    border-color: rgba(0, 85, 9, 0.4);
+  }
+</style>

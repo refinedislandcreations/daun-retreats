@@ -1,3 +1,4 @@
+<!-- _includes/section-cta.html -->
 <section class="relative py-28 overflow-hidden bg-[#FBF8EF]">
   <!-- ================= BACKGROUND IMAGE ================= -->
   <div class="absolute inset-0 max-w-screen-2xl mx-auto">
@@ -17,21 +18,135 @@
 
       <!-- CTA Content -->
       <div class="max-w-4xl mx-auto text-center">
-        <!-- Title -->
+        <!-- Title with animation -->
         <h2
-          class="tracking-[0.2em] text-4xl md:text-5xl lg:text-6xl text-[#000] cormorant-garamond whitespace-pre-line uppercase"
+          class="cta-split-title tracking-[0.2em] text-4xl md:text-5xl lg:text-6xl text-[#000] cormorant-garamond whitespace-pre-line uppercase"
+          style="opacity: 0"
         >
           {{ include.section.title }}
         </h2>
 
-        <!-- Button -->
+        <!-- Button with hover animation -->
         <a
           href="{{ include.section.button_link }}"
-          class="inline-block bg-[#005509] hover:bg-[#0c6a13] text-white px-8 py-3 rounded-md text-sm md:text-base tracking-wide proza-libre proza-500 transition duration-300"
+          class="cta-button inline-block bg-[#005509] hover:bg-[#0c6a13] text-white px-8 py-3 rounded-md text-sm md:text-base tracking-wide proza-libre proza-500 transition duration-300 overflow-hidden"
         >
-          {{ include.section.button_text }}
+          <span>{{ include.section.button_text }}</span>
         </a>
       </div>
     </div>
   </div>
 </section>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // Make sure GSAP and SplitText are loaded
+    if (typeof gsap === "undefined" || typeof SplitText === "undefined") {
+      console.log("GSAP or SplitText not loaded yet");
+      return;
+    }
+
+    document.fonts.ready.then(() => {
+      // ========== CTA TITLE ANIMATION ==========
+      // Use querySelectorAll to get ALL titles, not just the first one
+      const ctaTitles = document.querySelectorAll(".cta-split-title");
+
+      ctaTitles.forEach((ctaTitle) => {
+        if (ctaTitle) {
+          gsap.set(ctaTitle, { opacity: 1 });
+
+          SplitText.create(ctaTitle, {
+            type: "words,lines",
+            linesClass: "line",
+            autoSplit: true,
+            mask: "lines",
+            onSplit: (self) => {
+              gsap.from(self.lines, {
+                scrollTrigger: {
+                  trigger: ctaTitle,
+                  start: "top 80%",
+                  toggleActions: "play reverse play reverse",
+                },
+                duration: 1.2,
+                yPercent: 100,
+                opacity: 0,
+                stagger: 0.1,
+                ease: "power2.out",
+              });
+            },
+          });
+        }
+      });
+
+      // ========== CTA BUTTON HOVER ANIMATION ==========
+      const ctaButtons = gsap.utils.toArray(".cta-button");
+      ctaButtons.forEach((btn) => {
+        const span = btn.querySelector("span");
+        if (span) {
+          let tl = gsap.timeline({ paused: true });
+          tl.to(span, {
+            duration: 0.2,
+            yPercent: -150,
+            ease: "power2.in",
+          });
+          tl.set(span, { yPercent: 150 });
+          tl.to(span, {
+            duration: 0.2,
+            yPercent: 0,
+            ease: "power2.out",
+          });
+
+          btn.addEventListener("mouseenter", () => tl.play(0));
+          btn.addEventListener("mouseleave", () => {
+            tl.kill();
+            gsap.set(span, { yPercent: 0 });
+          });
+        }
+      });
+
+      ScrollTrigger.refresh();
+    });
+  });
+</script>
+
+<style>
+  /* Animation styles */
+  .cta-split-title * {
+    will-change: transform;
+  }
+
+  .cta-split-title .line {
+    display: block;
+    overflow: hidden;
+    line-height: 1.3;
+  }
+
+  /* Button hover styles */
+  .cta-button {
+    display: inline-block;
+    overflow: hidden;
+    text-decoration: none;
+    text-align: center;
+    margin-top: 2rem; /* Add some spacing between title and button */
+  }
+
+  .cta-button span {
+    display: inline-block;
+    will-change: transform;
+  }
+
+  /* Preserve original styles */
+  .cormorant-garamond {
+    font-family: "Cormorant Garamond", serif;
+    font-weight: 600;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);
+  }
+
+  .proza-libre {
+    font-family: "Proza Libre", sans-serif;
+  }
+
+  .proza-500 {
+    font-weight: 500;
+  }
+</style>

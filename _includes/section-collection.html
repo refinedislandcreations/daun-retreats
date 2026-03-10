@@ -1,9 +1,11 @@
+<!-- _includes/section-collection.html -->
 <section class="py-28 bg-[#FBF8EF]">
   <div class="max-w-7xl mx-auto px-6">
     <!-- Title -->
     <div class="mb-12">
       <h2
-        class="cormorant-garamond tracking-[0.08em] text-3xl xs:text-4xl sm:text-5xl md:text-6xl font-medium text-[#111]"
+        class="split-section-title cormorant-garamond tracking-[0.08em] text-3xl xs:text-4xl sm:text-5xl md:text-6xl font-medium text-[#111]"
+        style="opacity: 0"
       >
         {{ include.section.title }}
       </h2>
@@ -12,7 +14,10 @@
     {% for group in include.section.groups %}
 
     <!-- Group Title -->
-    <h3 class="proza-libre text-lg sm:text-xl font-medium text-[#222] mb-10">
+    <h3
+      class="split-group-title proza-libre text-lg sm:text-xl font-medium text-[#222] mb-10"
+      style="opacity: 0"
+    >
       {{ group.title }}
     </h3>
 
@@ -31,12 +36,16 @@
 
         <!-- ================= CONTENT ================= -->
         <div>
-          <h4 class="proza-libre text-xl font-semibold text-[#111] mb-4">
+          <h4
+            class="split-item-name proza-libre text-xl font-semibold text-[#111] mb-4"
+            style="opacity: 0"
+          >
             {{ item.name }}
           </h4>
 
           <p
-            class="proza-libre text-base sm:text-lg leading-relaxed text-[#333] mb-7 max-w-lg"
+            class="split-item-description proza-libre text-base sm:text-lg leading-relaxed text-[#333] mb-7 max-w-lg"
+            style="opacity: 0"
           >
             {{ item.description }}
           </p>
@@ -61,12 +70,14 @@
             </ul>
           </div>
 
-          <a
-            href="{{ item.button }}"
-            class="block w-fit ml-auto bg-[#005509] hover:bg-[#0c6a13] text-white px-6 py-2.5 rounded-md text-sm font-medium tracking-wide transition proza-libre"
-          >
-            View Villa
-          </a>
+          <div class="flex justify-end">
+            <a
+              href="{{ item.button }}"
+              class="villa-button bg-[#005509] hover:bg-[#0c6a13] text-white px-6 py-2.5 rounded-md text-sm font-medium tracking-wide transition proza-libre overflow-hidden"
+            >
+              <span>View Villa</span>
+            </a>
+          </div>
         </div>
       </div>
       {% endfor %}
@@ -75,3 +86,187 @@
     {% endfor %}
   </div>
 </section>
+
+<!-- Add GSAP and SplitText (not SplitType) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://assets.codepen.io/16327/SplitText.min.js"></script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    gsap.registerPlugin(SplitText, ScrollTrigger);
+
+    document.fonts.ready.then(() => {
+      // ========== SECTION TITLE ANIMATION ==========
+      const sectionTitle = document.querySelector(".split-section-title");
+      if (sectionTitle) {
+        gsap.set(sectionTitle, { opacity: 1 });
+
+        SplitText.create(sectionTitle, {
+          type: "words,lines",
+          linesClass: "line",
+          autoSplit: true,
+          mask: "lines",
+          onSplit: (self) => {
+            gsap.from(self.lines, {
+              scrollTrigger: {
+                trigger: sectionTitle,
+                start: "top 80%",
+                toggleActions: "play reverse play reverse",
+              },
+              duration: 1.2,
+              yPercent: 100,
+              opacity: 0,
+              stagger: 0.1,
+              ease: "power2.out",
+            });
+          },
+        });
+      }
+
+      // ========== GROUP TITLES ANIMATION ==========
+      const groupTitles = document.querySelectorAll(".split-group-title");
+      groupTitles.forEach((title) => {
+        gsap.set(title, { opacity: 1 });
+
+        SplitText.create(title, {
+          type: "words,lines",
+          linesClass: "line",
+          autoSplit: true,
+          mask: "lines",
+          onSplit: (self) => {
+            gsap.from(self.lines, {
+              scrollTrigger: {
+                trigger: title,
+                start: "top 80%",
+                toggleActions: "play reverse play reverse",
+              },
+              duration: 1.1,
+              yPercent: 100,
+              opacity: 0,
+              stagger: 0.08,
+              ease: "power2.out",
+            });
+          },
+        });
+      });
+
+      // ========== ITEM NAMES ANIMATION ==========
+      const itemNames = document.querySelectorAll(".split-item-name");
+      itemNames.forEach((name) => {
+        gsap.set(name, { opacity: 1 });
+
+        SplitText.create(name, {
+          type: "words,lines",
+          linesClass: "line",
+          autoSplit: true,
+          mask: "lines",
+          onSplit: (self) => {
+            gsap.from(self.lines, {
+              scrollTrigger: {
+                trigger: name,
+                start: "top 80%",
+                toggleActions: "play reverse play reverse",
+              },
+              duration: 1,
+              yPercent: 100,
+              opacity: 0,
+              stagger: 0.06,
+              ease: "power2.out",
+            });
+          },
+        });
+      });
+
+      // ========== ITEM DESCRIPTIONS ANIMATION ==========
+      const itemDescriptions = document.querySelectorAll(
+        ".split-item-description",
+      );
+      itemDescriptions.forEach((desc) => {
+        gsap.set(desc, { opacity: 1 });
+
+        SplitText.create(desc, {
+          type: "lines",
+          linesClass: "line",
+          autoSplit: true,
+          mask: "lines",
+          onSplit: (self) => {
+            gsap.from(self.lines, {
+              scrollTrigger: {
+                trigger: desc,
+                start: "top 80%",
+                toggleActions: "play reverse play reverse",
+              },
+              duration: 1,
+              yPercent: 100,
+              opacity: 0,
+              stagger: 0.05,
+              ease: "power2.out",
+            });
+          },
+        });
+      });
+
+      // ========== BUTTON HOVER ANIMATION ==========
+      const villaButtons = gsap.utils.toArray(".villa-button");
+      villaButtons.forEach((btn) => {
+        const span = btn.querySelector("span");
+        if (span) {
+          let tl = gsap.timeline({ paused: true });
+          tl.to(span, {
+            duration: 0.2,
+            yPercent: -150,
+            ease: "power2.in",
+          });
+          tl.set(span, { yPercent: 150 });
+          tl.to(span, {
+            duration: 0.2,
+            yPercent: 0,
+            ease: "power2.out",
+          });
+
+          btn.addEventListener("mouseenter", () => tl.play(0));
+          btn.addEventListener("mouseleave", () => {
+            tl.kill();
+            gsap.set(span, { yPercent: 0 });
+          });
+        }
+      });
+
+      ScrollTrigger.refresh();
+    });
+  });
+</script>
+
+<style>
+  /* Line class for SplitText */
+  .line {
+    overflow: hidden;
+  }
+
+  /* Ensure smooth animations */
+  .split-section-title *,
+  .split-group-title *,
+  .split-item-name *,
+  .split-item-description * {
+    will-change: transform;
+  }
+
+  /* Button hover styles */
+  .villa-button {
+    display: inline-block;
+    overflow: hidden;
+    text-decoration: none;
+    text-align: center;
+  }
+
+  .villa-button span {
+    display: inline-block;
+    will-change: transform;
+  }
+
+  /* Preserve original font styles */
+  .cormorant-garamond {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  }
+</style>
