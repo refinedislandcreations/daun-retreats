@@ -35,5 +35,36 @@
     <script src="https://unpkg.com/gsap@3/dist/ScrollTrigger.min.js"></script>
     <script src="https://unpkg.com/gsap@3/dist/SplitText.min.js"></script>
     <script src="https://unpkg.com/split-type"></script>
+
+    <!-- Force scroll to top on page reload/load -->
+    <script>
+      // Force scroll to top immediately
+      window.onload = function () {
+        // Try multiple methods to ensure it works across all browsers
+        window.scrollTo(0, 0);
+        document.documentElement.scrollTop = 0;
+        document.body.scrollTop = 0; // For Safari
+
+        // Also try with a slight delay to override any browser's attempt to restore scroll position
+        setTimeout(function () {
+          window.scrollTo(0, 0);
+          document.documentElement.scrollTop = 0;
+          document.body.scrollTop = 0;
+        }, 10);
+
+        setTimeout(function () {
+          window.scrollTo(0, 0);
+          document.documentElement.scrollTop = 0;
+          document.body.scrollTop = 0;
+        }, 50);
+      };
+
+      // Also run immediately in case onload is delayed
+      (function () {
+        window.scrollTo(0, 0);
+        document.documentElement.scrollTop = 0;
+        document.body.scrollTop = 0;
+      })();
+    </script>
   </body>
 </html>
