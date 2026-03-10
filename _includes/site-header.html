@@ -60,20 +60,30 @@
             </div>
           </div>
         </div>
-        {% elsif item.is_button %}
-        <!-- Book Now Button -->
+        {% elsif item.title == "Contact Us" %}
+        <!-- Contact Us Link with hover animation -->
         <a
           href="{{ item.url | relative_url }}"
-          class="ml-4 inline-block bg-[#005509] hover:bg-[#006611] px-4 py-2 rounded text-[#FBF8EF] proza-libre transition-all duration-200 transform hover:-translate-y-0.5 shadow-md hover:shadow-lg"
-          >{{ item.title }}</a
+          class="header-link px-3 py-2 proza-libre proza-600 relative after:absolute after:bottom-0 after:left-1/2 after:transition-all after:duration-200 hover:after:w-full hover:after:left-0 overflow-hidden inline-block"
         >
+          <span>{{ item.title }}</span>
+        </a>
+        {% elsif item.is_button %}
+        <!-- Book Now Button with hover animation -->
+        <a
+          href="{{ item.url | relative_url }}"
+          class="header-button ml-4 inline-block bg-[#005509] hover:bg-[#006611] px-4 py-2 rounded text-[#FBF8EF] proza-libre transition-all duration-200 transform hover:-translate-y-0.5 shadow-md hover:shadow-lg overflow-hidden"
+        >
+          <span>{{ item.title }}</span>
+        </a>
         {% else %}
         <!-- Single Link -->
         <a
           href="{{ item.url | relative_url }}"
           class="px-3 py-2 proza-libre proza-600 relative after:absolute after:bottom-0 after:left-1/2 after:w-0 after:h-0.5 after:bg-[#005509] after:transition-all after:duration-200 hover:after:w-full hover:after:left-0"
-          >{{ item.title }}</a
         >
+          {{ item.title }}
+        </a>
         {% endif %} {% endfor %}
       </nav>
 
@@ -143,13 +153,25 @@
             </div>
           </details>
         </div>
+        {% elsif item.title == "Contact Us" %}
+        <!-- Contact Us Link in Mobile -->
+        <div class="w-full border-b border-[#005509]/30 pb-1">
+          <a
+            href="{{ item.url | relative_url }}"
+            class="mobile-header-link block py-2 proza-libre proza-600 text-lg px-6 text-[#000] hover:text-[#006611] transition-colors duration-200 overflow-hidden"
+          >
+            <span>{{ item.title }}</span>
+          </a>
+        </div>
         {% elsif item.is_button %}
+        <!-- Book Now Button in Mobile -->
         <div class="w-full flex justify-center mt-4">
           <a
             href="{{ item.url | relative_url }}"
-            class="inline-block bg-[#005509] hover:bg-[#006611] px-6 py-3 rounded text-[#FBF8EF] proza-libre text-lg transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
-            >{{ item.title }}</a
+            class="mobile-header-button inline-block bg-[#005509] hover:bg-[#006611] px-6 py-3 rounded text-[#FBF8EF] proza-libre text-lg transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-0.5 overflow-hidden"
           >
+            <span>{{ item.title }}</span>
+          </a>
         </div>
         {% else %}
         <div class="w-full border-b border-[#005509]/30 pb-1">
@@ -183,6 +205,121 @@
 </header>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+<!-- Hover Animation Script for Header -->
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // Make sure GSAP is loaded
+    if (typeof gsap === "undefined") {
+      console.log("GSAP not loaded yet");
+      return;
+    }
+
+    // ========== DESKTOP HEADER LINK HOVER ANIMATION ==========
+    const headerLinks = gsap.utils.toArray(".header-link");
+    headerLinks.forEach((link) => {
+      const span = link.querySelector("span");
+      if (span) {
+        let tl = gsap.timeline({ paused: true });
+        tl.to(span, {
+          duration: 0.2,
+          yPercent: -150,
+          ease: "power2.in",
+        });
+        tl.set(span, { yPercent: 150 });
+        tl.to(span, {
+          duration: 0.2,
+          yPercent: 0,
+          ease: "power2.out",
+        });
+
+        link.addEventListener("mouseenter", () => tl.play(0));
+        link.addEventListener("mouseleave", () => {
+          tl.kill();
+          gsap.set(span, { yPercent: 0 });
+        });
+      }
+    });
+
+    // ========== DESKTOP HEADER BUTTON HOVER ANIMATION ==========
+    const headerButtons = gsap.utils.toArray(".header-button");
+    headerButtons.forEach((btn) => {
+      const span = btn.querySelector("span");
+      if (span) {
+        let tl = gsap.timeline({ paused: true });
+        tl.to(span, {
+          duration: 0.2,
+          yPercent: -150,
+          ease: "power2.in",
+        });
+        tl.set(span, { yPercent: 150 });
+        tl.to(span, {
+          duration: 0.2,
+          yPercent: 0,
+          ease: "power2.out",
+        });
+
+        btn.addEventListener("mouseenter", () => tl.play(0));
+        btn.addEventListener("mouseleave", () => {
+          tl.kill();
+          gsap.set(span, { yPercent: 0 });
+        });
+      }
+    });
+
+    // ========== MOBILE HEADER LINK HOVER ANIMATION ==========
+    const mobileHeaderLinks = gsap.utils.toArray(".mobile-header-link");
+    mobileHeaderLinks.forEach((link) => {
+      const span = link.querySelector("span");
+      if (span) {
+        let tl = gsap.timeline({ paused: true });
+        tl.to(span, {
+          duration: 0.2,
+          yPercent: -150,
+          ease: "power2.in",
+        });
+        tl.set(span, { yPercent: 150 });
+        tl.to(span, {
+          duration: 0.2,
+          yPercent: 0,
+          ease: "power2.out",
+        });
+
+        link.addEventListener("mouseenter", () => tl.play(0));
+        link.addEventListener("mouseleave", () => {
+          tl.kill();
+          gsap.set(span, { yPercent: 0 });
+        });
+      }
+    });
+
+    // ========== MOBILE HEADER BUTTON HOVER ANIMATION ==========
+    const mobileHeaderButtons = gsap.utils.toArray(".mobile-header-button");
+    mobileHeaderButtons.forEach((btn) => {
+      const span = btn.querySelector("span");
+      if (span) {
+        let tl = gsap.timeline({ paused: true });
+        tl.to(span, {
+          duration: 0.2,
+          yPercent: -150,
+          ease: "power2.in",
+        });
+        tl.set(span, { yPercent: 150 });
+        tl.to(span, {
+          duration: 0.2,
+          yPercent: 0,
+          ease: "power2.out",
+        });
+
+        btn.addEventListener("mouseenter", () => tl.play(0));
+        btn.addEventListener("mouseleave", () => {
+          tl.kill();
+          gsap.set(span, { yPercent: 0 });
+        });
+      }
+    });
+  });
+</script>
 
 <!-- Isolated GSAP Header Script -->
 <script>
@@ -491,3 +628,22 @@
     }
   })();
 </script>
+
+<style>
+  /* Animation styles for header links and buttons */
+  .header-link,
+  .header-button,
+  .mobile-header-link,
+  .mobile-header-button {
+    overflow: hidden;
+    display: inline-block;
+  }
+
+  .header-link span,
+  .header-button span,
+  .mobile-header-link span,
+  .mobile-header-button span {
+    display: inline-block;
+    will-change: transform;
+  }
+</style>
