@@ -2,7 +2,7 @@
 # Node / Tailwind CSS
 # ==============================
 node_modules/
-assets/css/output.css
+# assets/css/output.css
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
