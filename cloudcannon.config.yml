@@ -1,0 +1,39 @@
+source: ''
+paths:
+  static: ''
+  uploads: uploads
+  uploads_use_relative_path: false
+  dam_uploads: ''
+  dam_static: ''
+  data: _data
+  collections: ''
+  layouts: _layouts
+collections_config:
+  data:
+    path: _data
+    output: false
+    auto_discovered: true
+  pages:
+    path: ''
+    output: true
+    filter: strict
+    auto_discovered: true
+collection_groups:
+_enabled_editors:
+_inputs:
+  categories:
+    type: multiselect
+    options:
+      allow_create: true
+  tags:
+    type: multiselect
+    options:
+      allow_create: true
+_select_data: {}
+_structures: {}
+_editables: {}
+commit_templates: []
+base_url: ''
+editor:
+source_editor:
+timezone: Etc/UTC
