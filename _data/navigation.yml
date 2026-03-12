@@ -3,28 +3,28 @@ main_nav:
     url: "#"
     submenu:
       - title: Gerimis Senja Villa
-        url: "/gerimis-senja-villa"
+        url: "/gerimis-senja-villa.html"
       - title: Kozu Villa
-        url: "/kozu-villa"
+        url: "/kozu-villa.html"
       - title: Kasturi Cabin
-        url: "/kasturi-cabin"
+        url: "/kasturi-cabin.html"
       - title: Heritage Kampung Home
-        url: "/heritage-kampung-home"
+        url: "/heritage-kampung-home.html"
       - title: Norehan's Place
-        url: "/norehans-place"
+        url: "/norehans-place.html"
   - title: Explore the Area
     url: "#"
     submenu:
       - title: Discover Hulu Langat
-        url: "/explore-the-area/#hulu-langat"
+        url: "/explore-the-area.html/#hulu-langat"
       - title: Sungai Congkak
-        url: "/explore-the-area/#sungai-congkak"
+        url: "/explore-the-area.html/#sungai-congkak"
       - title: Skytrex Sungai Congkak
-        url: "/explore-the-area/#skytrex-sungai-congkak"
+        url: "/explore-the-area.html/#skytrex-sungai-congkak"
       - title: Restoran Terra Pong
-        url: "/explore-the-area/#restoran-terra-pong"
+        url: "/explore-the-area.html/#restoran-terra-pong"
       - title: Hulu Langat Fishing Resort
-        url: "/explore-the-area/#fishing-resort"
+        url: "/explore-the-area.html/#fishing-resort"
   - title: Contact Us
     url: "/contact"
   - title: Book Now
