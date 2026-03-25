@@ -1,26 +1,28 @@
 <!-- _includes/section-contact-form.html -->
-<section class="py-28 bg-[#E9E6DC]">
-  <div class="max-w-screen-2xl mx-auto px-6">
+<section class="py-16 md:py-20 lg:py-24 xl:py-28 bg-[#E9E6DC]">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
     <!-- ================= Title with animation ================= -->
     <h2
-      class="contact-split-title cormorant-garamond text-5xl md:text-6xl tracking-[0.12em] mb-12"
+      class="contact-split-title cormorant-garamond text-3xl sm:text-4xl md:text-5xl lg:text-6xl tracking-[0.12em] mb-8 md:mb-10 lg:mb-12"
       style="opacity: 0"
     >
       {{ include.section.title }}
     </h2>
 
     <!-- Main Grid -->
-    <div class="grid md:grid-cols-2 gap-20 items-start">
+    <div
+      class="grid md:grid-cols-2 gap-8 md:gap-12 lg:gap-16 xl:gap-20 items-start"
+    >
       <!-- LEFT : FORM -->
       <form
         action="{{ include.section.form.action | default:'#' }}"
         method="POST"
-        class="space-y-6"
+        class="space-y-5 md:space-y-6"
       >
         <!-- Name -->
         <div class="group">
           <label
-            class="block proza-libre mb-2 text-sm md:text-base font-medium text-neutral-700 group-focus-within:text-green-800 transition"
+            class="block proza-libre mb-1.5 md:mb-2 text-sm md:text-base font-medium text-neutral-700 group-focus-within:text-green-800 transition"
           >
             Your Name <span class="text-green-800">*</span>
           </label>
@@ -30,14 +32,14 @@
             name="name"
             required
             placeholder="John Doe"
-            class="w-full proza-libre border-2 border-green-800/30 rounded-lg px-5 py-4 bg-[#FBF8EF] backdrop-blur-sm focus:bg-[#FFF]/80 focus:border-green-800 focus:outline-none focus:ring-4 focus:ring-green-800/10 transition-all duration-300"
+            class="w-full proza-libre border-2 border-green-800/30 rounded-lg px-4 md:px-5 py-3 md:py-4 bg-[#FBF8EF] backdrop-blur-sm focus:bg-[#FFF]/80 focus:border-green-800 focus:outline-none focus:ring-4 focus:ring-green-800/10 transition-all duration-300 text-sm md:text-base"
           />
         </div>
 
         <!-- Email -->
         <div class="group">
           <label
-            class="block proza-libre mb-2 text-sm md:text-base font-medium text-neutral-700 group-focus-within:text-green-800 transition"
+            class="block proza-libre mb-1.5 md:mb-2 text-sm md:text-base font-medium text-neutral-700 group-focus-within:text-green-800 transition"
           >
             Your E-Mail <span class="text-green-800">*</span>
           </label>
@@ -47,14 +49,14 @@
             name="email"
             required
             placeholder="hello@example.com"
-            class="w-full border-2 border-green-800/30 rounded-lg px-5 py-4 bg-[#FBF8EF] backdrop-blur-sm focus:bg-[#FFF]/80 focus:border-green-800 focus:outline-none focus:ring-4 focus:ring-green-800/10 transition-all duration-300"
+            class="w-full border-2 border-green-800/30 rounded-lg px-4 md:px-5 py-3 md:py-4 bg-[#FBF8EF] backdrop-blur-sm focus:bg-[#FFF]/80 focus:border-green-800 focus:outline-none focus:ring-4 focus:ring-green-800/10 transition-all duration-300 text-sm md:text-base"
           />
         </div>
 
         <!-- Property Select -->
         <div class="group">
           <label
-            class="block proza-libre mb-2 text-sm md:text-base font-medium text-neutral-700 group-focus-within:text-green-800 transition"
+            class="block proza-libre mb-1.5 md:mb-2 text-sm md:text-base font-medium text-neutral-700 group-focus-within:text-green-800 transition"
           >
             Which property are you enquiring about?
             <span class="text-green-800">*</span>
@@ -64,7 +66,7 @@
             <select
               name="property"
               required
-              class="w-full proza-libre border-2 border-green-800/30 rounded-lg px-5 py-4 bg-[#FBF8EF] backdrop-blur-sm focus:bg-[#FFF]/80 focus:border-green-800 focus:outline-none focus:ring-4 focus:ring-green-800/10 transition-all duration-300 appearance-none cursor-pointer"
+              class="w-full proza-libre border-2 border-green-800/30 rounded-lg px-4 md:px-5 py-3 md:py-4 bg-[#FBF8EF] backdrop-blur-sm focus:bg-[#FFF]/80 focus:border-green-800 focus:outline-none focus:ring-4 focus:ring-green-800/10 transition-all duration-300 appearance-none cursor-pointer text-sm md:text-base"
             >
               <option value="" disabled selected>
                 Choose your villa or select "Other"
@@ -77,10 +79,10 @@
 
             <!-- Custom Arrow -->
             <div
-              class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-5 text-green-800"
+              class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 md:px-5 text-green-800"
             >
               <svg
-                class="w-5 h-5"
+                class="w-4 h-4 md:w-5 md:h-5"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -99,7 +101,7 @@
         <!-- Message -->
         <div class="group">
           <label
-            class="block mb-2 text-sm md:text-base font-medium text-neutral-700 group-focus-within:text-green-800 transition"
+            class="block mb-1.5 md:mb-2 text-sm md:text-base font-medium text-neutral-700 group-focus-within:text-green-800 transition"
           >
             Message <span class="text-green-800">*</span>
           </label>
@@ -109,15 +111,15 @@
             name="message"
             required
             placeholder="Tell us about your inquiry..."
-            class="w-full proza-libre border-2 border-green-800/30 rounded-lg px-5 py-4 bg-[#FBF8EF] backdrop-blur-sm focus:bg-[#FFF]/80 focus:border-green-800 focus:outline-none focus:ring-4 focus:ring-green-800/10 transition-all duration-300 resize-none"
+            class="w-full proza-libre border-2 border-green-800/30 rounded-lg px-4 md:px-5 py-3 md:py-4 bg-[#FBF8EF] backdrop-blur-sm focus:bg-[#FFF]/80 focus:border-green-800 focus:outline-none focus:ring-4 focus:ring-green-800/10 transition-all duration-300 resize-none text-sm md:text-base"
           ></textarea>
         </div>
 
         <!-- Button with hover animation -->
-        <div class="flex justify-end">
+        <div class="flex justify-end pt-2 md:pt-4">
           <button
             type="submit"
-            class="contact-button group relative !bg-[#005509] !text-[#FBF8EF] px-6 py-4 rounded-lg hover:!bg-[#005509]/80 transition-all duration-300 flex items-center gap-3 proza-libre overflow-hidden"
+            class="contact-button group relative !bg-[#005509] !text-[#FBF8EF] px-5 md:px-6 py-2.5 md:py-4 rounded-lg hover:!bg-[#005509]/80 transition-all duration-300 flex items-center gap-3 proza-libre overflow-hidden text-sm md:text-base"
           >
             <span>{{ include.section.form.button }}</span>
           </button>
@@ -125,17 +127,21 @@
       </form>
 
       <!-- RIGHT : IMAGE -->
-      <div class="space-y-6">
+      <div class="space-y-4 md:space-y-5 lg:space-y-6">
         <img
           src="{{ include.section.image }}"
           alt=""
-          class="w-full h-[520px] object-cover"
+          class="w-full h-[280px] sm:h-[360px] md:h-[420px] lg:h-[480px] xl:h-[520px] object-cover rounded-lg shadow-md"
           loading="lazy"
         />
 
         {% if include.section.caption %}
-        <div class="flex items-center justify-end gap-4 text-sm">
-          <div class="flex-1 h-[1px] bg-black/40 max-w-[12rem]"></div>
+        <div
+          class="flex items-center justify-end gap-3 md:gap-4 text-xs md:text-sm"
+        >
+          <div
+            class="flex-1 h-[1px] bg-black/40 max-w-[8rem] md:max-w-[10rem] lg:max-w-[12rem]"
+          ></div>
           <span class="whitespace-nowrap"> {{ include.section.caption }} </span>
         </div>
         {% endif %}
@@ -145,19 +151,27 @@
     <!-- ===================================================== -->
     <!-- Bottom Info -->
     <!-- ===================================================== -->
-    <div class="grid md:grid-cols-2 gap-20 mt-24">
+    <div
+      class="grid md:grid-cols-2 gap-8 md:gap-12 lg:gap-16 xl:gap-20 mt-12 md:mt-16 lg:mt-20 xl:mt-24"
+    >
       <!-- Contact Details -->
       <div class="proza-libre">
-        <h3 class="font-medium mb-4 text-lg">Contact Details</h3>
-        <p>{{ include.section.details.email }}</p>
-        <p>{{ include.section.details.phone }}</p>
+        <h3 class="font-medium mb-2 md:mb-3 lg:mb-4 text-base md:text-lg">
+          Contact Details
+        </h3>
+        <p class="text-sm md:text-base">{{ include.section.details.email }}</p>
+        <p class="text-sm md:text-base">{{ include.section.details.phone }}</p>
       </div>
 
       <!-- Socials -->
       <div>
-        <h3 class="font-medium mb-4 proza-libre text-lg">Follow Us</h3>
+        <h3
+          class="font-medium mb-2 md:mb-3 lg:mb-4 proza-libre text-base md:text-lg"
+        >
+          Follow Us
+        </h3>
 
-        <div class="flex gap-6 items-center">
+        <div class="flex gap-4 md:gap-5 lg:gap-6 items-center">
           {% for s in include.section.socials %}
           <a
             href="{{ s.url }}"
@@ -166,7 +180,7 @@
           >
             <img
               src="{{ s.icon }}"
-              class="w-6 h-6 md:w-7 md:h-7 object-contain"
+              class="w-5 h-5 md:w-6 md:h-6 lg:w-7 lg:h-7 object-contain"
               alt=""
             />
           </a>
@@ -259,6 +273,39 @@
     line-height: 1.3;
   }
 
+  /* Container utility if not already defined */
+  .container {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  @media (min-width: 640px) {
+    .container {
+      max-width: 640px;
+    }
+  }
+  @media (min-width: 768px) {
+    .container {
+      max-width: 768px;
+    }
+  }
+  @media (min-width: 1024px) {
+    .container {
+      max-width: 1024px;
+    }
+  }
+  @media (min-width: 1280px) {
+    .container {
+      max-width: 1280px;
+    }
+  }
+  @media (min-width: 1536px) {
+    .container {
+      max-width: 1536px;
+    }
+  }
+
   /* Button hover styles */
   .contact-button {
     display: inline-block;
@@ -272,13 +319,10 @@
     will-change: transform;
   }
 
-  /* Preserve original styles */
-  .cormorant-garamond {
-    font-family: "Cormorant Garamond", serif;
-    font-weight: 600;
-  }
-
-  .proza-libre {
-    font-family: "Proza Libre", sans-serif;
+  /* Form input focus styles */
+  input:focus,
+  select:focus,
+  textarea:focus {
+    outline: none;
   }
 </style>
