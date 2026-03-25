@@ -1,29 +1,29 @@
-<section class="py-12 md:py-16 lg:py-24 bg-[#FBF8EF]">
+<section class="py-12 md:py-16 lg:py-20 bg-[#FBF8EF]">
 
   <!-- ===== GROUP 1: BIG LEFT ===== -->
-  <div class="max-w-screen-2xl mx-auto px-6 lg:px-8">
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 lg:gap-6
-                auto-rows-[35vh] md:auto-rows-[30vh] lg:auto-rows-[28vh]">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 md:gap-5
+                auto-rows-[30vh] sm:auto-rows-[32vh] md:auto-rows-[30vh] lg:auto-rows-[28vh]">
 
       {% assign images = include.section.group_1 %}
       {% for image in images %}
         {% case forloop.index %}
         {% when 1 %}
           <!-- BIG LEFT -->
-          <div class="col-span-2 md:col-span-2 md:row-span-2 order-first md:order-none overflow-hidden">
+          <div class="col-span-2 md:col-span-2 md:row-span-2 order-first md:order-none overflow-hidden group">
         {% when 2 %}
-          <div class="col-span-1 md:col-start-3 md:row-start-1 order-2 md:order-none overflow-hidden">
+          <div class="col-span-1 md:col-start-3 md:row-start-1 order-2 md:order-none overflow-hidden group">
         {% when 3 %}
-          <div class="hidden md:block md:col-start-3 md:row-start-2 overflow-hidden">
+          <div class="hidden md:block md:col-start-3 md:row-start-2 overflow-hidden group">
         {% when 4 %}
-          <div class="hidden md:block md:col-start-4 md:row-start-1 overflow-hidden">
+          <div class="hidden md:block md:col-start-4 md:row-start-1 overflow-hidden group">
         {% else %}
-          <div class="col-span-1 overflow-hidden">
+          <div class="col-span-1 overflow-hidden group">
         {% endcase %}
             <img
               src="{{ image.src | default: image }}"
               alt="{{ image.alt | default: '' }}"
-              class="w-full h-full object-cover hover:scale-105 transition duration-500 ease-out"
+              class="w-full h-full object-cover transition duration-700 ease-out group-hover:scale-105"
               loading="lazy"
             />
           </div>
@@ -33,29 +33,29 @@
   </div>
 
   <!-- ===== GROUP 2: BIG RIGHT ===== -->
-  <div class="max-w-screen-2xl mx-auto px-6 lg:px-8 pt-4 lg:pt-6">
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 lg:gap-6
-                auto-rows-[35vh] md:auto-rows-[30vh] lg:auto-rows-[28vh]">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8 mt-4 md:mt-5">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 md:gap-5
+                auto-rows-[30vh] sm:auto-rows-[32vh] md:auto-rows-[30vh] lg:auto-rows-[28vh]">
 
       {% assign images = include.section.group_2 %}
       {% for image in images %}
         {% case forloop.index %}
         {% when 1 %}
-          <div class="col-span-1 order-1 md:order-none overflow-hidden">
+          <div class="col-span-1 order-1 md:order-none overflow-hidden group">
         {% when 2 %}
-          <div class="hidden md:block md:row-start-2 overflow-hidden">
+          <div class="hidden md:block md:row-start-2 overflow-hidden group">
         {% when 3 %}
-          <div class="hidden md:block overflow-hidden">
+          <div class="hidden md:block overflow-hidden group">
         {% when 4 %}
           <!-- BIG RIGHT -->
-          <div class="col-span-2 md:col-start-3 md:row-start-1 md:row-span-2 order-3 md:order-none overflow-hidden">
+          <div class="col-span-2 md:col-start-3 md:row-start-1 md:row-span-2 order-3 md:order-none overflow-hidden group">
         {% else %}
-          <div class="col-span-1 overflow-hidden">
+          <div class="col-span-1 overflow-hidden group">
         {% endcase %}
             <img
               src="{{ image.src | default: image }}"
               alt="{{ image.alt | default: '' }}"
-              class="w-full h-full object-cover hover:scale-105 transition duration-500 ease-out"
+              class="w-full h-full object-cover transition duration-700 ease-out group-hover:scale-105"
               loading="lazy"
             />
           </div>
@@ -65,3 +65,72 @@
   </div>
 
 </section>
+
+<style>
+  /* Container utility if not already defined */
+  .container {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  @media (min-width: 640px) {
+    .container {
+      max-width: 640px;
+    }
+  }
+  @media (min-width: 768px) {
+    .container {
+      max-width: 768px;
+    }
+  }
+  @media (min-width: 1024px) {
+    .container {
+      max-width: 1024px;
+    }
+  }
+  @media (min-width: 1280px) {
+    .container {
+      max-width: 1280px;
+    }
+  }
+  @media (min-width: 1536px) {
+    .container {
+      max-width: 1536px;
+    }
+  }
+
+  /* Smooth image hover transition - only affects images in this section */
+  .overflow-hidden img {
+    transition: transform 0.7s cubic-bezier(0.34, 1.2, 0.64, 1);
+  }
+  
+  /* Preserve original row height behavior */
+  .auto-rows-\[30vh\] {
+    grid-auto-rows: 30vh;
+  }
+  
+  @media (min-width: 640px) {
+    .sm\:auto-rows-\[32vh\] {
+      grid-auto-rows: 32vh;
+    }
+  }
+  
+  @media (min-width: 768px) {
+    .md\:auto-rows-\[30vh\] {
+      grid-auto-rows: 30vh;
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .lg\:auto-rows-\[28vh\] {
+      grid-auto-rows: 28vh;
+    }
+  }
+  
+  @media (min-width: 1280px) {
+    .xl\:auto-rows-\[32vh\] {
+      grid-auto-rows: 32vh;
+    }
+  }
+</style>
