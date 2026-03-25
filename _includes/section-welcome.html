@@ -1,9 +1,9 @@
 <!-- _includes/section-welcome.html -->
 {% assign section = include.section %} {% if section %}
-<section class="relative py-28 overflow-hidden bg-[#FBF8EF]">
+<section class="relative py-16 md:py-24 overflow-hidden bg-[#FBF8EF]">
   <!-- ================= BACKGROUND IMAGE ================= -->
   {% if section.background %}
-  <div class="absolute inset-0 max-w-screen-2xl mx-auto">
+  <div class="absolute inset-0">
     <img
       src="{{ section.background }}"
       alt=""
@@ -14,8 +14,8 @@
   {% endif %}
 
   <!-- ================= CONTENT ================= -->
-  <div class="relative mx-auto px-6 z-10 py-16">
-    <div class="max-w-screen-2xl mx-auto lg:px-16">
+  <div class="relative z-10">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
       <!-- Soft overlay (only if background exists) -->
       {% if section.background %}
       <div class="absolute inset-0 -z-10 bg-[#FBF8EF]/80"></div>
@@ -23,9 +23,9 @@
 
       <!-- ================= TITLE ================= -->
       {% if section.title %}
-      <div class="text-center mb-20">
+      <div class="text-center mb-12 md:mb-16">
         <h2
-          class="split-title text-center tracking-[0.2em] text-4xl md:text-5xl lg:text-6xl text-[#000] mb-20 cormorant-garamond uppercase whitespace-pre-line"
+          class="split-title tracking-[0.2em] text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-[#000] cormorant-garamond uppercase whitespace-pre-line"
           style="opacity: 0"
         >
           {{ section.title }}
@@ -35,7 +35,9 @@
 
       <!-- ================= ITEMS ================= -->
       {% if section.items and section.items.size > 0 %}
-      <div class="grid md:grid-cols-3 gap-8 lg:gap-10 mb-20">
+      <div
+        class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8 lg:gap-10 mb-12 md:mb-16 lg:mb-20"
+      >
         {% for item in section.items %} {% if item %}
         <a href="{{ item.link | default: '#' }}" class="group block">
           <div
@@ -53,9 +55,9 @@
 
           {% if item.title %}
           <!-- Caption with hover animation container -->
-          <div class="mt-5 flex items-center justify-end gap-3">
+          <div class="mt-4 md:mt-5 flex items-center justify-end gap-3">
             <span
-              class="h-[2px] w-[30%] md:w-[20%] lg:w-[40%] bg-[#005509]/60 transition-all duration-300"
+              class="h-[2px] w-[30%] md:w-[20%] lg:w-[40%] bg-[#005509]/60 transition-all duration-300 group-hover:bg-[#005509]/80"
             ></span>
             <div class="overflow-hidden h-[24px] md:h-[28px]">
               <p
@@ -73,9 +75,9 @@
 
       <!-- ================= DESCRIPTION ================= -->
       {% if section.description %}
-      <div class="max-w-4xl mx-auto">
+      <div class="max-w-4xl mx-auto px-4 sm:px-0">
         <div
-          class="split-description text-[#000]/80 leading-relaxed text-base md:text-lg lg:text-xl proza-libre proza-400 space-y-2 [&>p]:text-justify [&>p]:[text-justify:inter-word] [&>p]:hyphens-auto"
+          class="split-description text-[#000]/80 leading-relaxed text-base md:text-lg lg:text-xl proza-libre proza-400 space-y-4 [&>p]:text-justify [&>p]:[text-justify:inter-word] [&>p]:hyphens-auto"
           style="opacity: 0"
         >
           {{ section.description | markdownify }}
@@ -207,25 +209,6 @@
     will-change: transform;
   }
 
-  /* Preserve all your original styles */
-  .cormorant-garamond {
-    font-family: "Cormorant Garamond", serif;
-    font-weight: 600;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);
-  }
-
-  .proza-libre {
-    font-family: "Proza Libre", sans-serif;
-  }
-
-  .proza-400 {
-    font-weight: 400;
-  }
-
-  .proza-500 {
-    font-weight: 500;
-  }
-
   .group:hover .bg-\[\#005509\]\/60 {
     background-color: rgba(0, 85, 9, 0.8);
   }
@@ -245,6 +228,34 @@
     width: 100%;
     height: 100%;
     pointer-events: none;
+  }
+
+  /* Add container utility if not already in your Tailwind config */
+  .container {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  @media (min-width: 640px) {
+    .container {
+      max-width: 640px;
+    }
+  }
+  @media (min-width: 768px) {
+    .container {
+      max-width: 768px;
+    }
+  }
+  @media (min-width: 1024px) {
+    .container {
+      max-width: 1024px;
+    }
+  }
+  @media (min-width: 1280px) {
+    .container {
+      max-width: 1280px;
+    }
   }
 </style>
 {% endif %}
