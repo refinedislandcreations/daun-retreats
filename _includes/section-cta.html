@@ -1,107 +1,81 @@
-<!-- _includes/section-cta.html -->
-<section class="relative py-16 md:py-20 lg:py-28 overflow-hidden bg-[#FBF8EF]">
-  <!-- ================= BACKGROUND IMAGE ================= -->
-  <div class="absolute inset-0">
-    <img
-      src="{{ include.section.background }}"
-      alt=""
-      class="w-full h-full object-cover"
-      loading="lazy"
-    />
-  </div>
-
+<section
+  class="section-cta relative overflow-hidden bg-[#FBF8EF] bg-center"
+  style="
+    background-image: url('{{ include.section.background }}');
+    background-size: cover;
+    background-position: top center;
+  "
+>
   <!-- ================= CONTENT ================= -->
-  <div class="relative z-10">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
-      <!-- Soft cream overlay -->
-      <div class="absolute inset-0 -z-10 bg-[#FBF8EF]/80"></div>
-
-      <!-- CTA Content -->
-      <div class="max-w-4xl mx-auto text-center">
-        <!-- Title with animation -->
-        <div
-          class="cta-split-title tracking-[0.2em] text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-[#000] cormorant-garamond whitespace-pre-line uppercase mb-8 md:mb-10 lg:mb-12"
-          style="opacity: 0"
-        >
-          {{ include.section.title | raw }}
-        </div>
-
-        <!-- Button with hover animation -->
-        <a
-          href="{{ include.section.button_link }}"
-          class="cta-button inline-block bg-[#005509] hover:bg-[#0c6a13] text-white px-6 md:px-8 py-2.5 md:py-3 rounded-md text-sm md:text-base tracking-wide proza-libre proza-500 transition duration-300 overflow-hidden"
-        >
-          <span>{{ include.section.button_text }}</span>
-        </a>
+  <div class="relative z-10 py-12 md:py-16 lg:py-20">
+    <!-- Full-width CTA Background -->
+    <div class="w-full text-center bg-[#FBF8EF]/80 py-12 md:py-16">
+      <!-- Title with animation -->
+      <div
+        class="cta-split-title tracking-[0.2em] text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-[#000] cormorant-garamond whitespace-pre-line uppercase mb-8 md:mb-10 lg:mb-12"
+        style="opacity: 0"
+      >
+        {{ include.section.title | raw }}
       </div>
+
+      <!-- Button with hover animation -->
+      <a
+        href="{{ include.section.button_link }}"
+        class="cta-button inline-block bg-[#005509] hover:bg-[#0c6a13] text-white px-6 md:px-8 py-2.5 md:py-3 rounded-md text-sm md:text-base tracking-wide proza-libre proza-500 transition duration-300 overflow-hidden"
+      >
+        <span>{{ include.section.button_text }}</span>
+      </a>
     </div>
   </div>
 </section>
 
 <script>
   document.addEventListener("DOMContentLoaded", function () {
-    // Make sure GSAP and SplitText are loaded
-    if (typeof gsap === "undefined" || typeof SplitText === "undefined") {
-      console.log("GSAP or SplitText not loaded yet");
-      return;
-    }
+    if (typeof gsap === "undefined" || typeof SplitText === "undefined") return;
 
     document.fonts.ready.then(() => {
-      // ========== CTA TITLE ANIMATION ==========
-      // Use querySelectorAll to get ALL titles, not just the first one
+      // CTA Title Animation
       const ctaTitles = document.querySelectorAll(".cta-split-title");
-
       ctaTitles.forEach((ctaTitle) => {
-        if (ctaTitle) {
-          gsap.set(ctaTitle, { opacity: 1 });
-
-          SplitText.create(ctaTitle, {
-            type: "words,lines",
-            linesClass: "line",
-            autoSplit: true,
-            mask: "lines",
-            onSplit: (self) => {
-              gsap.from(self.lines, {
-                scrollTrigger: {
-                  trigger: ctaTitle,
-                  start: "top 80%",
-                  toggleActions: "play reverse play reverse",
-                },
-                duration: 1.2,
-                yPercent: 100,
-                opacity: 0,
-                stagger: 0.1,
-                ease: "power2.out",
-              });
-            },
-          });
-        }
+        if (!ctaTitle) return;
+        gsap.set(ctaTitle, { opacity: 1 });
+        SplitText.create(ctaTitle, {
+          type: "words,lines",
+          linesClass: "line",
+          autoSplit: true,
+          mask: "lines",
+          onSplit: (self) => {
+            gsap.from(self.lines, {
+              scrollTrigger: {
+                trigger: ctaTitle,
+                start: "top 80%",
+                toggleActions: "play reverse play reverse",
+              },
+              duration: 1.2,
+              yPercent: 100,
+              opacity: 0,
+              stagger: 0.1,
+              ease: "power2.out",
+            });
+          },
+        });
       });
 
-      // ========== CTA BUTTON HOVER ANIMATION ==========
+      // CTA Button Hover Animation
       const ctaButtons = gsap.utils.toArray(".cta-button");
       ctaButtons.forEach((btn) => {
         const span = btn.querySelector("span");
-        if (span) {
-          let tl = gsap.timeline({ paused: true });
-          tl.to(span, {
-            duration: 0.2,
-            yPercent: -150,
-            ease: "power2.in",
-          });
-          tl.set(span, { yPercent: 150 });
-          tl.to(span, {
-            duration: 0.2,
-            yPercent: 0,
-            ease: "power2.out",
-          });
+        if (!span) return;
+        let tl = gsap.timeline({ paused: true });
+        tl.to(span, { duration: 0.2, yPercent: -150, ease: "power2.in" });
+        tl.set(span, { yPercent: 150 });
+        tl.to(span, { duration: 0.2, yPercent: 0, ease: "power2.out" });
 
-          btn.addEventListener("mouseenter", () => tl.play(0));
-          btn.addEventListener("mouseleave", () => {
-            tl.kill();
-            gsap.set(span, { yPercent: 0 });
-          });
-        }
+        btn.addEventListener("mouseenter", () => tl.play(0));
+        btn.addEventListener("mouseleave", () => {
+          tl.kill();
+          gsap.set(span, { yPercent: 0 });
+        });
       });
 
       ScrollTrigger.refresh();
@@ -114,7 +88,6 @@
   .cta-split-title * {
     will-change: transform;
   }
-
   .cta-split-title .line {
     display: block;
     overflow: hidden;
@@ -128,37 +101,19 @@
     text-decoration: none;
     text-align: center;
   }
-
   .cta-button span {
     display: inline-block;
     will-change: transform;
   }
 
-  /* Container utility if not already defined */
-  .container {
-    width: 100%;
-    margin-left: auto;
-    margin-right: auto;
+  /* ================= Section-CTA Specific Height Fix ================= */
+  .section-cta {
+    min-height: auto;
   }
-
-  @media (min-width: 640px) {
-    .container {
-      max-width: 640px;
-    }
-  }
-  @media (min-width: 768px) {
-    .container {
-      max-width: 768px;
-    }
-  }
-  @media (min-width: 1024px) {
-    .container {
-      max-width: 1024px;
-    }
-  }
-  @media (min-width: 1280px) {
-    .container {
-      max-width: 1280px;
+  @media (max-width: 640px) {
+    .section-cta {
+      max-height: 500px;
+      background-size: cover;
     }
   }
 </style>
