@@ -1,8 +1,8 @@
 <!-- _includes/section-intro.html -->
-<section class="relative py-28 overflow-hidden bg-[#FBF8EF]">
+<section class="relative py-16 md:py-20 lg:py-28 overflow-hidden bg-[#FBF8EF]">
   <!-- ================= BACKGROUND IMAGE ================= -->
   {% if include.section.background %}
-  <div class="absolute inset-0 max-w-screen-2xl mx-auto">
+  <div class="absolute inset-0">
     <img
       src="{{ include.section.background }}"
       alt=""
@@ -13,8 +13,8 @@
   {% endif %}
 
   <!-- ================= CONTENT ================= -->
-  <div class="relative mx-auto px-6 z-10 py-16">
-    <div class="max-w-screen-2xl mx-auto lg:px-16">
+  <div class="relative z-10">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
       <!-- Soft cream overlay -->
       {% if include.section.background %}
       <div class="absolute inset-0 -z-10 bg-[#FBF8EF]/80"></div>
@@ -24,7 +24,7 @@
         <!-- ================= TITLE ================= -->
         {% if include.section.title %}
         <h2
-          class="intro-split-title cormorant-garamond tracking-[0.2em] text-4xl md:text-5xl lg:text-6xl text-[#000] whitespace-pre-line uppercase mb-10"
+          class="intro-split-title cormorant-garamond tracking-[0.2em] text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-[#000] whitespace-pre-line uppercase mb-6 md:mb-8 lg:mb-10"
           style="opacity: 0"
         >
           {{ include.section.title }}
@@ -44,7 +44,9 @@
 
       <!-- ================= OPTIONAL IMAGE GRID ================= -->
       {% if include.section.images %}
-      <div class="mt-20 grid md:grid-cols-2 gap-12">
+      <div
+        class="mt-12 md:mt-16 lg:mt-20 grid md:grid-cols-2 gap-6 md:gap-8 lg:gap-12"
+      >
         {% for image in include.section.images %}
         <div class="overflow-hidden shadow-lg">
           <img
@@ -150,14 +152,31 @@
     line-height: 1.6; /* Better for paragraph text */
   }
 
-  /* Preserve original styles */
-  .cormorant-garamond {
-    font-family: "Cormorant Garamond", serif;
-    font-weight: 600;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);
+  /* Container utility if not already defined */
+  .container {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
   }
 
-  .proza-libre {
-    font-family: "Proza Libre", sans-serif;
+  @media (min-width: 640px) {
+    .container {
+      max-width: 640px;
+    }
+  }
+  @media (min-width: 768px) {
+    .container {
+      max-width: 768px;
+    }
+  }
+  @media (min-width: 1024px) {
+    .container {
+      max-width: 1024px;
+    }
+  }
+  @media (min-width: 1280px) {
+    .container {
+      max-width: 1280px;
+    }
   }
 </style>
