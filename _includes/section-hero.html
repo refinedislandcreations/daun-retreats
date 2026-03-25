@@ -21,7 +21,7 @@
       <div class="relative" style="height: 80vh">
         <div class="absolute inset-0 flex justify-start">
           <div
-            class="relative w-full md:w-[70%] lg:w-[65%] h-full md:ml-6 lg:ml-12 xl:ml-16"
+            class="relative w-full md:w-[70%] lg:w-[65%] h-full md:ml-4 lg:ml-6 xl:ml-8 2xl:ml-12"
           >
             {% for slide in include.section.slides %}
             <div
@@ -44,12 +44,12 @@
           class="absolute inset-0 z-10 flex items-center px-4 sm:px-6 md:px-8 lg:px-12 justify-center md:justify-end pointer-events-none"
         >
           <div
-            class="relative bg-[#FBF8EF]/80 rounded-2xl px-8 sm:px-10 md:px-12 lg:px-16 xl:px-20 py-10 sm:py-12 md:py-14 lg:py-16 xl:py-20 text-center md:text-right mx-4 sm:mx-6 md:mx-0 inline-block pointer-events-auto"
+            class="relative bg-[#FBF8EF]/80 rounded-2xl px-6 sm:px-8 md:px-10 lg:px-12 xl:px-16 2xl:px-20 py-8 sm:py-10 md:py-12 lg:py-14 xl:py-16 2xl:py-20 text-center md:text-right mx-4 sm:mx-6 md:mx-0 inline-block pointer-events-auto max-w-[90%] sm:max-w-[85%] md:max-w-[80%] lg:max-w-[75%] xl:max-w-[70%]"
           >
             {% if include.section.button_text %}
             <a
               href="{{ include.section.button_link | default: '#' }}"
-              class="hero-button absolute -bottom-5 right-4 sm:right-6 md:right-8 lg:right-10 z-20 bg-[#005509] hover:bg-[#006611] text-[#FBF8EF] px-6 sm:px-7 md:px-8 lg:px-10 py-2.5 sm:py-3 lg:py-4 rounded-lg font-medium transition-all duration-300 shadow-lg hover:shadow-xl border-2 border-transparent hover:border-[#FBF8EF]/20 tracking-wide proza-libre text-sm sm:text-base lg:text-lg"
+              class="hero-button absolute -bottom-4 sm:-bottom-5 right-3 sm:right-4 md:right-6 lg:right-8 xl:right-10 z-20 bg-[#005509] hover:bg-[#006611] text-[#FBF8EF] px-5 sm:px-6 md:px-7 lg:px-8 xl:px-10 py-2 sm:py-2.5 md:py-3 lg:py-3.5 xl:py-4 rounded-lg font-medium transition-all duration-300 shadow-lg hover:shadow-xl border-2 border-transparent hover:border-[#FBF8EF]/20 tracking-wide proza-libre text-xs sm:text-sm md:text-base lg:text-lg"
             >
               <span>{{ include.section.button_text }}</span>
             </a>
@@ -57,14 +57,14 @@
 
             <!-- Title (with animation class) -->
             <h1
-              class="hero-split font-serif tracking-wide text-[clamp(2.2rem,7vw,6rem)] sm:text-[clamp(2.5rem,6.5vw,6.5rem)] md:text-[clamp(3rem,5vw,7rem)] lg:text-[clamp(3.5rem,4.5vw,7.5rem)] xl:text-[clamp(4rem,4vw,8rem)] text-[#000] mb-2 md:mb-0 leading-[1.1] cormorant-garamond"
+              class="hero-split font-serif tracking-wide text-[clamp(1.8rem,6vw,6rem)] sm:text-[clamp(2rem,5.5vw,6.5rem)] md:text-[clamp(2.2rem,4.5vw,7rem)] lg:text-[clamp(2.5rem,4vw,7.5rem)] xl:text-[clamp(3rem,3.5vw,8rem)] text-[#000] mb-2 md:mb-3 lg:mb-4 leading-[1.1] cormorant-garamond"
             >
               {{ include.section.title }}
             </h1>
 
             <!-- Subtitle (with animation class) -->
             <p
-              class="hero-split-sub text-[clamp(0.9rem,2.5vw,1.2rem)] sm:text-[clamp(1rem,2vw,1.4rem)] md:text-[clamp(1.05rem,1.8vw,1.5rem)] lg:text-[clamp(1.1rem,1.6vw,1.6rem)] text-[#000]/80 leading-relaxed max-w-3xl mx-auto md:mx-0 md:ml-auto mb-2 md:mb-0 proza-libre"
+              class="hero-split-sub text-[clamp(0.85rem,2.2vw,1.2rem)] sm:text-[clamp(0.9rem,2vw,1.3rem)] md:text-[clamp(0.95rem,1.8vw,1.4rem)] lg:text-[clamp(1rem,1.6vw,1.5rem)] xl:text-[clamp(1.05rem,1.5vw,1.6rem)] text-[#000]/80 leading-relaxed max-w-3xl mx-auto md:mx-0 md:ml-auto mb-2 md:mb-3 lg:mb-4 proza-libre"
             >
               {{ include.section.subtitle }}
             </p>
@@ -74,18 +74,20 @@
 
       <!-- Navigation Container -->
       <div class="flex items-center h-[10vh] relative z-20">
-        <div class="w-full md:w-[70%] lg:w-[65%] md:ml-6 lg:ml-12 xl:ml-16">
+        <div
+          class="w-full md:w-[70%] lg:w-[65%] md:ml-4 lg:ml-6 xl:ml-8 2xl:ml-12"
+        >
           <div class="flex items-center justify-between">
             <!-- Left Arrow -->
             <button
               id="hero-prev"
-              class="w-12 h-12 flex items-center justify-center hover:opacity-60 transition"
+              class="w-10 h-10 md:w-11 md:h-11 lg:w-12 lg:h-12 flex items-center justify-center hover:opacity-60 transition"
               aria-label="Previous"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 12 24"
-                class="w-4 h-8 rotate-180"
+                class="w-3 h-6 md:w-3.5 md:h-7 lg:w-4 lg:h-8 rotate-180"
               >
                 <path
                   fill="#005509"
@@ -100,12 +102,14 @@
               <!-- Line + Caption wrapper -->
               <div class="flex items-center gap-2">
                 <!-- Line -->
-                <span class="block h-[1px] w-[250px] bg-[#005509]/70"></span>
+                <span
+                  class="block h-[1px] w-[150px] sm:w-[180px] md:w-[200px] lg:w-[220px] xl:w-[250px] bg-[#005509]/70"
+                ></span>
 
                 <!-- Caption -->
                 <span
                   id="hero-caption"
-                  class="text-xs tracking-[0.35em] uppercase proza-libre text-[#000]"
+                  class="text-[10px] sm:text-[11px] md:text-xs tracking-[0.35em] uppercase proza-libre text-[#000]"
                 >
                   {{ include.section.slides[0].caption }}
                 </span>
@@ -114,13 +118,13 @@
               <!-- Right Arrow -->
               <button
                 id="hero-next"
-                class="w-12 h-12 flex items-center justify-center hover:opacity-60 transition"
+                class="w-10 h-10 md:w-11 md:h-11 lg:w-12 lg:h-12 flex items-center justify-center hover:opacity-60 transition"
                 aria-label="Next"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 12 24"
-                  class="w-4 h-8"
+                  class="w-3 h-6 md:w-3.5 md:h-7 lg:w-4 lg:h-8"
                 >
                   <path
                     fill="#005509"
@@ -140,12 +144,12 @@
       class="relative z-10 flex items-center min-h-screen px-4 sm:px-6 justify-center pointer-events-none md:hidden"
     >
       <div
-        class="relative bg-[#FBF8EF]/80 rounded-2xl px-8 sm:px-10 py-10 sm:py-12 text-center mx-4 sm:mx-6 inline-block pointer-events-auto"
+        class="relative bg-[#FBF8EF]/80 rounded-2xl px-5 sm:px-6 md:px-8 py-8 sm:py-10 md:py-12 text-center mx-3 sm:mx-4 md:mx-6 inline-block pointer-events-auto max-w-[90%] sm:max-w-[85%]"
       >
         {% if include.section.button_text %}
         <a
           href="{{ include.section.button_link | default: '#' }}"
-          class="hero-button absolute -bottom-5 right-4 sm:right-6 z-20 bg-[#005509] hover:bg-[#006611] text-[#FBF8EF] px-6 sm:px-7 py-2.5 sm:py-3 rounded-lg font-medium transition-all duration-300 shadow-lg hover:shadow-xl border-2 border-transparent hover:border-[#FBF8EF]/20 tracking-wide proza-libre text-sm sm:text-base"
+          class="hero-button absolute -bottom-4 right-3 sm:right-4 md:right-5 z-20 bg-[#005509] hover:bg-[#006611] text-[#FBF8EF] px-4 sm:px-5 md:px-6 py-2 sm:py-2.5 md:py-3 rounded-lg font-medium transition-all duration-300 shadow-lg hover:shadow-xl border-2 border-transparent hover:border-[#FBF8EF]/20 tracking-wide proza-libre text-xs sm:text-sm md:text-base"
         >
           <span>{{ include.section.button_text }}</span>
         </a>
@@ -153,14 +157,14 @@
 
         <!-- Mobile Title (with animation class) -->
         <h1
-          class="hero-split font-serif tracking-wide text-[clamp(2.2rem,7vw,4rem)] text-[#000] mb-2 leading-[1.1] cormorant-garamond"
+          class="hero-split font-serif tracking-wide text-[clamp(1.8rem,6vw,3.5rem)] sm:text-[clamp(2rem,6vw,4rem)] text-[#000] mb-2 leading-[1.1] cormorant-garamond"
         >
           {{ include.section.title }}
         </h1>
 
         <!-- Mobile Subtitle (with animation class) -->
         <p
-          class="hero-split-sub text-[clamp(0.9rem,2.5vw,1.1rem)] text-[#000]/80 leading-relaxed max-w-3xl mx-auto mb-2 proza-libre"
+          class="hero-split-sub text-[clamp(0.85rem,2.5vw,1rem)] sm:text-[clamp(0.9rem,2.5vw,1.1rem)] text-[#000]/80 leading-relaxed max-w-3xl mx-auto mb-2 proza-libre"
         >
           {{ include.section.subtitle }}
         </p>
