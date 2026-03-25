@@ -1,7 +1,7 @@
 <!-- _includes/section-cta.html -->
-<section class="relative py-28 overflow-hidden bg-[#FBF8EF]">
+<section class="relative py-16 md:py-20 lg:py-28 overflow-hidden bg-[#FBF8EF]">
   <!-- ================= BACKGROUND IMAGE ================= -->
-  <div class="absolute inset-0 max-w-screen-2xl mx-auto">
+  <div class="absolute inset-0">
     <img
       src="{{ include.section.background }}"
       alt=""
@@ -11,25 +11,25 @@
   </div>
 
   <!-- ================= CONTENT ================= -->
-  <div class="relative mx-auto px-6 z-10 py-16">
-    <div class="max-w-screen-2xl mx-auto lg:px-16">
+  <div class="relative z-10">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
       <!-- Soft cream overlay -->
       <div class="absolute inset-0 -z-10 bg-[#FBF8EF]/80"></div>
 
       <!-- CTA Content -->
       <div class="max-w-4xl mx-auto text-center">
         <!-- Title with animation -->
-        <h2
-          class="cta-split-title tracking-[0.2em] text-4xl md:text-5xl lg:text-6xl text-[#000] cormorant-garamond whitespace-pre-line uppercase"
+        <div
+          class="cta-split-title tracking-[0.2em] text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-[#000] cormorant-garamond whitespace-pre-line uppercase mb-8 md:mb-10 lg:mb-12"
           style="opacity: 0"
         >
-          {{ include.section.title }}
-        </h2>
+          {{ include.section.title | raw }}
+        </div>
 
         <!-- Button with hover animation -->
         <a
           href="{{ include.section.button_link }}"
-          class="cta-button inline-block bg-[#005509] hover:bg-[#0c6a13] text-white px-8 py-3 rounded-md text-sm md:text-base tracking-wide proza-libre proza-500 transition duration-300 overflow-hidden"
+          class="cta-button inline-block bg-[#005509] hover:bg-[#0c6a13] text-white px-6 md:px-8 py-2.5 md:py-3 rounded-md text-sm md:text-base tracking-wide proza-libre proza-500 transition duration-300 overflow-hidden"
         >
           <span>{{ include.section.button_text }}</span>
         </a>
@@ -127,7 +127,6 @@
     overflow: hidden;
     text-decoration: none;
     text-align: center;
-    margin-top: 2rem; /* Add some spacing between title and button */
   }
 
   .cta-button span {
@@ -135,18 +134,31 @@
     will-change: transform;
   }
 
-  /* Preserve original styles */
-  .cormorant-garamond {
-    font-family: "Cormorant Garamond", serif;
-    font-weight: 600;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);
+  /* Container utility if not already defined */
+  .container {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
   }
 
-  .proza-libre {
-    font-family: "Proza Libre", sans-serif;
+  @media (min-width: 640px) {
+    .container {
+      max-width: 640px;
+    }
   }
-
-  .proza-500 {
-    font-weight: 500;
+  @media (min-width: 768px) {
+    .container {
+      max-width: 768px;
+    }
+  }
+  @media (min-width: 1024px) {
+    .container {
+      max-width: 1024px;
+    }
+  }
+  @media (min-width: 1280px) {
+    .container {
+      max-width: 1280px;
+    }
   }
 </style>
