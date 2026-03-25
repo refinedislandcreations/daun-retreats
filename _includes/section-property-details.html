@@ -1,9 +1,9 @@
 <!-- _includes/section-property-details.html -->
-<section class="py-16 md:py-20 lg:py-24 bg-[#FBF8EF]">
+<section class="bg-[#FBF8EF] py-16 md:py-20">
   <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
     <!-- Card -->
     <div
-      class="border-2 border-[#005509] rounded-2xl p-6 sm:p-8 md:p-10 lg:p-12 xl:p-14"
+      class="border-2 border-[#005509] rounded-2xl p-6 sm:p-8 md:p-10 lg:p-12 xl:p-14 h-full"
     >
       <!-- Title with animation -->
       <h2
@@ -171,5 +171,17 @@
   .features-button span {
     display: inline-block;
     will-change: transform;
+  }
+
+  /* Fix for mobile height consistency */
+  @media (max-width: 767px) {
+    section {
+      min-height: auto;
+    }
+
+    .container {
+      padding-top: 2rem;
+      padding-bottom: 2rem;
+    }
   }
 </style>
