@@ -1,8 +1,8 @@
-<!-- _includes/section-why.html -->
-<section class="py-28 bg-[#FBF8EF]">
-  <div class="max-w-7xl mx-auto px-6">
+<!-- _includes/section-benefits.html -->
+<section class="py-16 md:py-20 lg:py-28 bg-[#FBF8EF]">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
     <!-- Title -->
-    <div class="mb-12 text-center">
+    <div class="mb-8 md:mb-10 lg:mb-12 text-center">
       <h2
         class="why-split-title cormorant-garamond tracking-[0.08em] text-3xl xs:text-4xl sm:text-5xl md:text-6xl font-medium text-[#111]"
         style="opacity: 0"
@@ -16,14 +16,14 @@
       {% for item in include.section.items %}
 
       <div
-        class="p-10 md:p-14 border-t border-b border-[#005509]/40 {% if forloop.first %} border-t-0 {% endif %} {% if forloop.last %} border-b-0 {% endif %} md:even:border-l md:border-[#005509]/40 {% if forloop.index0 < 2 %} md:border-t-0 {% endif %} {% if forloop.index0 > 3 %} md:border-b-0 {% endif %}"
+        class="p-6 sm:p-8 md:p-10 lg:p-14 border-t border-b border-[#005509]/40 {% if forloop.first %} border-t-0 {% endif %} {% if forloop.last %} border-b-0 {% endif %} md:even:border-l md:border-[#005509]/40 {% if forloop.index0 < 2 %} md:border-t-0 {% endif %} {% if forloop.index0 > 3 %} md:border-b-0 {% endif %}"
       >
-        <div class="flex items-start gap-5">
+        <div class="flex items-start gap-4 md:gap-5">
           <!-- Icon -->
           <img
             src="{{ item.icon }}"
             alt=""
-            class="w-7 h-7 mt-1 shrink-0"
+            class="w-6 h-6 md:w-7 md:h-7 mt-1 shrink-0"
             loading="lazy"
           />
 
@@ -31,7 +31,7 @@
           <div>
             <!-- Item Title with animation -->
             <h3
-              class="why-item-title proza-libre text-xl font-semibold text-[#111] mb-4"
+              class="why-item-title proza-libre text-lg md:text-xl font-semibold text-[#111] mb-2 md:mb-3 lg:mb-4"
               style="opacity: 0"
             >
               {{ item.title }}
@@ -167,15 +167,32 @@
     line-height: 1.3;
   }
 
-  /* Preserve original styles */
-  .cormorant-garamond {
-    font-family: "Cormorant Garamond", serif;
-    font-weight: 600;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);
+  /* Container utility if not already defined */
+  .container {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
   }
 
-  .proza-libre {
-    font-family: "Proza Libre", sans-serif;
+  @media (min-width: 640px) {
+    .container {
+      max-width: 640px;
+    }
+  }
+  @media (min-width: 768px) {
+    .container {
+      max-width: 768px;
+    }
+  }
+  @media (min-width: 1024px) {
+    .container {
+      max-width: 1024px;
+    }
+  }
+  @media (min-width: 1280px) {
+    .container {
+      max-width: 1280px;
+    }
   }
 
   /* Border styles remain the same */
