@@ -1,20 +1,22 @@
-<!-- _inlcudes/section-faq.html -->
-<section class="py-32 bg-[#FBF8EF]">
-  <div class="w-[85%] mx-auto space-y-28">
+<!-- _includes/section-faq.html -->
+<section class="py-16 md:py-20 lg:py-24 bg-[#FBF8EF]">
+  <div
+    class="container mx-auto px-4 sm:px-6 lg:px-8 space-y-12 md:space-y-16 lg:space-y-20"
+  >
     <!-- Title with animation -->
     <h2
-      class="faq-split-title font-serif text-5xl md:text-7xl tracking-wide mb-20 cormorant-garamond"
+      class="faq-split-title font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl tracking-wide mb-8 md:mb-12 lg:mb-16 xl:mb-20 cormorant-garamond"
       style="opacity: 0"
     >
       YOUR QUESTIONS ANSWERED
     </h2>
 
     {% for group in include.section.groups %}
-    <div class="grid md:grid-cols-3 gap-12">
+    <div class="grid md:grid-cols-3 gap-8 md:gap-10 lg:gap-12">
       <!-- Left title with animation -->
       <div>
         <h3
-          class="faq-group-title text-xl tracking-wide proza-libre proza-500"
+          class="faq-group-title text-lg md:text-xl tracking-wide proza-libre proza-500"
           style="opacity: 0"
         >
           {{ group.title }}
@@ -26,11 +28,16 @@
         {% for item in group.items %}
         <div class="faq-item border-b border-[#005509]/60">
           <button
-            class="faq-toggle w-full flex justify-between items-center py-6 text-left"
+            class="faq-toggle w-full flex justify-between items-center py-4 md:py-5 lg:py-6 text-left"
           >
-            <span class="proza-libre proza-600"> {{ item.question }} </span>
+            <span class="proza-libre proza-600 text-sm sm:text-base">
+              {{ item.question }}
+            </span>
 
-            <span class="faq-icon text-xl text-[#005509]">+</span>
+            <span
+              class="faq-icon text-xl md:text-2xl text-[#005509] font-medium"
+              >+</span
+            >
           </button>
 
           <div
@@ -38,7 +45,7 @@
             style="max-height: 0; opacity: 0"
           >
             <div
-              class="pb-6 pr-10 text-neutral-700 leading-relaxed proza-libre proza-400"
+              class="pb-4 md:pb-5 lg:pb-6 pr-6 md:pr-8 lg:pr-10 text-neutral-700 leading-relaxed text-sm sm:text-base proza-libre proza-400"
             >
               {{ item.answer }}
             </div>
@@ -245,7 +252,7 @@
             tl.to(content, {
               maxHeight: answerHeight + 32, // Add padding
               opacity: 1,
-              padding: "0 2.5rem 1.5rem 0", // pr-10 (2.5rem) + pb-6 (1.5rem)
+              padding: "0 1.5rem 1rem 0", // Adjust for responsive: pr-6 (1.5rem) + pb-4 (1rem)
               margin: 0,
               duration: duration,
               ease: "power2.out",
@@ -284,5 +291,33 @@
   /* FAQ transitions are handled by GSAP */
   .faq-content {
     will-change: max-height, opacity;
+  }
+
+  /* Container utility if not already defined */
+  .container {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  @media (min-width: 640px) {
+    .container {
+      max-width: 640px;
+    }
+  }
+  @media (min-width: 768px) {
+    .container {
+      max-width: 768px;
+    }
+  }
+  @media (min-width: 1024px) {
+    .container {
+      max-width: 1024px;
+    }
+  }
+  @media (min-width: 1280px) {
+    .container {
+      max-width: 1280px;
+    }
   }
 </style>
