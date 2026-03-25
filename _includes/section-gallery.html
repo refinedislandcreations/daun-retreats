@@ -1,31 +1,28 @@
-<section class="py-24 bg-[#F1EBD8]">
-  <div class="max-w-screen-2xl mx-auto px-6">
+<!-- _includes/section-gallery.html -->
+<section class="py-16 md:py-20 bg-[#F1EBD8]">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
     <!-- Grid -->
-    <div class="grid lg:grid-cols-3 gap-8">
-      <!-- ===================== -->
+    <div class="grid lg:grid-cols-3 gap-4 md:gap-6">
       <!-- Big Left Image -->
-      <!-- ===================== -->
       <div class="lg:col-span-2">
         <div class="overflow-hidden">
           <img
             src="{{ include.section.images.main }}"
             alt=""
             loading="lazy"
-            class="w-full h-full object-cover aspect-[4/3] hover:scale-105 transition duration-700"
+            class="w-full h-full object-cover aspect-[4/3]"
           />
         </div>
       </div>
 
-      <!-- ===================== -->
       <!-- Right Stack -->
-      <!-- ===================== -->
-      <div class="flex flex-col gap-8">
+      <div class="flex flex-col gap-4 md:gap-5">
         <div class="overflow-hidden">
           <img
             src="{{ include.section.images.side_top }}"
             alt=""
             loading="lazy"
-            class="w-full object-cover aspect-[4/3] hover:scale-105 transition duration-700"
+            class="w-full object-cover aspect-[4/3]"
           />
         </div>
 
@@ -34,10 +31,54 @@
             src="{{ include.section.images.side_bottom }}"
             alt=""
             loading="lazy"
-            class="w-full object-cover aspect-[4/3] hover:scale-105 transition duration-700"
+            class="w-full object-cover aspect-[4/3]"
           />
         </div>
       </div>
     </div>
   </div>
 </section>
+
+<style>
+  /* Container utility if not already defined */
+  .container {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  @media (min-width: 640px) {
+    .container {
+      max-width: 640px;
+    }
+  }
+  @media (min-width: 768px) {
+    .container {
+      max-width: 768px;
+    }
+  }
+  @media (min-width: 1024px) {
+    .container {
+      max-width: 1024px;
+    }
+  }
+  @media (min-width: 1280px) {
+    .container {
+      max-width: 1280px;
+    }
+  }
+  @media (min-width: 1536px) {
+    .container {
+      max-width: 1536px;
+    }
+  }
+
+  /* Smooth transitions */
+  .overflow-hidden img {
+    transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .overflow-hidden {
+    transition: box-shadow 0.3s ease;
+  }
+</style>
