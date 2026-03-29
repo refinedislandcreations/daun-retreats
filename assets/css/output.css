@@ -69,7 +69,6 @@
     --tracking-wide: 0.025em;
     --tracking-wider: 0.05em;
     --tracking-widest: 0.1em;
-    --leading-tight: 1.25;
     --leading-normal: 1.5;
     --leading-relaxed: 1.625;
     --radius-sm: 0.25rem;
@@ -1271,6 +1270,10 @@
     --tw-font-weight: var(--font-weight-semibold);
     font-weight: var(--font-weight-semibold);
   }
+  .tracking-\[0\.1em\] {
+    --tw-tracking: 0.1em;
+    letter-spacing: 0.1em;
+  }
   .tracking-\[0\.2em\] {
     --tw-tracking: 0.2em;
     letter-spacing: 0.2em;
@@ -1298,6 +1301,14 @@
   .tracking-\[0\.35em\] {
     --tw-tracking: 0.35em;
     letter-spacing: 0.35em;
+  }
+  .tracking-\[0\.075em\] {
+    --tw-tracking: 0.075em;
+    letter-spacing: 0.075em;
+  }
+  .tracking-\[0\.75em\] {
+    --tw-tracking: 0.75em;
+    letter-spacing: 0.75em;
   }
   .tracking-wide {
     --tw-tracking: var(--tracking-wide);
@@ -2477,6 +2488,11 @@
   .md\:w-\[40\%\] {
     @media (width >= 48rem) {
       width: 40%;
+    }
+  }
+  .md\:w-\[60\%\] {
+    @media (width >= 48rem) {
+      width: 60%;
     }
   }
   .md\:w-\[70\%\] {

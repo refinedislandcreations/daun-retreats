@@ -34,7 +34,7 @@
         <!-- ================= DESCRIPTION ================= -->
         {% if include.section.description %}
         <p
-          class="intro-split-description proza-libre text-base sm:text-lg leading-relaxed text-[#222] max-w-4xl mx-auto text-justify [text-justify:inter-word] hyphens-auto"
+          class="intro-split-description proza-libre text-sm md:text-base leading-relaxed text-[#222] max-w-4xl mx-auto text-justify [text-justify:inter-word] hyphens-auto"
           style="opacity: 0"
         >
           {{ include.section.description }}
@@ -44,9 +44,7 @@
 
       <!-- ================= OPTIONAL IMAGE GRID ================= -->
       {% if include.section.images %}
-      <div
-        class="mt-12 md:mt-16 lg:mt-20 grid md:grid-cols-2 gap-6 md:gap-8 lg:gap-12"
-      >
+      <div class="mt-12 md:mt-16 grid md:grid-cols-2 gap-6 md:gap-8 lg:gap-12">
         {% for image in include.section.images %}
         <div class="overflow-hidden shadow-lg">
           <img
@@ -115,10 +113,10 @@
             gsap.from(self.lines, {
               scrollTrigger: {
                 trigger: introDescription,
-                start: "top 80%",
+                start: "top 90%",
                 toggleActions: "play reverse play reverse",
               },
-              duration: 1,
+              duration: 0.75,
               yPercent: 100,
               opacity: 0,
               stagger: 0.05,
