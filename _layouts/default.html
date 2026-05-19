@@ -57,20 +57,5 @@
     {% include site-header.html %}
     <main>{{ content }}</main>
     {% include site-footer.html %}
-
-    <!-- Force scroll to top on page reload/load -->
-    <script>
-      window.addEventListener("load", function () {
-        window.scrollTo(0, 0);
-        document.documentElement.scrollTop = 0;
-        document.body.scrollTop = 0; // For Safari
-
-        setTimeout(function () {
-          window.scrollTo(0, 0);
-          document.documentElement.scrollTop = 0;
-          document.body.scrollTop = 0;
-        }, 10);
-      });
-    </script>
   </body>
 </html>
