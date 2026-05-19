@@ -8,8 +8,11 @@
         <div class="overflow-hidden">
           <img
             src="{{ include.section.images.main }}"
-            alt=""
+            alt="{{ include.section.images.main_alt | default: include.section.title | default: 'Gallery image' }}"
             loading="lazy"
+            decoding="async"
+            width="1200"
+            height="900"
             class="w-full h-full object-cover aspect-[4/3]"
           />
         </div>
@@ -20,8 +23,11 @@
         <div class="overflow-hidden">
           <img
             src="{{ include.section.images.side_top }}"
-            alt=""
+            alt="{{ include.section.images.side_top_alt | default: include.section.title | default: 'Gallery image' }}"
             loading="lazy"
+            decoding="async"
+            width="1200"
+            height="900"
             class="w-full object-cover aspect-[4/3]"
           />
         </div>
@@ -29,8 +35,11 @@
         <div class="overflow-hidden">
           <img
             src="{{ include.section.images.side_bottom }}"
-            alt=""
+            alt="{{ include.section.images.side_bottom_alt | default: include.section.title | default: 'Gallery image' }}"
             loading="lazy"
+            decoding="async"
+            width="1200"
+            height="900"
             class="w-full object-cover aspect-[4/3]"
           />
         </div>

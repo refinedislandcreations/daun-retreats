@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "dev:css": "npx @tailwindcss/cli -i ./assets/css/input.css -o ./assets/css/output.css --watch",
-    "build:css": "npx tailwindcss -i ./assets/css/input.css -o ./assets/css/output.css --minify --content './**/*.{html,md}'",
+    "build:css": "npx tailwindcss -i ./assets/css/input.css -o ./assets/css/output.css --minify --content './{*.html,_includes/**/*.html,_layouts/**/*.html,_data/**/*.yml}'",
     "dev": "concurrently \"npm run dev:css\" \"bundle exec jekyll serve\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

@@ -28,16 +28,16 @@ main_nav:
   - title: Contact Us
     url: "/contact.html"
   - title: Book Now
-    url: "#"
+    url: "/booking"
     is_button: true
 
 social_links:
   - title: Instagram
-    url: ""
+    url: "https://www.instagram.com/daunretreats/"
     icon: "/assets/images/icons/instagram-icon-green.png"
   - title: Facebook
-    url: ""
+    url: "https://www.facebook.com/daunretreats/"
     icon: "/assets/images/icons/facebook-icon-green.png"
   - title: TikTok
-    url: ""
+    url: "https://www.tiktok.com/@daunretreats"
     icon: "/assets/images/icons/tiktok-icon-green.png"

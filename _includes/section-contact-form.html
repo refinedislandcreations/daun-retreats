@@ -4,7 +4,6 @@
     <!-- ================= Title with animation ================= -->
     <h2
       class="contact-split-title cormorant-garamond text-3xl sm:text-4xl md:text-5xl lg:text-6xl tracking-[0.12em] mb-8 md:mb-10 lg:mb-12"
-      style="opacity: 0"
     >
       {{ include.section.title }}
     </h2>
@@ -15,10 +14,20 @@
     >
       <!-- LEFT : FORM -->
       <form
-        action="{{ include.section.form.action | default:'#' }}"
+        action="{{ include.section.form.action | default:'/thank-you/' }}"
         method="POST"
+        name="contact"
+        data-netlify="true"
+        data-netlify-honeypot="bot-field"
         class="space-y-5 md:space-y-6"
       >
+        <input type="hidden" name="form-name" value="contact" />
+        <p class="hidden">
+          <label>
+            Don’t fill this out if you’re human: <input name="bot-field" />
+          </label>
+        </p>
+
         <!-- Name -->
         <div class="group">
           <label
@@ -32,6 +41,7 @@
             name="name"
             required
             placeholder="John Doe"
+            autocomplete="name"
             class="w-full proza-libre border-2 border-green-800/30 rounded-lg px-4 md:px-5 py-3 md:py-4 bg-[#FBF8EF] backdrop-blur-sm focus:bg-[#FFF]/80 focus:border-green-800 focus:outline-none focus:ring-4 focus:ring-green-800/10 transition-all duration-300 text-sm md:text-base"
           />
         </div>
@@ -49,6 +59,7 @@
             name="email"
             required
             placeholder="hello@example.com"
+            autocomplete="email"
             class="w-full border-2 border-green-800/30 rounded-lg px-4 md:px-5 py-3 md:py-4 bg-[#FBF8EF] backdrop-blur-sm focus:bg-[#FFF]/80 focus:border-green-800 focus:outline-none focus:ring-4 focus:ring-green-800/10 transition-all duration-300 text-sm md:text-base"
           />
         </div>
@@ -111,6 +122,7 @@
             name="message"
             required
             placeholder="Tell us about your inquiry..."
+            autocomplete="off"
             class="w-full proza-libre border-2 border-green-800/30 rounded-lg px-4 md:px-5 py-3 md:py-4 bg-[#FBF8EF] backdrop-blur-sm focus:bg-[#FFF]/80 focus:border-green-800 focus:outline-none focus:ring-4 focus:ring-green-800/10 transition-all duration-300 resize-none text-sm md:text-base"
           ></textarea>
         </div>
@@ -130,9 +142,12 @@
       <div class="space-y-4 md:space-y-5 lg:space-y-6">
         <img
           src="{{ include.section.image }}"
-          alt=""
+          alt="{{ include.section.caption | default: include.section.title | default: 'Contact section image' }}"
           class="w-full h-[280px] sm:h-[360px] md:h-[420px] lg:h-[480px] xl:h-[520px] object-cover shadow-md"
           loading="lazy"
+          decoding="async"
+          width="1200"
+          height="900"
         />
 
         {% if include.section.caption %}
@@ -176,12 +191,15 @@
           <a
             href="{{ s.url }}"
             target="_blank"
+            rel="noopener noreferrer"
             class="hover:opacity-70 transition"
           >
             <img
               src="{{ s.icon }}"
               class="w-5 h-5 md:w-6 md:h-6 lg:w-7 lg:h-7 object-contain"
-              alt=""
+              alt="{{ s.title }}"
+              loading="lazy"
+              decoding="async"
             />
           </a>
           {% endfor %}

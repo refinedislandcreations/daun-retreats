@@ -6,7 +6,6 @@
     <div class="text-center mb-8 md:mb-12 lg:mb-16">
       <h2
         class="testimonial-split-title tracking-[0.18em] text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-[#000] cormorant-garamond"
-        style="opacity: 0"
       >
         {{ include.section.title }}
       </h2>
@@ -33,9 +32,12 @@
                 <div class="p-2">
                   <img
                     src="{{ '/assets/images/icons/quote-icon.png' | relative_url }}"
-                    alt=""
+                    alt="Quote icon"
                     class="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 lg:w-8 lg:h-8 opacity-70 shrink-0"
                     loading="lazy"
+                    decoding="async"
+                    width="64"
+                    height="64"
                   />
                 </div>
 

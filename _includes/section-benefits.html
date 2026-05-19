@@ -5,7 +5,6 @@
     <div class="mb-8 md:mb-10 lg:mb-12 text-center">
       <h2
         class="why-split-title cormorant-garamond tracking-[0.08em] text-3xl xs:text-4xl sm:text-5xl md:text-6xl font-medium text-[#111]"
-        style="opacity: 0"
       >
         {{ include.section.title }}
       </h2>
@@ -22,9 +21,10 @@
           <!-- Icon -->
           <img
             src="{{ item.icon }}"
-            alt=""
+            alt="{{ item.title }}"
             class="w-6 h-6 md:w-7 md:h-7 shrink-0"
             loading="lazy"
+            decoding="async"
           />
 
           <!-- Text -->
@@ -32,7 +32,6 @@
             <!-- Item Title with animation -->
             <h3
               class="why-item-title proza-libre text-lg font-semibold text-[#111] mb-2 md:mb-3 lg:mb-4"
-              style="opacity: 0"
             >
               {{ item.title }}
             </h3>
@@ -40,7 +39,6 @@
             <!-- Description with animation -->
             <p
               class="why-item-description proza-libre text-sm md:text-base leading-relaxed text-[#333]"
-              style="opacity: 0"
             >
               {{ item.description }}
             </p>

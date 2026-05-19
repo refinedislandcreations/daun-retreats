@@ -1,0 +1,65 @@
+{% assign seo_title = page.seo_title | default: page.title | default: site.title
+%} {% assign seo_description = page.seo_description | default: page.description
+| default: page.excerpt | strip_html | strip_newlines | default:
+site.description %} {% assign seo_image = page.seo_image | default:
+page.social_image | default: page.hero.slides[0].image | default:
+site.default_social_image %} {% assign canonical_path = page.canonical_url |
+default: page.url %} {% assign canonical_path = canonical_path | replace:
+'index.html', '' %} {% if canonical_path == blank %} {% assign canonical_path =
+'/' %} {% endif %} {% if site.url != blank %} {% assign canonical_url =
+canonical_path | absolute_url %} {% else %} {% assign canonical_url =
+canonical_path | relative_url %} {% endif %} {% if site.url != blank %} {%
+assign seo_image_url = seo_image | absolute_url %} {% else %} {% assign
+seo_image_url = seo_image | relative_url %} {% endif %}
+
+<title>{{ seo_title }}</title>
+<meta name="description" content="{{ seo_description | strip | escape }}" />
+<link rel="canonical" href="{{ canonical_url }}" />
+
+<meta property="og:type" content="website" />
+<meta property="og:title" content="{{ seo_title | escape }}" />
+<meta
+  property="og:description"
+  content="{{ seo_description | strip | escape }}"
+/>
+<meta property="og:url" content="{{ canonical_url }}" />
+<meta property="og:image" content="{{ seo_image_url }}" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="{{ seo_title | escape }}" />
+<meta
+  name="twitter:description"
+  content="{{ seo_description | strip | escape }}"
+/>
+<meta name="twitter:image" content="{{ seo_image_url }}" />
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "{{ canonical_url }}#organization",
+        "name": "{{ site.title | escape }}",
+        "url": "{{ site.url | default: canonical_url }}",
+        "logo": "{{ seo_image_url }}",
+        "email": "{{ site.email | escape }}",
+        "sameAs": [
+          "{{ site.instagram_url }}",
+          "{{ site.facebook_url }}",
+          "{{ site.tiktok_url }}"
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "{{ canonical_url }}#website",
+        "url": "{{ site.url | default: canonical_url }}",
+        "name": "{{ site.title | escape }}",
+        "description": "{{ site.description | strip | escape }}",
+        "publisher": {
+          "@id": "{{ canonical_url }}#organization"
+        }
+      }
+    ]
+  }
+</script>

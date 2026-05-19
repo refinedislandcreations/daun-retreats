@@ -5,9 +5,12 @@
   <div class="absolute inset-0">
     <img
       src="{{ include.section.background }}"
-      alt=""
+      alt="{{ include.section.title | default: 'Background image' }}"
       class="w-full h-full object-cover"
       loading="lazy"
+      decoding="async"
+      width="1600"
+      height="900"
     />
   </div>
   {% endif %}
@@ -25,7 +28,6 @@
         {% if include.section.title %}
         <h2
           class="intro-split-title cormorant-garamond tracking-[0.2em] text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-[#000] whitespace-pre-line uppercase mb-6 md:mb-8 lg:mb-10"
-          style="opacity: 0"
         >
           {{ include.section.title }}
         </h2>
@@ -35,7 +37,6 @@
         {% if include.section.description %}
         <p
           class="intro-split-description proza-libre text-sm md:text-base leading-relaxed text-[#222] max-w-4xl mx-auto text-justify [text-justify:inter-word] hyphens-auto"
-          style="opacity: 0"
         >
           {{ include.section.description }}
         </p>
@@ -49,9 +50,12 @@
         <div class="overflow-hidden shadow-lg">
           <img
             src="{{ image }}"
-            alt=""
+            alt="{{ include.section.title | default: 'Supporting image' }}"
             class="w-full aspect-[4/3] object-cover"
             loading="lazy"
+            decoding="async"
+            width="1200"
+            height="900"
           />
         </div>
         {% endfor %}
