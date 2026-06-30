@@ -6,12 +6,12 @@
 
     <link
       rel="icon"
-      href="{{ '/assets/images/icons/daun-retreats-logo.png' | relative_url }}"
+      href="{{ '/assets/images/icons/daun-retreats-logo.png' | relative_url }}?v={{ site.time | date: '%s' }}"
       sizes="any"
     />
     <link
       rel="apple-touch-icon"
-      href="{{ '/assets/images/icons/daun-retreats-logo.png' | relative_url }}"
+      href="{{ '/assets/images/icons/daun-retreats-logo.png' | relative_url }}?v={{ site.time | date: '%s' }}"
     />
 
     <!-- Google Fonts -->
@@ -42,13 +42,13 @@
     <!-- Tailwind Build CSS-->
     <link
       rel="stylesheet"
-      href="{{ '/assets/css/output.css' | relative_url }}"
+      href="{{ '/assets/css/output.css' | relative_url }}?v={{ site.time | date: '%s' }}"
     />
 
     <!-- Custom Styles -->
     <link
       rel="stylesheet"
-      href="{{ '/assets/css/style.css' | relative_url }}"
+      href="{{ '/assets/css/style.css' | relative_url }}?v={{ site.time | date: '%s' }}"
     />
 
     {% include site-seo.html %}
