@@ -18,11 +18,23 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
-    <link rel="preconnect" href="https://assets.codepen.io" />
     <link
+      rel="preload"
+      as="style"
       href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Proza+Libre:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700;1,800&display=swap"
-      rel="stylesheet"
     />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Proza+Libre:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700;1,800&display=swap"
+      media="print"
+      onload="this.media='all'"
+    />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Proza+Libre:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700;1,800&display=swap"
+      />
+    </noscript>
 
     {% if page.hero.slides[0].image %}
     <link rel="preload" as="image" href="{{ page.hero.slides[0].image | relative_url }}" fetchpriority="high">
@@ -43,16 +55,15 @@
     <script defer src="https://unpkg.com/split-type"></script>
 
     <!-- Tailwind Build CSS-->
-    <link
-      rel="stylesheet"
-      href="{{ '/assets/css/output.css' | relative_url }}?v={{ site.time | date: '%s' }}"
-    />
+    <style>
+      {% include output.css %}
+    </style>
 
     <!-- Custom Styles -->
-    <link
-      rel="stylesheet"
-      href="{{ '/assets/css/style.css' | relative_url }}?v={{ site.time | date: '%s' }}"
-    />
+    <style>
+      {% include style.css %}
+    </style>
+
 
     {% include site-seo.html %}
   </head>

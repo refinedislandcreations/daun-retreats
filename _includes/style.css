@@ -1,0 +1,72 @@
+/* =========================
+   Proza Libre Font
+========================= */
+
+.proza-libre {
+  font-family: "Proza Libre", sans-serif;
+  font-weight: 400; /* default */
+  font-style: normal;
+}
+
+/* Font Style */
+.proza-libre-normal {
+  font-style: normal;
+}
+
+.proza-libre-italic {
+  font-style: italic;
+}
+
+/* Font Weights */
+.proza-400 {
+  font-weight: 400;
+}
+.proza-500 {
+  font-weight: 500;
+}
+.proza-600 {
+  font-weight: 600;
+}
+.proza-700 {
+  font-weight: 700;
+}
+.proza-800 {
+  font-weight: 800;
+}
+
+/* =========================
+   Cormorant Garamond Font
+========================= */
+
+.cormorant-garamond {
+  font-family: "Cormorant Garamond", serif;
+  font-optical-sizing: auto;
+  font-weight: 400; /* default */
+  font-style: normal;
+}
+
+/* Font Style */
+.cormorant-normal {
+  font-style: normal;
+}
+
+.cormorant-italic {
+  font-style: italic;
+}
+
+/* Font Weights */
+.cormorant-300 {
+  font-weight: 300;
+}
+.cormorant-400 {
+  font-weight: 400;
+}
+.cormorant-500 {
+  font-weight: 500;
+}
+.cormorant-600 {
+  font-weight: 600;
+}
+.cormorant-700 {
+  font-weight: 700;
+}
