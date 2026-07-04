@@ -35,7 +35,12 @@
                 src="{{ slide.image }}"
                 alt="{{ include.section.title }}"
                 class="w-full h-full object-cover"
+                {% if forloop.first %}
+                loading="eager"
+                fetchpriority="high"
+                {% else %}
                 loading="lazy"
+                {% endif %}
                 decoding="async"
                 width="1600"
                 height="900"
