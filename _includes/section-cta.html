@@ -13,7 +13,7 @@
     <div class="w-full text-center bg-[#FBF8EF]/80 py-12 md:py-16">
       <!-- Title with animation -->
       <div
-        class="cta-split-title max-w-4xl mx-auto tracking-[0.075em] text-3xl sm:text-4xl md:text-5xl text-[#000] cormorant-garamond whitespace-pre-line uppercase mb-8"
+        class="animate-title max-w-4xl mx-auto tracking-[0.075em] text-3xl sm:text-4xl md:text-5xl text-[#000] cormorant-garamond whitespace-pre-line uppercase mb-8"
       >
         {{ include.section.title | raw }}
       </div>
@@ -34,33 +34,6 @@
     if (typeof gsap === "undefined" || typeof SplitText === "undefined") return;
 
     document.fonts.ready.then(() => {
-      // CTA Title Animation
-      const ctaTitles = document.querySelectorAll(".cta-split-title");
-      ctaTitles.forEach((ctaTitle) => {
-        if (!ctaTitle) return;
-        gsap.set(ctaTitle, { opacity: 1 });
-        SplitText.create(ctaTitle, {
-          type: "words,lines",
-          linesClass: "line",
-          autoSplit: true,
-          mask: "lines",
-          onSplit: (self) => {
-            gsap.from(self.lines, {
-              scrollTrigger: {
-                trigger: ctaTitle,
-                start: "top 80%",
-                toggleActions: "play reverse play reverse",
-              },
-              duration: 1.2,
-              yPercent: 100,
-              opacity: 0,
-              stagger: 0.1,
-              ease: "power2.out",
-            });
-          },
-        });
-      });
-
       // CTA Button Hover Animation
       const ctaButtons = gsap.utils.toArray(".cta-button");
       ctaButtons.forEach((btn) => {
@@ -84,21 +57,6 @@
 </script>
 
 <style>
-  /* Animation styles */
-  .cta-split-title * {
-    will-change: transform;
-  }
-  .cta-split-title {
-    line-height: 1;
-  }
-
-  .cta-split-title .line {
-    display: block;
-    overflow: hidden;
-    line-height: 1;
-    margin-bottom: 0.12rem;
-  }
-
   /* Button hover styles */
   .cta-button {
     display: inline-block;

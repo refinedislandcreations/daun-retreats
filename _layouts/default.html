@@ -52,7 +52,6 @@
       defer
       src="https://assets.codepen.io/16327/SplitText.min.js"
     ></script>
-    <script defer src="https://unpkg.com/split-type"></script>
 
     <!-- Tailwind Build CSS-->
     <style>
@@ -71,5 +70,46 @@
     {% include site-header.html %}
     <main>{{ content }}</main>
     {% include site-footer.html %}
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        if (typeof gsap === "undefined" || typeof SplitText === "undefined") {
+          console.log("GSAP or SplitText not loaded yet");
+          return;
+        }
+
+        document.fonts.ready.then(() => {
+          const animateTitles = document.querySelectorAll(".animate-title");
+
+          animateTitles.forEach((title) => {
+            if (title) {
+              gsap.set(title, { opacity: 1 });
+
+              SplitText.create(title, {
+                type: "words,lines",
+                linesClass: "line",
+                autoSplit: true,
+                mask: "lines",
+                onSplit: (self) => {
+                  gsap.from(self.lines, {
+                    scrollTrigger: {
+                      trigger: title,
+                      start: "top 80%",
+                      toggleActions: "play reverse play reverse",
+                    },
+                    duration: 1.2,
+                    yPercent: 100,
+                    opacity: 0,
+                    stagger: 0.1,
+                    ease: "power2.out",
+                  });
+                },
+              });
+            }
+          });
+          ScrollTrigger.refresh();
+        });
+      });
+    </script>
   </body>
 </html>

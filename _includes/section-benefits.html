@@ -4,7 +4,7 @@
     <!-- Title -->
     <div class="mb-8 md:mb-10 lg:mb-12 text-center">
       <h2
-        class="why-split-title cormorant-garamond tracking-[0.08em] text-3xl xs:text-4xl sm:text-5xl md:text-6xl font-medium text-[#111]"
+        class="animate-title cormorant-garamond tracking-[0.08em] text-3xl xs:text-4xl sm:text-5xl md:text-6xl font-medium text-[#111]"
       >
         {{ include.section.title }}
       </h2>
@@ -31,7 +31,7 @@
           <div>
             <!-- Item Title with animation -->
             <h3
-              class="why-item-title proza-libre text-lg font-semibold text-[#111] mb-2 md:mb-3 lg:mb-4"
+              class="animate-title proza-libre text-lg font-semibold text-[#111] mb-2 md:mb-3 lg:mb-4"
             >
               {{ item.title }}
             </h3>
@@ -60,60 +60,6 @@
     }
 
     document.fonts.ready.then(() => {
-      // ========== SECTION TITLE ANIMATION ==========
-      const whyTitle = document.querySelector(".why-split-title");
-      if (whyTitle) {
-        gsap.set(whyTitle, { opacity: 1 });
-
-        SplitText.create(whyTitle, {
-          type: "words,lines",
-          linesClass: "line",
-          autoSplit: true,
-          mask: "lines",
-          onSplit: (self) => {
-            gsap.from(self.lines, {
-              scrollTrigger: {
-                trigger: whyTitle,
-                start: "top 80%",
-                toggleActions: "play reverse play reverse",
-              },
-              duration: 1.2,
-              yPercent: 100,
-              opacity: 0,
-              stagger: 0.1,
-              ease: "power2.out",
-            });
-          },
-        });
-      }
-
-      // ========== ITEM TITLES ANIMATION ==========
-      const itemTitles = document.querySelectorAll(".why-item-title");
-      itemTitles.forEach((title) => {
-        gsap.set(title, { opacity: 1 });
-
-        SplitText.create(title, {
-          type: "words,lines",
-          linesClass: "line",
-          autoSplit: true,
-          mask: "lines",
-          onSplit: (self) => {
-            gsap.from(self.lines, {
-              scrollTrigger: {
-                trigger: title,
-                start: "top 80%",
-                toggleActions: "play reverse play reverse",
-              },
-              duration: 1,
-              yPercent: 100,
-              opacity: 0,
-              stagger: 0.06,
-              ease: "power2.out",
-            });
-          },
-        });
-      });
-
       // ========== ITEM DESCRIPTIONS ANIMATION ==========
       const itemDescriptions = document.querySelectorAll(
         ".why-item-description",
@@ -151,14 +97,10 @@
 
 <style>
   /* Animation styles */
-  .why-split-title *,
-  .why-item-title *,
   .why-item-description * {
     will-change: transform;
   }
 
-  .why-split-title .line,
-  .why-item-title .line,
   .why-item-description .line {
     display: block;
     overflow: hidden;

@@ -256,29 +256,25 @@
           if (!titleElement.textContent.trim()) return;
 
           try {
-            // Split the title
-            const splitTitle = new SplitType(titleElement, {
-              types: "words,lines",
-              lineClass: "line",
-            });
-
-            // Set initial opacity
             gsap.set(titleElement, { opacity: 1 });
-
-            // Animate lines
-            if (splitTitle.lines && splitTitle.lines.length > 0) {
-              gsap.from(splitTitle.lines, {
-                duration: 0.8,
-                yPercent: 100,
-                opacity: 0,
-                stagger: 0.15,
-                ease: "expo.out",
-                delay: 0.2,
-              });
-            }
+            SplitText.create(titleElement, {
+              type: "words,lines",
+              linesClass: "line",
+              autoSplit: true,
+              mask: "lines",
+              onSplit: (self) => {
+                gsap.from(self.lines, {
+                  duration: 0.8,
+                  yPercent: 100,
+                  opacity: 0,
+                  stagger: 0.15,
+                  ease: "expo.out",
+                  delay: 0.2,
+                });
+              }
+            });
           } catch (e) {
-            console.log("SplitType error for title:", e);
-            // Fallback animation if SplitType fails
+            console.log("SplitText error for title:", e);
             gsap.from(titleElement, {
               duration: 0.8,
               y: 30,
@@ -297,29 +293,24 @@
           if (!subtitleElement.textContent.trim()) return;
 
           try {
-            // Split the subtitle
-            const splitSub = new SplitType(subtitleElement, {
-              types: "words",
-              wordClass: "word",
-            });
-
-            // Set initial opacity
             gsap.set(subtitleElement, { opacity: 1 });
-
-            // Animate words
-            if (splitSub.words && splitSub.words.length > 0) {
-              gsap.from(splitSub.words, {
-                duration: 0.6,
-                y: 20,
-                opacity: 0,
-                stagger: 0.03,
-                ease: "expo.out",
-                delay: 0.4,
-              });
-            }
+            SplitText.create(subtitleElement, {
+              type: "words",
+              wordsClass: "word",
+              autoSplit: true,
+              onSplit: (self) => {
+                gsap.from(self.words, {
+                  duration: 0.6,
+                  y: 20,
+                  opacity: 0,
+                  stagger: 0.03,
+                  ease: "expo.out",
+                  delay: 0.4,
+                });
+              }
+            });
           } catch (e) {
-            console.log("SplitType error for subtitle:", e);
-            // Fallback animation if SplitType fails
+            console.log("SplitText error for subtitle:", e);
             gsap.from(subtitleElement, {
               duration: 0.6,
               y: 20,

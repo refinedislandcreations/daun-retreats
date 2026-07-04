@@ -7,7 +7,7 @@
     >
       <!-- Title with animation -->
       <h2
-        class="features-split-title text-2xl sm:text-3xl md:text-4xl font-semibold mb-6 md:mb-8 lg:mb-10 proza-libre"
+        class="animate-title text-2xl sm:text-3xl md:text-4xl font-semibold mb-6 md:mb-8 lg:mb-10 proza-libre"
       >
         {{ include.section.title }}
       </h2>
@@ -59,35 +59,6 @@
     }
 
     document.fonts.ready.then(() => {
-      // ========== FEATURES TITLE ANIMATION ==========
-      const featureTitles = document.querySelectorAll(".features-split-title");
-
-      featureTitles.forEach((title) => {
-        if (title) {
-          gsap.set(title, { opacity: 1 });
-
-          SplitText.create(title, {
-            type: "words,lines",
-            linesClass: "line",
-            autoSplit: true,
-            mask: "lines",
-            onSplit: (self) => {
-              gsap.from(self.lines, {
-                scrollTrigger: {
-                  trigger: title,
-                  start: "top 80%",
-                  toggleActions: "play reverse play reverse",
-                },
-                duration: 1.2,
-                yPercent: 100,
-                opacity: 0,
-                stagger: 0.1,
-                ease: "power2.out",
-              });
-            },
-          });
-        }
-      });
 
       // ========== FEATURES BUTTON HOVER ANIMATION ==========
       const featureButtons = gsap.utils.toArray(".features-button");
@@ -121,17 +92,6 @@
 </script>
 
 <style>
-  /* Animation styles */
-  .features-split-title * {
-    will-change: transform;
-  }
-
-  .features-split-title .line {
-    display: block;
-    overflow: hidden;
-    line-height: 1.3;
-  }
-
   /* Container utility if not already defined */
   .container {
     width: 100%;

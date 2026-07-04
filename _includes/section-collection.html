@@ -4,7 +4,7 @@
     <!-- Title -->
     <div class="mb-8 md:mb-10 lg:mb-12">
       <h2
-        class="split-section-title cormorant-garamond tracking-[0.08em] text-3xl xs:text-4xl sm:text-5xl md:text-6xl font-medium text-[#111]"
+        class="animate-title cormorant-garamond tracking-[0.08em] text-3xl xs:text-4xl sm:text-5xl md:text-6xl font-medium text-[#111]"
       >
         {{ include.section.title }}
       </h2>
@@ -14,7 +14,7 @@
 
     <!-- Group Title -->
     <h3
-      class="split-group-title proza-libre text-lg sm:text-xl font-medium text-[#222] mb-6 md:mb-8 lg:mb-10"
+      class="animate-title proza-libre text-lg sm:text-xl font-medium text-[#222] mb-6 md:mb-8 lg:mb-10"
     >
       {{ group.title }}
     </h3>
@@ -40,7 +40,7 @@
         <!-- ================= CONTENT ================= -->
         <div>
           <h4
-            class="split-item-name proza-libre text-lg font-semibold text-[#111] mb-3 md:mb-4"
+            class="animate-title proza-libre text-lg font-semibold text-[#111] mb-3 md:mb-4"
           >
             {{ item.name }}
           </h4>
@@ -98,87 +98,6 @@
     gsap.registerPlugin(SplitText, ScrollTrigger);
 
     document.fonts.ready.then(() => {
-      // ========== SECTION TITLE ANIMATION ==========
-      const sectionTitle = document.querySelector(".split-section-title");
-      if (sectionTitle) {
-        gsap.set(sectionTitle, { opacity: 1 });
-
-        SplitText.create(sectionTitle, {
-          type: "words,lines",
-          linesClass: "line",
-          autoSplit: true,
-          mask: "lines",
-          onSplit: (self) => {
-            gsap.from(self.lines, {
-              scrollTrigger: {
-                trigger: sectionTitle,
-                start: "top 80%",
-                toggleActions: "play reverse play reverse",
-              },
-              duration: 1.2,
-              yPercent: 100,
-              opacity: 0,
-              stagger: 0.1,
-              ease: "power2.out",
-            });
-          },
-        });
-      }
-
-      // ========== GROUP TITLES ANIMATION ==========
-      const groupTitles = document.querySelectorAll(".split-group-title");
-      groupTitles.forEach((title) => {
-        gsap.set(title, { opacity: 1 });
-
-        SplitText.create(title, {
-          type: "words,lines",
-          linesClass: "line",
-          autoSplit: true,
-          mask: "lines",
-          onSplit: (self) => {
-            gsap.from(self.lines, {
-              scrollTrigger: {
-                trigger: title,
-                start: "top 80%",
-                toggleActions: "play reverse play reverse",
-              },
-              duration: 1.1,
-              yPercent: 100,
-              opacity: 0,
-              stagger: 0.08,
-              ease: "power2.out",
-            });
-          },
-        });
-      });
-
-      // ========== ITEM NAMES ANIMATION ==========
-      const itemNames = document.querySelectorAll(".split-item-name");
-      itemNames.forEach((name) => {
-        gsap.set(name, { opacity: 1 });
-
-        SplitText.create(name, {
-          type: "words,lines",
-          linesClass: "line",
-          autoSplit: true,
-          mask: "lines",
-          onSplit: (self) => {
-            gsap.from(self.lines, {
-              scrollTrigger: {
-                trigger: name,
-                start: "top 80%",
-                toggleActions: "play reverse play reverse",
-              },
-              duration: 1,
-              yPercent: 100,
-              opacity: 0,
-              stagger: 0.06,
-              ease: "power2.out",
-            });
-          },
-        });
-      });
-
       // ========== ITEM DESCRIPTIONS ANIMATION ==========
       const itemDescriptions = document.querySelectorAll(
         ".split-item-description",
@@ -246,9 +165,6 @@
   }
 
   /* Ensure smooth animations */
-  .split-section-title *,
-  .split-group-title *,
-  .split-item-name *,
   .split-item-description * {
     will-change: transform;
   }

@@ -70,3 +70,16 @@
 .cormorant-700 {
   font-weight: 700;
 }
+
+/* =========================
+   Global Title Animation
+========================= */
+.animate-title * {
+  will-change: transform;
+}
+
+.animate-title .line {
+  display: block;
+  overflow: hidden;
+  line-height: 1.3;
+}

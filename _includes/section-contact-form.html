@@ -3,7 +3,7 @@
   <div class="container mx-auto px-4 sm:px-6 lg:px-8">
     <!-- ================= Title with animation ================= -->
     <h2
-      class="contact-split-title cormorant-garamond text-3xl sm:text-4xl md:text-5xl lg:text-6xl tracking-[0.12em] mb-8 md:mb-10 lg:mb-12"
+      class="animate-title cormorant-garamond text-3xl sm:text-4xl md:text-5xl lg:text-6xl tracking-[0.12em] mb-8 md:mb-10 lg:mb-12"
     >
       {{ include.section.title }}
     </h2>
@@ -218,35 +218,6 @@
     }
 
     document.fonts.ready.then(() => {
-      // ========== CONTACT TITLE ANIMATION ==========
-      const contactTitles = document.querySelectorAll(".contact-split-title");
-
-      contactTitles.forEach((title) => {
-        if (title) {
-          gsap.set(title, { opacity: 1 });
-
-          SplitText.create(title, {
-            type: "words,lines",
-            linesClass: "line",
-            autoSplit: true,
-            mask: "lines",
-            onSplit: (self) => {
-              gsap.from(self.lines, {
-                scrollTrigger: {
-                  trigger: title,
-                  start: "top 80%",
-                  toggleActions: "play reverse play reverse",
-                },
-                duration: 1.2,
-                yPercent: 100,
-                opacity: 0,
-                stagger: 0.1,
-                ease: "power2.out",
-              });
-            },
-          });
-        }
-      });
 
       // ========== CONTACT BUTTON HOVER ANIMATION ==========
       const contactButtons = gsap.utils.toArray(".contact-button");
@@ -280,16 +251,7 @@
 </script>
 
 <style>
-  /* Animation styles */
-  .contact-split-title * {
-    will-change: transform;
-  }
 
-  .contact-split-title .line {
-    display: block;
-    overflow: hidden;
-    line-height: 1.3;
-  }
 
   /* Container utility if not already defined */
   .container {

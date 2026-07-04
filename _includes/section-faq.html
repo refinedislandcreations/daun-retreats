@@ -5,7 +5,7 @@
   >
     <!-- Title with animation -->
     <h2
-      class="faq-split-title font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl tracking-wide mb-8 md:mb-12 lg:mb-16 xl:mb-20 cormorant-garamond"
+      class="animate-title font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl tracking-wide mb-8 md:mb-12 lg:mb-16 xl:mb-20 cormorant-garamond"
     >
       YOUR QUESTIONS ANSWERED
     </h2>
@@ -15,7 +15,7 @@
       <!-- Left title with animation -->
       <div>
         <h3
-          class="faq-group-title text-lg md:text-xl tracking-wide proza-libre proza-500"
+          class="animate-title text-lg md:text-xl tracking-wide proza-libre proza-500"
         >
           {{ group.title }}
         </h3>
@@ -56,73 +56,6 @@
   </div>
 </section>
 
-<!-- Title Animation Script -->
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    // Register SplitText and ScrollTrigger
-    if (typeof gsap !== "undefined" && typeof SplitText !== "undefined") {
-      gsap.registerPlugin(SplitText, ScrollTrigger);
-
-      document.fonts.ready.then(() => {
-        // ========== MAIN TITLE ANIMATION ==========
-        const faqTitle = document.querySelector(".faq-split-title");
-        if (faqTitle) {
-          gsap.set(faqTitle, { opacity: 1 });
-
-          SplitText.create(faqTitle, {
-            type: "words,lines",
-            linesClass: "line",
-            autoSplit: true,
-            mask: "lines",
-            onSplit: (self) => {
-              gsap.from(self.lines, {
-                scrollTrigger: {
-                  trigger: faqTitle,
-                  start: "top 80%",
-                  toggleActions: "play reverse play reverse",
-                },
-                duration: 1.2,
-                yPercent: 100,
-                opacity: 0,
-                stagger: 0.1,
-                ease: "power2.out",
-              });
-            },
-          });
-        }
-
-        // ========== GROUP TITLES ANIMATION ==========
-        const groupTitles = document.querySelectorAll(".faq-group-title");
-        groupTitles.forEach((title) => {
-          gsap.set(title, { opacity: 1 });
-
-          SplitText.create(title, {
-            type: "words,lines",
-            linesClass: "line",
-            autoSplit: true,
-            mask: "lines",
-            onSplit: (self) => {
-              gsap.from(self.lines, {
-                scrollTrigger: {
-                  trigger: title,
-                  start: "top 80%",
-                  toggleActions: "play reverse play reverse",
-                },
-                duration: 1,
-                yPercent: 100,
-                opacity: 0,
-                stagger: 0.08,
-                ease: "power2.out",
-              });
-            },
-          });
-        });
-
-        ScrollTrigger.refresh();
-      });
-    }
-  });
-</script>
 
 <!-- Isolated GSAP FAQ Script -->
 <script>
@@ -268,18 +201,6 @@
 </script>
 
 <style>
-  /* Animation styles for titles */
-  .faq-split-title,
-  .faq-group-title {
-    will-change: transform;
-  }
-
-  .faq-split-title .line,
-  .faq-group-title .line {
-    display: block;
-    overflow: hidden;
-    line-height: 1.3;
-  }
 
   /* FAQ transitions are handled by GSAP */
   .faq-content {

@@ -28,7 +28,7 @@
       {% if section.title %}
       <div class="text-center mb-6">
         <h2
-          class="split-title tracking-[0.2em] text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-[#000] cormorant-garamond uppercase whitespace-pre-line"
+          class="animate-title tracking-[0.2em] text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-[#000] cormorant-garamond uppercase whitespace-pre-line"
         >
           {{ section.title }}
         </h2>
@@ -97,37 +97,6 @@
     gsap.registerPlugin(SplitText, ScrollTrigger);
 
     document.fonts.ready.then(() => {
-      // ========== TITLE ANIMATION ==========
-      // Use querySelectorAll to get ALL titles
-      const titleElements = document.querySelectorAll(".split-title");
-
-      titleElements.forEach((titleElement) => {
-        if (titleElement) {
-          gsap.set(titleElement, { opacity: 1 });
-
-          SplitText.create(titleElement, {
-            type: "words,lines",
-            linesClass: "line",
-            autoSplit: true,
-            mask: "lines",
-            onSplit: (self) => {
-              // Create scroll-triggered animation
-              gsap.from(self.lines, {
-                scrollTrigger: {
-                  trigger: titleElement,
-                  start: "top 80%",
-                  toggleActions: "play reverse play reverse",
-                },
-                duration: 1.2,
-                yPercent: 100,
-                opacity: 0,
-                stagger: 0.1,
-                ease: "power2.out",
-              });
-            },
-          });
-        }
-      });
 
       // ========== DESCRIPTION ANIMATION ==========
       // Use querySelectorAll to get ALL descriptions
@@ -208,7 +177,6 @@
   }
 
   /* Ensure smooth animations */
-  .split-title *,
   .split-description * {
     will-change: transform;
   }
@@ -262,15 +230,5 @@
     }
   }
 
-  /* Reduce vertical gap when section title wraps to multiple lines */
-  .split-title {
-    line-height: 1;
-  }
-
-  .split-title .line {
-    display: block;
-    line-height: 1;
-    margin-bottom: 0.12rem; /* small visual separation between wrapped lines */
-  }
 </style>
 {% endif %}

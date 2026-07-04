@@ -27,7 +27,7 @@
         <!-- ================= TITLE ================= -->
         {% if include.section.title %}
         <h2
-          class="intro-split-title cormorant-garamond tracking-[0.2em] text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-[#000] whitespace-pre-line uppercase mb-6 md:mb-8 lg:mb-10"
+          class="animate-title cormorant-garamond tracking-[0.2em] text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-[#000] whitespace-pre-line uppercase mb-6 md:mb-8 lg:mb-10"
         >
           {{ include.section.title }}
         </h2>
@@ -74,33 +74,6 @@
     }
 
     document.fonts.ready.then(() => {
-      // ========== INTRO TITLE ANIMATION ==========
-      const introTitle = document.querySelector(".intro-split-title");
-      if (introTitle) {
-        gsap.set(introTitle, { opacity: 1 });
-
-        SplitText.create(introTitle, {
-          type: "words,lines",
-          linesClass: "line",
-          autoSplit: true,
-          mask: "lines",
-          onSplit: (self) => {
-            gsap.from(self.lines, {
-              scrollTrigger: {
-                trigger: introTitle,
-                start: "top 80%",
-                toggleActions: "play reverse play reverse",
-              },
-              duration: 1.2,
-              yPercent: 100,
-              opacity: 0,
-              stagger: 0.1,
-              ease: "power2.out",
-            });
-          },
-        });
-      }
-
       // ========== INTRO DESCRIPTION ANIMATION ==========
       const introDescription = document.querySelector(
         ".intro-split-description",
@@ -138,12 +111,10 @@
 
 <style>
   /* Animation styles */
-  .intro-split-title *,
   .intro-split-description * {
     will-change: transform;
   }
 
-  .intro-split-title .line,
   .intro-split-description .line {
     display: block;
     overflow: hidden;
