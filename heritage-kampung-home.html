@@ -10,8 +10,11 @@ hero:
       caption: "Heritage Kampung Home Exterior"
     - image: "/assets/images/heritage-kampung-home/heritage-kampung-home-spacious-interior.webp"
       caption: "Heritage Kampung Home Interior"
-  button_text: "Book Now"
-  button_link: "https://secure.guestpro.net/daun-retreats/booking"
+  buttons:
+    - text: "Inquire by Email"
+      link: "mailto:daunretreats@gmail.com?subject=Inquiry%20for%20Heritage%20Kampung%20Home&body=Hi%2C%20I%20would%20like%20to%20inquire%20about%20booking%20the%20Heritage%20Kampung%20Home."
+    - text: "Inquire by WhatsApp"
+      link: "https://wa.me/60122522235?text=Hi%2C%20I%20would%20like%20to%20inquire%20about%20booking%20the%20Heritage%20Kampung%20Home."
 
 welcome:
   title: "Traditional Malay village charm for your next shoot"
@@ -23,8 +26,11 @@ welcome:
 
 property:
   title: "Property Details"
-  button_text: "Book Now"
-  button_link: "https://secure.guestpro.net/daun-retreats/booking"
+  buttons:
+    - text: "Inquire by Email"
+      link: "mailto:daunretreats@gmail.com?subject=Inquiry%20for%20Heritage%20Kampung%20Home&body=Hi%2C%20I%20would%20like%20to%20inquire%20about%20booking%20the%20Heritage%20Kampung%20Home."
+    - text: "Inquire by WhatsApp"
+      link: "https://wa.me/60122522235?text=Hi%2C%20I%20would%20like%20to%20inquire%20about%20booking%20the%20Heritage%20Kampung%20Home."
 
   items:
     - icon: "/assets/images/icons/camera-icon.png"
@@ -53,9 +59,11 @@ usage:
   description: |
     This space is available exclusively for photoshoots and filming. It is not suitable for overnight stays, events, or large gatherings. The setting is ideal for cultural shoots, editorial photography, period film scenes, lifestyle portraits, branding sessions, and creative productions that value heritage character and atmosphere.
 
-  button:
-    label: "Book Now"
-    url: "https://secure.guestpro.net/daun-retreats/booking"
+  buttons:
+    - label: "Inquire by Email"
+      url: "mailto:daunretreats@gmail.com?subject=Inquiry%20for%20Heritage%20Kampung%20Home&body=Hi%2C%20I%20would%20like%20to%20inquire%20about%20booking%20the%20Heritage%20Kampung%20Home."
+    - label: "Inquire by WhatsApp"
+      url: "https://wa.me/60122522235?text=Hi%2C%20I%20would%20like%20to%20inquire%20about%20booking%20the%20Heritage%20Kampung%20Home."
 
   slides:
     - image: "/assets/images/heritage-kampung-home/heritage-kampung-home-exterior-garden.webp"
@@ -145,11 +153,11 @@ faq:
           answer: "Convenience stores are about a two-minute drive away, and there are several local restaurants nearby, including Bahulu Classiq, Daging Salai House, and Terapong Restaurant."
 ---
 
-{% include section-hero.html section=page.hero %} {% include
+{% include section-hero-property.html section=page.hero %} {% include
 section-welcome.html section=page.welcome %} {% include
-section-property-details.html section=page.property %} {% include
+section-property.html section=page.property %} {% include
 section-gallery.html section=page.gallery %} {% include
-section-property-carousel.html section=page.usage id="usage"
+section-carousel.html section=page.usage id="usage"
 bg_color="bg-[#FBF8EF]" %} {% include section-welcome.html section=page.notes %}
 {% include section-gallery-masonry.html section=page.gallery_masonry %} {%
 include section-map.html section=page.map %} {% include section-faq.html

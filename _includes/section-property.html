@@ -1,0 +1,162 @@
+<!-- _includes/section-property-details.html -->
+<section class="bg-[#FBF8EF] py-16 md:py-20">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
+    <!-- Card -->
+    <div
+      class="border-2 border-[#005509] rounded-2xl p-6 sm:p-8 md:p-10 lg:p-12 xl:p-14 h-full"
+    >
+      <!-- Title with animation -->
+      <h2
+        class="animate-title text-2xl sm:text-3xl md:text-4xl font-semibold mb-6 md:mb-8 lg:mb-10 proza-libre"
+      >
+        {{ include.section.title }}
+      </h2>
+
+      <div
+        class="grid md:grid-cols-2 gap-x-12 lg:gap-x-20 gap-y-5 md:gap-y-6 lg:gap-y-8"
+      >
+        {% for item in include.section.items %}
+        <!-- Items -->
+        <div class="flex items-center gap-3 md:gap-4">
+          {% if item.icon %}
+          <img
+            src="{{ item.icon }}"
+            alt="{{ item.text }}"
+            class="w-5 h-5 md:w-6 md:h-6 shrink-0"
+            loading="lazy"
+            decoding="async"
+            width="24"
+            height="24"
+          />
+          {% endif %}
+
+          <span class="text-neutral-800 text-sm md:text-base proza-libre">
+            {{ item.text }}
+          </span>
+        </div>
+        {% endfor %}
+      </div>
+
+      <!-- Button with hover animation -->
+      {% if include.section.buttons %}
+      <div class="mt-6 md:mt-8 lg:mt-10 flex flex-col sm:flex-row justify-end gap-3">
+        {% for btn in include.section.buttons %}
+        <a
+          href="{{ btn.link }}"
+          {% if btn.link contains 'secure.guestpro.net' %}target="_blank" rel="noopener noreferrer"{% endif %}
+          class="features-button bg-[#005509] text-white px-6 md:px-7 lg:px-8 py-2.5 md:py-3 rounded-md hover:opacity-90 transition font-medium proza-libre overflow-hidden inline-block text-sm md:text-base text-center w-full sm:w-auto"
+        >
+          <span>{{ btn.text }}</span>
+        </a>
+        {% endfor %}
+      </div>
+      {% elsif include.section.button_text %}
+      <div class="mt-6 md:mt-8 lg:mt-10 flex justify-end">
+        <a
+          href="{{ include.section.button_link | default: '/contact.html' }}"
+          {% if include.section.button_link contains 'secure.guestpro.net' %}target="_blank" rel="noopener noreferrer"{% endif %}
+          class="features-button bg-[#005509] text-white px-6 md:px-7 lg:px-8 py-2.5 md:py-3 rounded-md hover:opacity-90 transition font-medium proza-libre overflow-hidden inline-block text-sm md:text-base"
+        >
+          <span>{{ include.section.button_text }}</span>
+        </a>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // Make sure GSAP and SplitText are loaded
+    if (typeof gsap === "undefined" || typeof SplitText === "undefined") {
+      console.log("GSAP or SplitText not loaded yet");
+      return;
+    }
+
+    document.fonts.ready.then(() => {
+
+      // ========== FEATURES BUTTON HOVER ANIMATION ==========
+      const featureButtons = gsap.utils.toArray(".features-button");
+      featureButtons.forEach((btn) => {
+        const span = btn.querySelector("span");
+        if (span) {
+          let tl = gsap.timeline({ paused: true });
+          tl.to(span, {
+            duration: 0.2,
+            yPercent: -150,
+            ease: "power2.in",
+          });
+          tl.set(span, { yPercent: 150 });
+          tl.to(span, {
+            duration: 0.2,
+            yPercent: 0,
+            ease: "power2.out",
+          });
+
+          btn.addEventListener("mouseenter", () => tl.play(0));
+          btn.addEventListener("mouseleave", () => {
+            tl.kill();
+            gsap.set(span, { yPercent: 0 });
+          });
+        }
+      });
+
+      ScrollTrigger.refresh();
+    });
+  });
+</script>
+
+<style>
+  /* Container utility if not already defined */
+  .container {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  @media (min-width: 640px) {
+    .container {
+      max-width: 640px;
+    }
+  }
+  @media (min-width: 768px) {
+    .container {
+      max-width: 768px;
+    }
+  }
+  @media (min-width: 1024px) {
+    .container {
+      max-width: 1024px;
+    }
+  }
+  @media (min-width: 1280px) {
+    .container {
+      max-width: 1280px;
+    }
+  }
+
+  /* Button hover styles */
+  .features-button {
+    display: inline-block;
+    overflow: hidden;
+    text-decoration: none;
+    text-align: center;
+  }
+
+  .features-button span {
+    display: inline-block;
+    will-change: transform;
+  }
+
+  /* Fix for mobile height consistency */
+  @media (max-width: 767px) {
+    section {
+      min-height: auto;
+    }
+
+    .container {
+      padding-top: 2rem;
+      padding-bottom: 2rem;
+    }
+  }
+</style>

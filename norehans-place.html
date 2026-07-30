@@ -10,8 +10,11 @@ hero:
       caption: "Norehan’s Place Exterior"
     - image: "/assets/images/norehans-place/norehans-place-living-room-interior.jpeg"
       caption: "Norehan’s Place Interior"
-  button_text: "Book Now"
-  button_link: "https://secure.guestpro.net/daun-retreats/booking"
+  buttons:
+    - text: "Inquire by Email"
+      link: "mailto:daunretreats@gmail.com?subject=Inquiry%20for%20Norehan's%20Place&body=Hi%2C%20I%20would%20like%20to%20inquire%20about%20booking%20Norehan's%20Place."
+    - text: "Inquire by WhatsApp"
+      link: "https://wa.me/60122522235?text=Hi%2C%20I%20would%20like%20to%20inquire%20about%20booking%20Norehan's%20Place."
 
 welcome:
   title: "A classic estate setting for cinematic shoots"
@@ -23,8 +26,11 @@ welcome:
 
 property:
   title: "Property Details"
-  button_text: "Book Now"
-  button_link: "https://secure.guestpro.net/daun-retreats/booking"
+  buttons:
+    - text: "Inquire by Email"
+      link: "mailto:daunretreats@gmail.com?subject=Inquiry%20for%20Norehan's%20Place&body=Hi%2C%20I%20would%20like%20to%20inquire%20about%20booking%20Norehan's%20Place."
+    - text: "Inquire by WhatsApp"
+      link: "https://wa.me/60122522235?text=Hi%2C%20I%20would%20like%20to%20inquire%20about%20booking%20Norehan's%20Place."
 
   items:
     - icon: "/assets/images/icons/camera-icon.png"
@@ -58,9 +64,11 @@ usage:
 
     With its expansive lawns, graceful exterior, and tranquil surroundings, the estate is perfectly suited for editorial shoots, lifestyle campaigns, wedding portraits, brand and product sessions, film scenes, and creative productions seeking a sophisticated and timeless setting.
 
-  button:
-    label: "Book Now"
-    url: "https://secure.guestpro.net/daun-retreats/booking"
+  buttons:
+    - label: "Inquire by Email"
+      url: "mailto:daunretreats@gmail.com?subject=Inquiry%20for%20Norehan's%20Place&body=Hi%2C%20I%20would%20like%20to%20inquire%20about%20booking%20Norehan's%20Place."
+    - label: "Inquire by WhatsApp"
+      url: "https://wa.me/60122522235?text=Hi%2C%20I%20would%20like%20to%20inquire%20about%20booking%20Norehan's%20Place."
 
   slides:
     - image: "/assets/images/norehans-place/norehans-place-full-villa-facade.webp"
@@ -133,10 +141,10 @@ faq:
           answer: "Convenience stores are about a two-minute drive away, and there are several local restaurants nearby, including Bahulu Classiq, Daging Salai House, and Terapong Restaurant."
 ---
 
-{% include section-hero.html section=page.hero %} {% include
+{% include section-hero-property.html section=page.hero %} {% include
 section-welcome.html section=page.welcome %} {% include
-section-property-details.html section=page.property %} {% include
+section-property.html section=page.property %} {% include
 section-gallery.html section=page.gallery %} {% include
-section-property-carousel.html section=page.usage id="usage"
+section-carousel.html section=page.usage id="usage"
 bg_color="bg-[#FBF8EF]" %} {% include section-map.html section=page.map %} {%
 include section-faq.html section=page.faq %}
