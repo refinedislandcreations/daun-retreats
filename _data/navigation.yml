@@ -28,7 +28,7 @@ main_nav:
   - title: Contact Us
     url: "/contact.html"
   - title: Book Now
-    url: "/booking"
+    url: "https://secure.guestpro.net/daun-retreats/booking"
     is_button: true
 
 social_links:
