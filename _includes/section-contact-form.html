@@ -14,7 +14,7 @@
     >
       <!-- LEFT : FORM -->
       <form
-        action="{{ include.section.form.action | default:'/thank-you/' }}"
+        action="{{ include.section.form.action | default:'/thank-you.html' }}"
         method="POST"
         name="contact"
         data-netlify="true"
@@ -200,6 +200,8 @@
               alt="{{ s.title }}"
               loading="lazy"
               decoding="async"
+              width="28"
+              height="28"
             />
           </a>
           {% endfor %}

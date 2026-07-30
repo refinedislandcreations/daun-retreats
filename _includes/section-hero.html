@@ -173,11 +173,12 @@
         {% endif %}
 
         <!-- Mobile Title (with animation class) -->
-        <h1
+        <div
+          aria-hidden="true"
           class="hero-split font-serif tracking-wide text-[clamp(1.8rem,6vw,3.5rem)] sm:text-[clamp(2rem,6vw,4rem)] text-[#000] mb-2 leading-[1.1] cormorant-garamond"
         >
           {{ include.section.title }}
-        </h1>
+        </div>
 
         <!-- Mobile Subtitle (with animation class) -->
         <p
