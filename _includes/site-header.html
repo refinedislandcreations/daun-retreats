@@ -110,107 +110,108 @@
       </div>
     </div>
 
-    <!-- Mobile Menu - Fixed positioning with static values -->
-    <nav
-      id="mobile-menu"
-      class="fixed left-0 right-0 top-[70px] md:top-[82px] h-[calc(100vh-70px)] md:h-[calc(100vh-82px)] bg-[#FBF8EF] z-40 flex flex-col lg:hidden overflow-y-auto"
-    >
-      <div
-        class="flex flex-col items-center space-y-6 w-full max-w-xl mx-auto min-h-[calc(100vh-70px)] md:min-h-[calc(100vh-82px)] px-6 py-8"
-      >
-        {% for item in site.data.navigation.main_nav %} {% if item.submenu %}
-        <!-- Dropdown Menu -->
-        <div class="w-full border-b border-[#005509]/30 pb-1">
-          <details class="dropdown w-full">
-            <summary
-              class="group cursor-pointer py-2 flex items-center justify-between appearance-none list-none w-full px-6"
-            >
-              <span
-                class="proza-libre proza-600 text-lg text-[#000] group-hover:text-[#005509] transition-colors duration-200"
-              >
-                {{ item.title }}
-              </span>
-
-              <span
-                class="dropdown-icon text-2xl font-light text-[#000] group-hover:text-[#005509] transition-colors duration-200"
-              >
-                +
-              </span>
-            </summary>
-
-            <div
-              class="dropdown-content overflow-hidden ml-8"
-              style="max-height: 0px; opacity: 0"
-            >
-              <ul class="space-y-3 mt-3 pl-2">
-                {% for subitem in item.submenu %}
-                <li>
-                  <a
-                    href="{{ subitem.url | relative_url }}"
-                    class="block py-2 proza-libre proza-500 text-sm text-[#000]/80 hover:text-[#005509] hover:translate-x-2 transition-all duration-200"
-                    >{{ subitem.title }}</a
-                  >
-                </li>
-                {% endfor %}
-              </ul>
-            </div>
-          </details>
-        </div>
-        {% elsif item.title == "Contact Us" %}
-        <!-- Contact Us Link in Mobile -->
-        <div class="w-full border-b border-[#005509]/30 pb-1">
-          <a
-            href="{{ item.url | relative_url }}"
-            class="mobile-header-link block py-2 proza-libre proza-600 text-lg px-6 text-[#000] hover:text-[#006611] transition-colors duration-200 overflow-hidden"
-          >
-            <span>{{ item.title }}</span>
-          </a>
-        </div>
-        {% elsif item.is_button %}
-        <!-- Book Now Button in Mobile -->
-        <div class="w-full flex justify-center mt-4">
-          <a
-            href="{{ item.url | relative_url }}"
-            {% if item.url contains 'secure.guestpro.net' %}target="_blank" rel="noopener noreferrer"{% endif %}
-            class="mobile-header-button inline-block bg-[#005509] hover:bg-[#006611] px-6 py-3 rounded text-[#FBF8EF] proza-libre text-lg transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-0.5 overflow-hidden"
-          >
-            <span>{{ item.title }}</span>
-          </a>
-        </div>
-        {% else %}
-        <div class="w-full border-b border-[#005509]/30 pb-1">
-          <a
-            href="{{ item.url | relative_url }}"
-            class="block py-2 proza-libre proza-600 text-lg px-6 text-[#000] hover:text-[#006611] transition-colors duration-200"
-            >{{ item.title }}</a
-          >
-        </div>
-        {% endif %} {% endfor %}
-
-        <!-- Social Icons - Centered -->
-        <div class="flex space-x-6 justify-center w-full pt-4">
-          {% for social in site.data.navigation.social_links %}
-          <a
-            href="{{ social.url }}"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="transform hover:scale-110 transition-transform duration-200"
-          >
-            <img
-              src="{{ social.icon | relative_url }}"
-              alt="{{ social.title }}"
-              class="h-6 w-auto opacity-80 hover:opacity-100 transition-opacity duration-200"
-              width="24"
-              height="24"
-              loading="lazy"
-            />
-          </a>
-          {% endfor %}
-        </div>
-      </div>
-    </nav>
   </div>
 </header>
+
+<!-- Mobile Menu - Fixed positioning with static values -->
+<nav
+  id="mobile-menu"
+  class="fixed left-0 right-0 top-[70px] md:top-[82px] h-[calc(100vh-70px)] md:h-[calc(100vh-82px)] bg-[#FBF8EF] z-40 flex flex-col lg:hidden overflow-y-auto"
+>
+  <div
+    class="flex flex-col items-center space-y-6 w-full max-w-xl mx-auto min-h-[calc(100vh-70px)] md:min-h-[calc(100vh-82px)] px-6 py-8"
+  >
+    {% for item in site.data.navigation.main_nav %} {% if item.submenu %}
+    <!-- Dropdown Menu -->
+    <div class="w-full border-b border-[#005509]/30 pb-1">
+      <details class="dropdown w-full">
+        <summary
+          class="group cursor-pointer py-2 flex items-center justify-between appearance-none list-none w-full px-6"
+        >
+          <span
+            class="proza-libre proza-600 text-lg text-[#000] group-hover:text-[#005509] transition-colors duration-200"
+          >
+            {{ item.title }}
+          </span>
+
+          <span
+            class="dropdown-icon text-2xl font-light text-[#000] group-hover:text-[#005509] transition-colors duration-200"
+          >
+            +
+          </span>
+        </summary>
+
+        <div
+          class="dropdown-content overflow-hidden ml-8"
+          style="max-height: 0px; opacity: 0"
+        >
+          <ul class="space-y-3 mt-3 pl-2">
+            {% for subitem in item.submenu %}
+            <li>
+              <a
+                href="{{ subitem.url | relative_url }}"
+                class="block py-2 proza-libre proza-500 text-sm text-[#000]/80 hover:text-[#005509] hover:translate-x-2 transition-all duration-200"
+                >{{ subitem.title }}</a
+              >
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </details>
+    </div>
+    {% elsif item.title == "Contact Us" %}
+    <!-- Contact Us Link in Mobile -->
+    <div class="w-full border-b border-[#005509]/30 pb-1">
+      <a
+        href="{{ item.url | relative_url }}"
+        class="mobile-header-link block py-2 proza-libre proza-600 text-lg px-6 text-[#000] hover:text-[#006611] transition-colors duration-200 overflow-hidden"
+      >
+        <span>{{ item.title }}</span>
+      </a>
+    </div>
+    {% elsif item.is_button %}
+    <!-- Book Now Button in Mobile -->
+    <div class="w-full flex justify-center mt-4">
+      <a
+        href="{{ item.url | relative_url }}"
+        {% if item.url contains 'secure.guestpro.net' %}target="_blank" rel="noopener noreferrer"{% endif %}
+        class="mobile-header-button inline-block bg-[#005509] hover:bg-[#006611] px-6 py-3 rounded text-[#FBF8EF] proza-libre text-lg transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-0.5 overflow-hidden"
+      >
+        <span>{{ item.title }}</span>
+      </a>
+    </div>
+    {% else %}
+    <div class="w-full border-b border-[#005509]/30 pb-1">
+      <a
+        href="{{ item.url | relative_url }}"
+        class="block py-2 proza-libre proza-600 text-lg px-6 text-[#000] hover:text-[#006611] transition-colors duration-200"
+        >{{ item.title }}</a
+      >
+    </div>
+    {% endif %} {% endfor %}
+
+    <!-- Social Icons - Centered -->
+    <div class="flex space-x-6 justify-center w-full pt-4">
+      {% for social in site.data.navigation.social_links %}
+      <a
+        href="{{ social.url }}"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="transform hover:scale-110 transition-transform duration-200"
+      >
+        <img
+          src="{{ social.icon | relative_url }}"
+          alt="{{ social.title }}"
+          class="h-6 w-auto opacity-80 hover:opacity-100 transition-opacity duration-200"
+          width="24"
+          height="24"
+          loading="lazy"
+        />
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</nav>
 
 <!-- Hover Animation Script for Header -->
 <script>
@@ -347,99 +348,55 @@
         return;
       }
 
-      // Store timeline in closure
-      let menuTimeline = null;
+      let isMenuOpen = false;
 
       const initializeMobileMenu = () => {
         const button = document.getElementById("mobile-menu-button");
         const menu = document.getElementById("mobile-menu");
-        let isMenuOpen = false;
 
         if (!button || !menu) return;
 
         // Set initial state with static values
         gsap.set(menu, {
           x: "100%",
-          visibility: "visible",
-        });
-
-        // Initialize GSAP timeline with faster animation
-        menuTimeline = gsap.timeline({
-          paused: true,
-          reversed: true,
-        });
-
-        // Menu slide animation - faster
-        menuTimeline.to(menu, {
-          x: "0%",
-          duration: 0.3,
-          ease: "power2.inOut",
+          visibility: "hidden",
         });
 
         button.addEventListener("click", (e) => {
           e.stopPropagation();
           isMenuOpen = !isMenuOpen;
-          toggleMenu(menu, button, isMenuOpen);
+          
+          const topLine = button.querySelector(".top");
+          const middleLine = button.querySelector(".middle");
+          const bottomLine = button.querySelector(".bottom");
+
+          if (isMenuOpen) {
+            document.body.style.overflow = "hidden";
+            gsap.to(menu, { x: "0%", visibility: "visible", duration: 0.3, ease: "power2.out" });
+            
+            gsap.to(middleLine, { opacity: 0, duration: 0.15, ease: "power1.inOut" });
+            gsap.to(topLine, { y: 9, rotation: 45, duration: 0.2, ease: "power1.inOut" });
+            gsap.to(bottomLine, { y: -9, rotation: -45, duration: 0.2, ease: "power1.inOut" });
+          } else {
+            document.body.style.overflow = "";
+            gsap.to(menu, { x: "100%", duration: 0.3, ease: "power2.in", onComplete: () => {
+              gsap.set(menu, { visibility: "hidden" });
+            }});
+            
+            gsap.to(middleLine, { opacity: 1, duration: 0.15, ease: "power1.inOut" });
+            gsap.to(topLine, { y: 0, rotation: 0, duration: 0.2, ease: "power1.inOut" });
+            gsap.to(bottomLine, { y: 0, rotation: 0, duration: 0.2, ease: "power1.inOut" });
+            
+            closeAllDropdowns();
+          }
         });
-      };
 
-      const toggleMenu = (menu, button, isOpen) => {
-        const topLine = button.querySelector(".top");
-        const middleLine = button.querySelector(".middle");
-        const bottomLine = button.querySelector(".bottom");
-
-        if (isOpen) {
-          menuTimeline.play();
-          document.body.style.overflow = "hidden";
-
-          // Hamburger to X animation
-          gsap.to(middleLine, {
-            opacity: 0,
-            duration: 0.15,
-            ease: "power1.inOut",
+        // Close menu on link click
+        menu.querySelectorAll("a").forEach((link) => {
+          link.addEventListener("click", () => {
+            if (isMenuOpen) button.click();
           });
-
-          gsap.to(topLine, {
-            y: 9,
-            rotation: 45,
-            duration: 0.2,
-            ease: "power1.inOut",
-          });
-
-          gsap.to(bottomLine, {
-            y: -9,
-            rotation: -45,
-            duration: 0.2,
-            ease: "power1.inOut",
-          });
-        } else {
-          menuTimeline.reverse();
-          document.body.style.overflow = "";
-
-          // X to hamburger animation
-          gsap.to(middleLine, {
-            opacity: 1,
-            duration: 0.15,
-            ease: "power1.inOut",
-          });
-
-          gsap.to(topLine, {
-            y: 0,
-            rotation: 0,
-            duration: 0.2,
-            ease: "power1.inOut",
-          });
-
-          gsap.to(bottomLine, {
-            y: 0,
-            rotation: 0,
-            duration: 0.2,
-            ease: "power1.inOut",
-          });
-
-          // Close all dropdowns
-          closeAllDropdowns();
-        }
+        });
       };
 
       const closeAllDropdowns = () => {
@@ -522,15 +479,7 @@
             }
           });
 
-          // Close menu when clicking links
-          content.querySelectorAll("a").forEach((link) => {
-            link.addEventListener("click", () => {
-              const button = document.getElementById("mobile-menu-button");
-              const menu = document.getElementById("mobile-menu");
-              if (menuTimeline && menuTimeline.isActive()) return;
-              toggleMenu(menu, button, false);
-            });
-          });
+          // The main menu link click handler now handles closing.
         });
       };
 
@@ -611,10 +560,7 @@
           }
 
           closeAllDropdowns();
-
-          if (menuTimeline) {
-            menuTimeline.reverse();
-          }
+          isMenuOpen = false;
         }
       };
 
@@ -627,9 +573,7 @@
 
       // Clean up on page unload
       window.addEventListener("beforeunload", () => {
-        if (menuTimeline) {
-          menuTimeline.kill();
-        }
+        // No timeline to kill anymore
       });
     }
   })();
