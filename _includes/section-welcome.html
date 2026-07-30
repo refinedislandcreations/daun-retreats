@@ -1,6 +1,6 @@
 <!-- _includes/section-welcome.html -->
 {% assign section = include.section %} {% if section %}
-<section class="relative py-16 md:py-24 overflow-hidden bg-[#FBF8EF]">
+<section class="section relative overflow-hidden bg-[#FBF8EF]">
   <!-- ================= BACKGROUND IMAGE ================= -->
   {% if section.background %}
   <div class="absolute inset-0">
@@ -26,9 +26,9 @@
 
       <!-- ================= TITLE ================= -->
       {% if section.title %}
-      <div class="text-center mb-6">
+      <div class="text-center mb-3 md:mb-4">
         <h2
-          class="animate-title tracking-[0.2em] text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-[#000] cormorant-garamond uppercase whitespace-pre-line"
+          class="animate-title tracking-[0.15em] uppercase text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-[#000] cormorant-garamond mb-2 md:mb-3"
         >
           {{ section.title }}
         </h2>
@@ -82,7 +82,7 @@
       {% if section.description %}
       <div class="max-w-4xl mx-auto px-4 sm:px-0">
         <div
-          class="split-description text-[#000]/80 leading-none text-base md:text-lg proza-libre proza-400 space-y-6 [&>p]:text-justify [&>p]:[text-justify:inter-word] [&>p]:hyphens-auto"
+          class="split-description text-[#000]/80 leading-relaxed text-sm md:text-base proza-libre proza-400 space-y-6 [&>p]:text-justify [&>p]:[text-justify:inter-word] [&>p]:hyphens-auto"
         >
           {{ section.description | markdownify }}
         </div>
