@@ -8,22 +8,22 @@
 
 [[redirects]]
   from = "/booking"
-  to = "/contact.html"
+  to = "https://secure.guestpro.net/daun-retreats/booking"
   status = 301
 
 [[redirects]]
   from = "/booking/"
-  to = "/contact.html"
+  to = "https://secure.guestpro.net/daun-retreats/booking"
   status = 301
 
 [[redirects]]
   from = "/book-now"
-  to = "/contact.html"
+  to = "https://secure.guestpro.net/daun-retreats/booking"
   status = 301
 
 [[redirects]]
   from = "/book-now/"
-  to = "/contact.html"
+  to = "https://secure.guestpro.net/daun-retreats/booking"
   status = 301
 
 [[redirects]]

@@ -41,9 +41,13 @@
       {% if include.section.buttons %}
       <div class="mt-6 md:mt-8 lg:mt-10 flex flex-wrap justify-end gap-3">
         {% for btn in include.section.buttons %}
+        {% assign btn_link_url = btn.link %}
+        {% if btn.text == "Book Now" and btn_link_url == nil or btn_link_url == '#' or btn_link_url == '' %}
+          {% assign btn_link_url = "https://secure.guestpro.net/daun-retreats/booking" %}
+        {% endif %}
         <a
-          href="{{ btn.link }}"
-          {% if btn.link contains 'secure.guestpro.net' %}target="_blank" rel="noopener noreferrer"{% endif %}
+          href="{{ btn_link_url }}"
+          {% if btn_link_url contains 'secure.guestpro.net' or btn.text == "Book Now" %}target="_blank" rel="noopener noreferrer"{% endif %}
           class="features-button bg-[#005509] text-white px-6 md:px-7 lg:px-8 py-2.5 md:py-3 rounded-md hover:opacity-90 transition font-medium proza-libre overflow-hidden inline-block text-sm md:text-base"
         >
           <span>{{ btn.text }}</span>
@@ -51,10 +55,14 @@
         {% endfor %}
       </div>
       {% elsif include.section.button_text %}
+      {% assign prop_btn_link = include.section.button_link %}
+      {% if include.section.button_text == "Book Now" and prop_btn_link == nil or prop_btn_link == '/contact.html' or prop_btn_link == '' %}
+        {% assign prop_btn_link = "https://secure.guestpro.net/daun-retreats/booking" %}
+      {% endif %}
       <div class="mt-6 md:mt-8 lg:mt-10 flex justify-end">
         <a
-          href="{{ include.section.button_link | default: '/contact.html' }}"
-          {% if include.section.button_link contains 'secure.guestpro.net' %}target="_blank" rel="noopener noreferrer"{% endif %}
+          href="{{ prop_btn_link | default: 'https://secure.guestpro.net/daun-retreats/booking' }}"
+          {% if prop_btn_link contains 'secure.guestpro.net' or include.section.button_text == "Book Now" %}target="_blank" rel="noopener noreferrer"{% endif %}
           class="features-button bg-[#005509] text-white px-6 md:px-7 lg:px-8 py-2.5 md:py-3 rounded-md hover:opacity-90 transition font-medium proza-libre overflow-hidden inline-block text-sm md:text-base"
         >
           <span>{{ include.section.button_text }}</span>
