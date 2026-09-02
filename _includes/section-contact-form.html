@@ -14,17 +14,19 @@
     >
       <!-- LEFT : FORM -->
       <form
-        action="{{ include.section.form.action | default:'/thank-you.html' }}"
+        action="{{ include.section.form.action | default: '/thank-you/' }}"
         method="POST"
-        name="contact"
+        name="{{ include.section.form.name | default: 'contact' }}"
+        netlify
         data-netlify="true"
+        netlify-honeypot="bot-field"
         data-netlify-honeypot="bot-field"
         class="space-y-5 md:space-y-6"
       >
-        <input type="hidden" name="form-name" value="contact" />
-        <p class="hidden">
+        <input type="hidden" name="form-name" value="{{ include.section.form.name | default: 'contact' }}" />
+        <p class="hidden" style="display: none !important;" aria-hidden="true">
           <label>
-            Don’t fill this out if you’re human: <input name="bot-field" />
+            Don’t fill this out if you’re human: <input name="bot-field" tabindex="-1" autocomplete="off" />
           </label>
         </p>
 
@@ -84,7 +86,7 @@
               </option>
 
               {% for option in include.section.form.properties %}
-              <option value="{{ option | slugify }}">{{ option }}</option>
+              <option value="{{ option }}">{{ option }}</option>
               {% endfor %}
             </select>
 

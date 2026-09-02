@@ -81,6 +81,16 @@
   to = "/terms-and-conditions.html"
   status = 301
 
+[[redirects]]
+  from = "/thank-you.html"
+  to = "/thank-you/"
+  status = 301
+
+[[redirects]]
+  from = "/thank-you"
+  to = "/thank-you/"
+  status = 301
+
 [[headers]]
   for = "/*.html"
   [headers.values]
